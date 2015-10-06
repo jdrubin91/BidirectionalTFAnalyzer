@@ -308,6 +308,15 @@ def venn_d3(A, headerA, B, headerB, C, headerC):
             ABC += len(ABCint)
             CAB += len(CABint)
             BAC += len(BACint)
+    AB = AB - ABC
+    AC = AC - ABC
+    Atot = Atot - AB - AC - ABC
+    BA = BA - BAC
+    BC = BC - BAC
+    Btot = Btot - BA - BC - BAC
+    CA = CA - CAB
+    CB = CB - CAB
+    Ctot = Ctot - CA - CB - CAB
     
     return [Atot, Btot, Ctot, AB, BA, AC, CA, BC, CB, ABC, CAB, BAC]
     
@@ -361,7 +370,6 @@ def get_distances_pad_directional(file1, headerlines, file2, header2, pad):
                     start1 = float(item3[0])
                     stop1 = float(item3[1])
                     pi = float(item3[2])
-                    print pi
                     i = (start1+stop1)/2
                     start2 = float(item2[0])
                     stop2 = float(item2[1])
