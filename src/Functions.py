@@ -302,9 +302,7 @@ def venn_d3(A, headerA, B, headerB, C, headerC):
 #of site in file1. Returns list of distances.
 def get_distances_pad(file1, header1, file2, header2, pad):
     file1dict = create_tup_dict(file1, header1)
-    print file1dict['chr1']
     file2dict = create_tup_dict(file2, header2)
-    print file2dict['chr1']
     distances = []
     for chrom in file1dict:
         if chrom in file2dict:
@@ -314,6 +312,8 @@ def get_distances_pad(file1, header1, file2, header2, pad):
                 start, stop = item1[0:2]
                 mid = (float(start)+float(stop))/2
                 chromtree.append((mid-pad,mid+pad))
+                print start,stop
+            print chromtree
             chromtree = node.tree(chromtree)
             for item2 in file2dict[chrom]:
                 for item3 in overlapping_list(chromtree, item2):
