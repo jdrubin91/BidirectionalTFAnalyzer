@@ -32,6 +32,7 @@ if __name__ == "__main__":
     directorylist = fimo_directories(directory)
     distances = dict()
     for item in directorylist:
+        print item
         os.chdir(item)
         TF = item.split('/')[5]
         Motif = item.split('/')[8]
