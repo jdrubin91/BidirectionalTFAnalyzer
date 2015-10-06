@@ -311,8 +311,6 @@ def get_distances_pad(file1, header1, file2, header2, pad):
             for item1 in file1list:
                 start, stop = item1[0:2]
                 mid = (float(start)+float(stop))/2
-                item1[0] = mid - pad
-                item1[1] = mid + pad
                 chromtree.append((mid-pad,mid+pad))
             chromtree = node.tree(chromtree)
             for item2 in file2dict[chrom]:
