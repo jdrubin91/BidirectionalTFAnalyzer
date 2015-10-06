@@ -314,8 +314,7 @@ def get_distances_pad(file1, header1, file2, header2, pad):
                 chromtree.append((mid-pad,mid+pad))
             chromtree = node.tree(chromtree)
             for item2 in file2dict[chrom]:
-                print item2
-                for item3 in overlapping_list(chromtree, item2):
+                for item3 in chromtree.searchInterval(item2):
                     start1 = float(item3[0])
                     stop1 = float(item3[1])
                     i = (start1+stop1)/2
