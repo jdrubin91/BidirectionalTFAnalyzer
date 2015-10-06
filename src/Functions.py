@@ -281,21 +281,22 @@ def venn_d3(A, headerA, B, headerB, C, headerC):
     return [Atot, Btot, Ctot, AB, BA, AC, CA, BC, CB, ABC, CAB, BAC]
     
 
-#For each site in file1, get middle point and add and subtract pad.  For each site in file2, determine whether site is in file1, if so get distance from middle of site in file2 to middle of site in file1
+#For each site in file1, get middle point and add and subtract pad.  For each site in file2, 
+#determine whether site is in file1, if so get distance from middle of site in file2 to middle 
+#of site in file1. Returns list of distances.
 def get_distances_pad(file1, header1, file2, header2, pad):
     file1dict = create_dict(file1, header1)
     file2dict = create_dict(file2, header2)
-    distances = dict()
+    distances = []
     for chrom in file1dict:
         if chrom in file2dict:
-            distances[chrom] = []
             file1list = file1dict[chrom]
             chromtree = []
             for item1 in file1list:
                 start, stop = item1[0:2]
                 mid = (float(start)+float(stop))/2
-                item1[1] = mid - pad
-                item1[2] = mid + pad
+                item1[0] = mid - pad
+                item1[1] = mid + pad
                 chromtree.append((mid-pad,mid+pad))
             chromtree = node.tree(chromtree)
             for item2 in file2dict[chrom]:
@@ -306,7 +307,8 @@ def get_distances_pad(file1, header1, file2, header2, pad):
                     start2 = float(item2[0])
                     stop2 = float(item2[1])
                     x = (start2+stop2)/2
-                    distances[chrom].append((i-x)/((stop1-start1)/2))
-                
+                    distances.append((i-x)/((stop1-start1)/2))
+                    
+    return distances
                 
             
