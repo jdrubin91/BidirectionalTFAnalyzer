@@ -361,6 +361,7 @@ def get_distances_pad_directional(file1, headerlines, file2, header2, pad):
                     start1 = float(item3[0])
                     stop1 = float(item3[1])
                     pi = float(item3[2])
+                    print pi
                     i = (start1+stop1)/2
                     start2 = float(item2[0])
                     stop2 = float(item2[1])
