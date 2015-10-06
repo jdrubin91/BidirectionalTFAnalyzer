@@ -39,7 +39,8 @@ if __name__ == "__main__":
         os.chdir(item)
         TF = item.split('/')[5]
         Motif = item.split('/')[8]
-        distances[TF].append([Motif, Functions.get_distances_pad(bidirectionalfilepath, False, "fimo.rmdup.ord.cut.merge.bed", True, 1500)])
+        distances[TF].append(Motif)
+        distances[TF].append(Functions.get_distances_pad(bidirectionalfilepath, False, "fimo.rmdup.ord.cut.merge.bed", True, 1500))
                 
     os.chdir(homedir)
     os.chdir('..')
