@@ -32,11 +32,14 @@ if __name__ == "__main__":
     directorylist = fimo_directories(directory)
     distances = dict()
     for item in directorylist:
+        TF = item.split('/')[5]
+        distances[TF] = []
+    for item in directorylist:
         print item
         os.chdir(item)
         TF = item.split('/')[5]
         Motif = item.split('/')[8]
-        distances[TF] = [Motif, Functions.get_distances_pad(bidirectionalfilepath, False, "fimo.rmdup.ord.cut.merge.bed", True, 1000)]
+        distances[TF].append([Motif, Functions.get_distances_pad(bidirectionalfilepath, False, "fimo.rmdup.ord.cut.merge.bed", True, 1000)])
                 
     os.chdir(homedir)
     os.chdir('..')
