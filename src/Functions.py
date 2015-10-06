@@ -178,7 +178,7 @@ def parent_dir(directory):
 #returns filename for desired modification by finding index('.') and returning substring[0:lastindex('.')] + mod + substring[lastindex('.'):endofstring]
 def get_mod_filename(filename, mod):
     
-    return filename[0:filename.rfind('.')] + mod + filename[filename.rfind('.'):len(filename)]
+    return filename[0:filename.rfind('.')] + '.' + mod + filename[filename.rfind('.'):len(filename)]
 
 #Return list of intersecting tuples
 def overlapping_list(tree, list1):
