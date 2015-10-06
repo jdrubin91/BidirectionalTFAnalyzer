@@ -38,6 +38,21 @@ def create_tup_dict(filename, header):
             d1[chrom] = [(float(start), float(stop))]
     return d1
     
+#Create a dictionary from a bed file with chromosome locations creates list of tuples (start,stop) for each chrom
+#(format needs to be: 'Chromosome'\t'Start'\t'Stop'..., if header = True, remove first line of file containing header info)
+def create_tup_dict_largeheader_strandprob(filename, headerlines):
+    d1 = dict()
+    file1 = open(filename)
+    for i in range(0,headerlines):
+        file1.readline()
+    for line in file1:
+        chrom, start, stop = line.strip().split()[0:3]
+        if chrom in d1:
+            d1[chrom].append((float(start),float(stop),line.strip().split()[3].split('_')[4]))
+        else:
+            d1[chrom] = [(float(start), float(stop),line.strip().split()[3].split('_')[4])]
+    return d1
+    
 #Returns a list of arrays for a file with each item in list a line and each array contains tab delimited fields (i.e. list = [[chrom, start, stop],[chrom,start,stop], ...etc.]) 
 def parse_file(filename):
     FileList = []
@@ -322,6 +337,38 @@ def get_distances_pad(file1, header1, file2, header2, pad):
                     stop2 = float(item2[1])
                     x = (start2+stop2)/2
                     distances.append((i-x)/((stop1-start1)/2))
+                    
+    return distances
+    
+#For each site in file1, get middle point and add and subtract pad.  For each site in file2, 
+#determine whether site is in file1, if so get distance from middle of site in file2 to middle 
+#of site in file1. Returns list of distances.
+def get_distances_pad_directional(file1, headerlines, file2, header2, pad):
+    file1dict = create_tup_dict_largeheader_strandprob(file1, headerlines)
+    file2dict = create_tup_dict(file2, header2)
+    distances = []
+    for chrom in file1dict:
+        if chrom in file2dict:
+            file1list = file1dict[chrom]
+            chromtree = []
+            for item1 in file1list:
+                start, stop, pi = item1[0:3]
+                mid = (float(start)+float(stop))/2
+                chromtree.append((mid-pad,mid+pad,pi))
+            chromtree = node.tree(chromtree)
+            for item2 in file2dict[chrom]:
+                for item3 in chromtree.searchInterval(item2):
+                    start1 = float(item3[0])
+                    stop1 = float(item3[1])
+                    pi = float(item3[2])
+                    i = (start1+stop1)/2
+                    start2 = float(item2[0])
+                    stop2 = float(item2[1])
+                    x = (start2+stop2)/2
+                    if pi > 0.5:
+                        distances.append(-(i-x)/((stop1-start1)/2))
+                    else:
+                        distances.append((i-x)/((stop1-start1)/2))
                     
     return distances
                 
