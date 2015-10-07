@@ -13,7 +13,7 @@ def run(directory, bidirectionalfilepath, homedir):
 
 
 if __name__ == "__main__":
-    #Runs on original HCT116 directory
+    #Runs on original HCT116 directory now has bidirectional file shuffled
     
     def fimo_directories(rootdirectory):
         directorylist = []
@@ -27,7 +27,7 @@ if __name__ == "__main__":
         return directorylist
     
     directory = "/projects/dowellLab/ENCODE/HCT116"
-    bidirectionalfilepath = "/Users/joru1876/ENCODEBidirectional/bidirectional_hits.merge.bed"
+    bidirectionalfilepath = "/Users/joru1876/ENCODEBidirectional/bidirectional_hits.merge.shuffle.bed"
     homedir = "/Users/joru1876/BidirectionalTFAnalyzer/src"
     directorylist = fimo_directories(directory)
     distances = dict()
