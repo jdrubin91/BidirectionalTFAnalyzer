@@ -45,6 +45,6 @@ if __name__ == "__main__":
     motiflist = os.listdir(packagedir + '/files/HOCOMOCOFileSplitterout')
     os.chdir(shellscripttemplatedir)
     for motif in motiflist:
-        os.system("qsub -v arg1='" + motif.split('.')[0] + "_fimo_out',arg2='" + motif.split('.')[0] + "' runHOCOMOCOv9FIMOTemplate.sh")
+        os.system("qsub -v arg1='/Users/joru1876/HOCOMOCODatabaseFIMO/" + motif.split('.')[0] + "_fimo_out',arg2='" + motif.split('.')[0] + "' runHOCOMOCOv9FIMOTemplate.sh")
         
     
