@@ -17,7 +17,7 @@ if __name__ == "__main__":
     
     
     directory = "/Users/joru1876/HOCOMOCODatabaseFIMO/FIMO_OUT"
-    bidirectionalfilepath = "/Users/joru1876/ENCODEBidirectional/Allen2014_DMSO2_3-1_bidirectional_hits_intervals.bed"
+    bidirectionalfilepath = "/Users/joru1876/ENCODEBidirectional/bidirectional_hits.merge.bed"
     homedir = "/Users/joru1876/BidirectionalTFAnalyzer/src"
     directorylist = ["/Users/joru1876/HOCOMOCODatabaseFIMO/FIMO_OUT/" + item for item in os.listdir(directory) if 'fimo_out' in item]
     distances = dict()
