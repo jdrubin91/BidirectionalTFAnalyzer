@@ -45,7 +45,7 @@ if __name__ == "__main__":
     os.chdir(homedir)
     os.chdir('..')
     os.chdir("files")
-    outfile = open("TFMotifToBidirDistancePad.txt",'w')
+    outfile = open("TFMotifToBidirDistancePadNegCntrl.txt",'w')
     for key in distances:
         outfile.write(key)
         outfile.write("\n")
