@@ -25,6 +25,9 @@ def run(filename1, header):
 
 if __name__ == "__main__":
     
+    #Right now this writes a folder called HOCOMOCOFileSplitterout which contains a single txt file for each motif in HOCOMOCO database (with appropriate header)
+    #Since FIMO was still having trouble recognizing the motif files, I opted to instead just get motif names from the database and do seperate FIMO submissions
+    #for each motif (but still using the same database motif file for each one).  As of right now I could eliminat 
     shellscripttemplatedir = '/Users/joru1876/HOCOMOCODatabaseFIMO'
     packagedir = '/Users/joru1876/BidirectionalTFAnalyzer'
     
