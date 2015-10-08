@@ -24,8 +24,8 @@ if __name__ == "__main__":
     
     motiflist = run(packagedir + '/files/HOCOMOCOv9_AD_MEME.txt', True)
     for item in motiflist:
-        print shellscripttemplatedir + "/" + item + "/fimo.txt"
-        if os.path.exists(shellscripttemplatedir + "/" + item + "/fimo.txt"):
+        print shellscripttemplatedir + "/FIMO_OUT/" + item +"_fimo_out"+ "/fimo.txt"
+        if os.path.exists(shellscripttemplatedir + "/FIMO_OUT/" + item +"_fimo_out"+ "/fimo.txt"):
             print item
             motiflist.pop([item])
             
