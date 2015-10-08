@@ -29,6 +29,6 @@ if __name__ == "__main__":
             
     os.chdir(shellscripttemplatedir)
     for motif in motiflist:
-        os.system("qsub -v arg1='/Users/joru1876/HOCOMOCODatabaseFIMO/" + motif.split('.')[0] + "_fimo_out',arg2='" + motif.split('.')[0] + "' runHOCOMOCOv9FIMOTemplate.sh")
+        os.system("qsub -v arg1='/Users/joru1876/HOCOMOCODatabaseFIMO/" + motif + "_fimo_out',arg2='" + motif + "' runHOCOMOCOv9FIMOTemplate.sh")
         
     
