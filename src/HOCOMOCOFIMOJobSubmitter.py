@@ -28,10 +28,10 @@ if __name__ == "__main__":
             print item
             motiflist.pop(motiflist.index(item))
             
-
+    print motiflist
             
-    os.chdir(shellscripttemplatedir)
-    for motif in motiflist:
-        os.system("qsub -v arg1='/Users/joru1876/HOCOMOCODatabaseFIMO/" + motif + "_fimo_out',arg2='" + motif + "' runHOCOMOCOv9FIMOTemplate.sh")
+    #os.chdir(shellscripttemplatedir)
+    #for motif in motiflist:
+    #    os.system("qsub -v arg1='/Users/joru1876/HOCOMOCODatabaseFIMO/" + motif + "_fimo_out',arg2='" + motif + "' runHOCOMOCOv9FIMOTemplate.sh")
         
     
