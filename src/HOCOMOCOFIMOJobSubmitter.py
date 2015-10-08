@@ -24,11 +24,13 @@ if __name__ == "__main__":
     
     motiflist = run(packagedir + '/files/HOCOMOCOv9_AD_MEME.txt', True)
     for item in motiflist:
+        print shellscripttemplatedir + "/" + item + "/fimo.txt"
         if os.path.exists(shellscripttemplatedir + "/" + item + "/fimo.txt"):
+            print item
             motiflist.pop([item])
             
-    os.chdir(shellscripttemplatedir)
-    for motif in motiflist:
-        os.system("qsub -v arg1='/Users/joru1876/HOCOMOCODatabaseFIMO/" + motif + "_fimo_out',arg2='" + motif + "' runHOCOMOCOv9FIMOTemplate.sh")
-        
+    #os.chdir(shellscripttemplatedir)
+    #for motif in motiflist:
+    #    os.system("qsub -v arg1='/Users/joru1876/HOCOMOCODatabaseFIMO/" + motif + "_fimo_out',arg2='" + motif + "' runHOCOMOCOv9FIMOTemplate.sh")
+    #    
     
