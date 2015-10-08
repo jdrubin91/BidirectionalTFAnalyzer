@@ -28,7 +28,7 @@ if __name__ == "__main__":
             print item
             motiflist.pop(motiflist.index(item))
             
-    print motiflist
+    print len(motiflist)
             
     #os.chdir(shellscripttemplatedir)
     #for motif in motiflist:
