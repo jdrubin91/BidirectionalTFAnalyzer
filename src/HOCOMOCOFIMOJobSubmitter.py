@@ -27,9 +27,7 @@ if __name__ == "__main__":
         print shellscripttemplatedir + "/FIMO_OUT/" + item +"_fimo_out"+ "/fimo.txt"
         if os.path.exists(shellscripttemplatedir + "/FIMO_OUT/" + item +"_fimo_out"+ "/fimo.txt"):
             print item
-            index = motiflist.index(item)
-            print index
-            motiflist.pop([index])
+            motiflist.pop(motiflist.index(item))
             
     #os.chdir(shellscripttemplatedir)
     #for motif in motiflist:
