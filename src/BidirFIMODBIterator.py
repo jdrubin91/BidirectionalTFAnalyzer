@@ -51,7 +51,7 @@ if __name__ == "__main__":
             if 'bidirectional_hits' in bidirfile:
                 outfiledir = Functions.parent_dir(Functions.parent_dir(bidirfile))
                 if not os.path.exists(outfiledir + '/FIMO_OUT'):
-                    os.makedir(outfiledir + '/FIMO_OUT')
+                    os.mkdir(outfiledir + '/FIMO_OUT')
                 distances = run(bidirfile, fimodir)
                 sorted_distances = sorted(distances.items(), key=itemgetter(1))
                 outfile = open(outfiledir + '/FIMO_OUT/' + bidirfile.split('/')[6][0:bidirfile.split('/')[6].index('.')] + '.txt', 'w')
