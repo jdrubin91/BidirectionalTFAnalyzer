@@ -44,20 +44,13 @@ def create_tup_dict(filename, header):
 def create_tup_bidir(filename):
     d1 = dict()
     file1 = open(filename)
-    line = file1.readline
-    while '#' in line:
-        line = file1.readline()
-    chrom, start, stop = line.strip().split()[0:3]
-    if chrom in d1:
-        d1[chrom].append((float(start),float(stop)))
-    else:
-        d1[chrom] = [(float(start), float(stop))]
     for line in file1:
-        chrom, start, stop = line.strip().split()[0:3]
-        if chrom in d1:
-            d1[chrom].append((float(start),float(stop)))
-        else:
-            d1[chrom] = [(float(start), float(stop))]
+        if '#' not in line:
+            chrom, start, stop = line.strip().split()[0:3]
+            if chrom in d1:
+                d1[chrom].append((float(start),float(stop)))
+            else:
+                d1[chrom] = [(float(start), float(stop))]
     return d1
     
 #Create a dictionary from a bed file with chromosome locations creates list of tuples (start,stop) for each chrom
