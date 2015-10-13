@@ -11,7 +11,6 @@ def run(bidirfile, fimodir):
     
     distances = dict()
     directorylist = [fimodir + '/' + item for item in os.listdir(fimodir) if 'fimo_out' in item]
-    print directorylist
     for item in directorylist:
         print item
         os.chdir(item)
@@ -33,7 +32,7 @@ def run(bidirfile, fimodir):
             m = 1
         distances[TF] = [k[1],p,m,x]
         
-        return distances
+    return distances
         
 if __name__ == "__main__":
     fimodir = '/Users/joru1876/HOCOMOCODatabaseFIMO/FIMO_OUT'
