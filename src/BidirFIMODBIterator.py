@@ -49,7 +49,7 @@ if __name__ == "__main__":
     
         for bidirfile in bidirfiles:
             if 'bidirectional_hits' in bidirfile:
-                outfiledir = Functions.get_parent_dir(Functions.get_parent_dir(bidirfile))
+                outfiledir = Functions.parent_dir(Functions.parent_dir(bidirfile))
                 if not os.path.exists(outfiledir + '/FIMO_OUT'):
                     os.makedir(outfiledir + '/FIMO_OUT')
                 distances = run(bidirfile, fimodir)
