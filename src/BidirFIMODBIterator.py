@@ -11,6 +11,7 @@ def run(bidirfile, fimodir):
     
     distances = dict()
     directorylist = [fimodir + '/' + item for item in os.listdir(fimodir) if 'fimo_out' in item]
+    print directorylist
     for item in directorylist:
         print item
         os.chdir(item)
