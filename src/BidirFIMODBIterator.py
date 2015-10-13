@@ -16,21 +16,22 @@ def run(bidirfile, fimodir):
         os.chdir(item)
         TF = item.split('/')[5].split('_')[0]
         x = Functions.get_distances_pad_v3(bidirfile, "fimo.cut.txt", True, 1500)
-        start = min(x)
-        stop = max(x)
-        sigma = np.std(x)
-        mu = np.mean(x)
-        N = len(x)
-        y = np.random.uniform(start, stop, N)
-        z = mu/(sigma/math.sqrt(N))
-        p = 1 - scipy.special.ndtr(z)
-        k = scipy.stats.ks_2samp(x,y)
-        m = scipy.stats.mode(x)[0][0]
-        if -0.25 < m < 0.25:
-            m = 0
-        else:
-            m = 1
-        distances[TF] = [k[1],p,m,x]
+        if len(x) != 0:
+            start = min(x)
+            stop = max(x)
+            sigma = np.std(x)
+            mu = np.mean(x)
+            N = len(x)
+            y = np.random.uniform(start, stop, N)
+            z = mu/(sigma/math.sqrt(N))
+            p = 1 - scipy.special.ndtr(z)
+            k = scipy.stats.ks_2samp(x,y)
+            m = scipy.stats.mode(x)[0][0]
+            if -0.25 < m < 0.25:
+                m = 0
+            else:
+                m = 1
+            distances[TF] = [k[1],p,m,x]
         
     return distances
         
