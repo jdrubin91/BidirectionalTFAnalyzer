@@ -39,6 +39,7 @@ if __name__ == "__main__":
     bidirDir = '/projects/dowellLab/TFIT'
     
     for exp in os.listdir(bidirDir):
+        print exp
         if exp != 'genome_files':
             if os.path.exists(bidirDir + '/' + exp + '/EMG_out_files'):
                 bidirfileDir = bidirDir + '/' + exp + '/EMG_out_files'
