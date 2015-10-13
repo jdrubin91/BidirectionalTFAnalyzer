@@ -47,28 +47,28 @@ if __name__ == "__main__":
             else:
                 bidirfiles = [bidirDir + '/' + bidir for bidir in os.listdir(bidirfileDir) if 'bidirectional_hits' in bidir]
     
-    for bidirfile in bidirfiles:
-        if 'bidirectional_hits' in bidirfile:
-            outfiledir = Functions.get_parent_dir(Functions.get_parent_dir(bidirfile))
-            if not os.path.exists(outfiledir + '/FIMO_OUT'):
-                os.makedir(outfiledir + '/FIMO_OUT')
-            distances = run(bidirfile, fimodir)
-            sorted_distances = sorted(distances.items(), key=itemgetter(1))
-            outfile = open(outfiledir + '/FIMO_OUT/TFDatabaseAnalysis.txt', 'w')
-            outfile.write("TF\tUniform p-val\tCentered(0) p-val\tBimodality (1=True)\tDistance List")
-            for item in sorted_distances:
-                outfile.write(str(item[0]))
-                outfile.write("\t")
-                outfile.write(str(item[1][0]))
-                outfile.write("\t")
-                outfile.write(str(item[1][1]))
-                outfile.write("\t")
-                outfile.write(str(item[1][2]))
-                outfile.write("\t")
-                for val in item[1][3]:
-                    outfile.write(str(val))
-                    outfile.write(",")
-                outfile.write("\n")
-                    
-            
-            
+        for bidirfile in bidirfiles:
+            if 'bidirectional_hits' in bidirfile:
+                outfiledir = Functions.get_parent_dir(Functions.get_parent_dir(bidirfile))
+                if not os.path.exists(outfiledir + '/FIMO_OUT'):
+                    os.makedir(outfiledir + '/FIMO_OUT')
+                distances = run(bidirfile, fimodir)
+                sorted_distances = sorted(distances.items(), key=itemgetter(1))
+                outfile = open(outfiledir + '/FIMO_OUT/' + bidirfile.split('/')[6][0:bidirfile.split('/')[6].index('.')] + '.txt', 'w')
+                outfile.write("TF\tUniform p-val\tCentered(0) p-val\tBimodality (1=True)\tDistance List")
+                for item in sorted_distances:
+                    outfile.write(str(item[0]))
+                    outfile.write("\t")
+                    outfile.write(str(item[1][0]))
+                    outfile.write("\t")
+                    outfile.write(str(item[1][1]))
+                    outfile.write("\t")
+                    outfile.write(str(item[1][2]))
+                    outfile.write("\t")
+                    for val in item[1][3]:
+                        outfile.write(str(val))
+                        outfile.write(",")
+                    outfile.write("\n")
+                        
+                
+                
