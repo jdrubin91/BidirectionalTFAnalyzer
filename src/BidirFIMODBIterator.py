@@ -10,10 +10,9 @@ from operator import itemgetter
 def run(bidirfile, fimodir):
     
     distances = dict()
-    directorylist = [fimodir + item for item in os.listdir(fimodir) if 'fimo_out' in item]
+    directorylist = [fimodir + '/' + item for item in os.listdir(fimodir) if 'fimo_out' in item]
     for item in directorylist:
         print item
-        TF = item.split('/')[5].split('_')[0]
         os.chdir(item)
         TF = item.split('/')[5].split('_')[0]
         x = Functions.get_distances_pad_v3(bidirfile, "fimo.cut.txt", True, 1500)
