@@ -7,7 +7,7 @@ import sys
 #sys.path.append("C:\home\Jonathan\interval_searcher")
 from operator import itemgetter
 import node
-import intervals,load
+#from interval_searcher import intervals
 
 #Create a dictionary from a bed file with chromosome locations creates a list of lists [start,stop] for each chrom
 #(format needs to be: 'Chromosome'\t'Start'\t'Stop'..., if header = True, remove first line of file containing header info)
@@ -395,23 +395,23 @@ def get_distances_pad(file1, header1, file2, header2, pad):
 #For each site in file1, get middle point and add and subtract pad.  For each site in file2, 
 #determine whether site is in file1, if so get distance from middle of site in file2 to middle 
 #of site in file1. Returns list of distances.
-def get_distances_pad_v2(file1, header1, file2, header2, pad):
-    file1dict = create_tup_dict(file1, header1)
-    file2dict = create_tup_dict(file2, header2)
-    distances = []
-    for chrom in file1dict:
-        if chrom in file2dict:
-            file1list = file1dict[chrom]
-            chromtree = []
-            for item1 in file1list:
-                start, stop = item1[0:2]
-                mid = (float(start)+float(stop))/2
-                chromtree.append((mid-pad,mid+pad))
-            ST = intervals.comparison((chromtree,file2dict[chrom]))
-            OVERLAPS_0_1 = ST.find_overlaps(0,1)
-            
-                    
-    return distances
+#def get_distances_pad_v2(file1, header1, file2, header2, pad):
+#    file1dict = create_tup_dict(file1, header1)
+#    file2dict = create_tup_dict(file2, header2)
+#    distances = []
+#    for chrom in file1dict:
+#        if chrom in file2dict:
+#            file1list = file1dict[chrom]
+#            chromtree = []
+#            for item1 in file1list:
+#                start, stop = item1[0:2]
+#                mid = (float(start)+float(stop))/2
+#                chromtree.append((mid-pad,mid+pad))
+#            ST = intervals.comparison((chromtree,file2dict[chrom]))
+#            OVERLAPS_0_1 = ST.find_overlaps(0,1)
+#            
+#                    
+#    return distances
     
 #For each site in file1, get middle point and add and subtract pad.  For each site in file2, 
 #determine whether site is in file1, if so get distance from middle of site in file2 to middle 
