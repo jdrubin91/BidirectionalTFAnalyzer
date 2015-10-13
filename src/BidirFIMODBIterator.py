@@ -4,7 +4,7 @@ import os
 import Functions
 import numpy as np
 import math
-import scipy
+import scipy.stats
 from operator import itemgetter
 
 def run(bidirfile, fimodir):
