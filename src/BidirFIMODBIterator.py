@@ -40,7 +40,6 @@ if __name__ == "__main__":
     
     for exp in os.listdir(bidirDir):
         if exp != 'genome_files':
-            print exp
             if os.path.exists(bidirDir + '/' + exp + '/EMG_out_files'):
                 bidirfileDir = bidirDir + '/' + exp + '/EMG_out_files'
                 bidirfiles = [bidirfileDir + '/' + bidir for bidir in os.listdir(bidirfileDir) if 'bidirectional_hits' in bidir]
@@ -48,6 +47,7 @@ if __name__ == "__main__":
                 bidirfiles = [bidirDir + '/' + bidir for bidir in os.listdir(bidirfileDir) if 'bidirectional_hits' in bidir]
     
         for bidirfile in bidirfiles:
+            print bidirfile
             if 'EMG_out_files' in bidirfile:
                 outfiledir = Functions.parent_dir(Functions.parent_dir(bidirfile))
             else:
