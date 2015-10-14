@@ -47,32 +47,32 @@ if __name__ == "__main__":
             else:
                 bidirfiles = [bidirDir + '/' + bidir for bidir in os.listdir(bidirfileDir) if 'bidirectional_hits' in bidir]
     
-        for bidirfile in bidirfiles:
-            print bidirfile
-            if 'EMG_out_files' in bidirfile:
-                outfiledir = Functions.parent_dir(Functions.parent_dir(bidirfile))
-            else:
-                outfiledir = Functions.parent_dir(bidirfile)
-            if not os.path.exists(outfiledir + '/FIMO_OUT'):
-                os.mkdir(outfiledir + '/FIMO_OUT')
-            distances = run(bidirfile, fimodir)
-            sorted_distances = sorted(distances.items(), key=itemgetter(1))
-            outfile = open(outfiledir + '/FIMO_OUT/' + bidirfile.split('/')[6][0:bidirfile.split('/')[6].index('.')] + '.txt', 'w')
-            outfile.write("TF\tUniform p-val\tCentered(0) p-val\tBimodality (1=True)\tDistance List")
-            outfile.write("\n")
-            for item in sorted_distances:
-                outfile.write(str(item[0]))
-                outfile.write("\t")
-                outfile.write(str(item[1][0]))
-                outfile.write("\t")
-                outfile.write(str(item[1][1]))
-                outfile.write("\t")
-                outfile.write(str(item[1][2]))
-                outfile.write("\t")
-                for val in item[1][3]:
-                    outfile.write(str(val))
-                    outfile.write(",")
+            for bidirfile in bidirfiles:
+                print bidirfile
+                if 'EMG_out_files' in bidirfile:
+                    outfiledir = Functions.parent_dir(Functions.parent_dir(bidirfile))
+                else:
+                    outfiledir = Functions.parent_dir(bidirfile)
+                if not os.path.exists(outfiledir + '/FIMO_OUT'):
+                    os.mkdir(outfiledir + '/FIMO_OUT')
+                distances = run(bidirfile, fimodir)
+                sorted_distances = sorted(distances.items(), key=itemgetter(1))
+                outfile = open(outfiledir + '/FIMO_OUT/' + bidirfile.split('/')[6][0:bidirfile.split('/')[6].index('.')] + '.txt', 'w')
+                outfile.write("TF\tUniform p-val\tCentered(0) p-val\tBimodality (1=True)\tDistance List")
                 outfile.write("\n")
+                for item in sorted_distances:
+                    outfile.write(str(item[0]))
+                    outfile.write("\t")
+                    outfile.write(str(item[1][0]))
+                    outfile.write("\t")
+                    outfile.write(str(item[1][1]))
+                    outfile.write("\t")
+                    outfile.write(str(item[1][2]))
+                    outfile.write("\t")
+                    for val in item[1][3]:
+                        outfile.write(str(val))
+                        outfile.write(",")
+                    outfile.write("\n")
                     
             
             
