@@ -15,9 +15,8 @@ def run(filename1, header):
 
 if __name__ == "__main__":
     
-    #Right now this writes a folder called HOCOMOCOFileSplitterout which contains a single txt file for each motif in HOCOMOCO database (with appropriate header)
-    #Since FIMO was still having trouble recognizing the motif files, I opted to instead just get motif names from the database and do seperate FIMO submissions
-    #for each motif (but still using the same database motif file for each one).  As of right now I could eliminat 
+    #Right now this calls fimo on each motif by providing the HOCOMOCO database along with a single motif name per
+    #job submitted. It now only submits jobs for motifs who have fimo.txt files less than 1
     shellscripttemplatedir = '/Users/joru1876/HOCOMOCODatabaseFIMO'
     packagedir = '/Users/joru1876/BidirectionalTFAnalyzer'
     
@@ -25,7 +24,7 @@ if __name__ == "__main__":
     motiflist = run(packagedir + '/files/HOCOMOCOv9_AD_MEME.txt', True)
     motiflist1 = []
     for item in motiflist:
-        if not os.path.exists(shellscripttemplatedir + "/FIMO_OUT/" + item +"_fimo_out"+ "/fimo.txt"):
+        if not os.path.exists(shellscripttemplatedir + "/FIMO_OUT/" + item +"_fimo_out"+ "/fimo.txt") or Functions.line_count(shellscripttemplatedir + "/FIMO_OUT/" + item +"_fimo_out"+ "/fimo.txt") < 2:
             motiflist1.append(item)
     
     print motiflist1
