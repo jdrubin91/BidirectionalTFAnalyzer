@@ -35,8 +35,8 @@ def run(bidirfile, fimodir):
     return distances
         
 if __name__ == "__main__":
-    
-    #Iterates through bidirectional files and compares sites in each bidirectional file to entire HOCOMOCO TF database
+   
+    #Submits a job for each bidirectional file that finds motif distances to bidir sites for each TF in HOCOMOCO database
     fimodir = '/Users/joru1876/HOCOMOCODatabaseFIMO/FIMO_OUT'
     bidirDir = '/projects/dowellLab/TFIT'
     
@@ -58,25 +58,7 @@ if __name__ == "__main__":
                 if not os.path.exists(outfiledir + '/FIMO_OUT'):
                     os.mkdir(outfiledir + '/FIMO_OUT')
                     
-                
-                distances = run(bidirfile, fimodir)
-                sorted_distances = sorted(distances.items(), key=itemgetter(1))
-                outfile = open(outfiledir + '/FIMO_OUT/' + bidirfile.split('/')[6][0:bidirfile.split('/')[6].index('.')] + '.txt', 'w')
-                outfile.write("TF\tUniform p-val\tCentered(0) p-val\tBimodality (1=True)\tDistance List")
-                outfile.write("\n")
-                for item in sorted_distances:
-                    outfile.write(str(item[0]))
-                    outfile.write("\t")
-                    outfile.write(str(item[1][0]))
-                    outfile.write("\t")
-                    outfile.write(str(item[1][1]))
-                    outfile.write("\t")
-                    outfile.write(str(item[1][2]))
-                    outfile.write("\t")
-                    for val in item[1][3]:
-                        outfile.write(str(val))
-                        outfile.write(",")
-                    outfile.write("\n")
+                os.system("qsub -v arg1='" + bidirfile + "',arg2='" + fimodir + "',arg3='" + outfiledir + "' runHOCOMOCOv9FIMOTemplate.sh")
                     
             
             
