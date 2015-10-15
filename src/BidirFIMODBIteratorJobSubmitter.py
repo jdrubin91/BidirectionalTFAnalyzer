@@ -8,6 +8,8 @@ import math
 import scipy.stats
 from operator import itemgetter
 
+#This code will be used by BidirFIMODBIteratorv2 to submit jobs to pando
+
 def run(bidirfile, fimodir):
     
     distances = dict()
