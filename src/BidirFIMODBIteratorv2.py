@@ -58,7 +58,7 @@ if __name__ == "__main__":
                 if not os.path.exists(outfiledir + '/FIMO_OUT'):
                     os.mkdir(outfiledir + '/FIMO_OUT')
                     
-                os.system("qsub -v arg1='" + bidirfile + "',arg2='" + fimodir + "',arg3='" + outfiledir + "' runHOCOMOCOv9FIMOTemplate.sh")
+                os.system("qsub -v arg1='" + bidirfile + "',arg2='" + fimodir + "',arg3='" + outfiledir + "' /Users/joru1876/runHOCOMOCOv9FIMOTemplate.sh")
                     
             
             
