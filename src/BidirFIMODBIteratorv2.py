@@ -48,7 +48,7 @@ if __name__ == "__main__":
                 bidirfiles = [bidirfileDir + '/' + bidir for bidir in os.listdir(bidirfileDir) if 'bidirectional_hits' in bidir]
             else:
                 bidirfileDir = bidirDir + '/' + exp
-                bidirfiles = [bidirDir + '/' + bidir for bidir in os.listdir(bidirfileDir) if 'bidirectional_hits' in bidir]
+                bidirfiles = [bidirfileDir + '/' + bidir for bidir in os.listdir(bidirfileDir) if 'bidirectional_hits' in bidir]
     
             for bidirfile in bidirfiles:
                 print bidirfile
