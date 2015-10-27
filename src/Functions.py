@@ -34,9 +34,9 @@ def create_bedgraph_dict(filename, header):
     for line in file1:
         chrom, start, stop, peak = line.strip().split()[0:4]
         if chrom in d1:
-            d1[chrom].append([float(start),float(stop),float(peak)])
+            d1[chrom].append((float(start),float(stop),float(peak)))
         else:
-            d1[chrom] = [[float(start), float(stop),float(peak)]]
+            d1[chrom] = [(float(start), float(stop),float(peak))]
     return d1
     
 #Create a dictionary from a bed file with chromosome locations creates list of tuples (start,stop) for each chrom
