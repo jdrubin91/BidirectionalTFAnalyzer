@@ -47,8 +47,8 @@ if __name__ == "__main__":
     
     TFGenesDict = run(TFGeneNames, refFile, RNASeqFile)
     
-    outfile = open('RNASeqTFLevels.txt','w')
+    outfile = open('../files/RNASeqTFLevels.txt','w')
     outfile.write("TF\tRNA-Seq reads")
     for TF in TFGenesDict:
-        outfile.write("../files/" + TF + "\t" + TFGenesDict[TF][1] + "\n")
+        outfile.write(TF + "\t" + TFGenesDict[TF][1] + "\n")
     
