@@ -7,6 +7,7 @@ import numpy as np
 import math
 import scipy.stats
 from operator import itemgetter
+import node
 
 #This code will be used by BidirFIMODBIteratorv2 to submit jobs to pando
 
@@ -14,9 +15,23 @@ def run(bidirfile, fimodir):
     
     distances = dict()
     directorylist = [fimodir + '/' + item for item in os.listdir(fimodir) if 'fimo_out' in item]
+    bidirsites = Functions.create_site_dict(bidirfile)
     for item in directorylist:
         print item
         TF = item.split('/')[5].split('_')[0]
+        fimodict = Functions.create_tup_fimo(item, True)
+        for key in bidirsites:
+            start,stop,chrom = key
+            fimotree = fimodict[chrom]
+            fimotree = node.tree(fimotree)
+            intervalsearch = []
+            for item in fimotree.searchInterval(key):
+                start2,stop2,pval = item
+                i = (start+stop)/2
+                x = (start2+stop2)/2
+                intervalsearch.append((i-x,pval))
+            bidirsites[key].append((TF,intervalsearch))
+
         x = Functions.get_distances_pad_v3(bidirfile, item + "/fimo.cut.txt", True, 1500)
         if len(x) != 0:
             start = min(x)
@@ -36,7 +51,7 @@ def run(bidirfile, fimodir):
                 m = 1
             distances[TF] = [k[1],p,m]
         
-    return distances
+    return distances,bidirsites
     
     
 if __name__ == "__main__":
@@ -44,21 +59,20 @@ if __name__ == "__main__":
     fimodir = sys.argv[2]
     outfiledir = sys.argv[3]
     
-    distances = run(bidirfile, fimodir)
-    sorted_distances = sorted(distances.items(), key=itemgetter(1))
-    outfile = open(outfiledir + '/FIMO_OUT/' + bidirfile.split('/')[6][0:bidirfile.split('/')[6].index('.')] + '.txt', 'w')
-    outfile.write("TF\tUniform p-val\tCentered(0) p-val\tBimodality (1=True)\tDistance List")
-    outfile.write("\n")
-    for item in sorted_distances:
-        outfile.write(str(item[0]))
-        outfile.write("\t")
-        outfile.write(str(item[1][0]))
-        outfile.write("\t")
-        outfile.write(str(item[1][1]))
-        outfile.write("\t")
-        outfile.write(str(item[1][2]))
-        outfile.write("\t")
-        for val in item[1][3]:
-            outfile.write(str(val))
-            outfile.write(",")
-        outfile.write("\n")
+    distances,bidirsites = run(bidirfile, fimodir)
+    print bidirsites
+    #sorted_distances = sorted(distances.items(), key=itemgetter(1))
+    #outfile = open(outfiledir + '/FIMO_OUT/' + bidirfile.split('/')[6][0:bidirfile.split('/')[6].index('.')] + '.txt', 'w')
+    #outfile.write("TF\tUniform p-val\tCentered(0) p-val\tBimodality (1=True)\tDistance List\n")
+    #for item in sorted_distances:
+    #    outfile.write(str(item[0]))
+    #    outfile.write("\t")
+    #    outfile.write(str(item[1][0]))
+    #    outfile.write("\t")
+    #    outfile.write(str(item[1][1]))
+    #    outfile.write("\t")
+    #    outfile.write(str(item[1][2]))
+    #    outfile.write("\n")
+    #
+    #outfile.write("#########################################################################\n")
+    #

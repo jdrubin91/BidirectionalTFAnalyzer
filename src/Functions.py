@@ -53,6 +53,16 @@ def create_tup_bidir(filename):
                 d1[chrom] = [(float(start), float(stop))]
     return d1
     
+#Create a dictionary from a bed file with key = 'Chromosome:start-stop' and blank value if header = True, remove first line of file containing header info)
+def create_site_bidir(filename):
+    d1 = dict()
+    file1 = open(filename)
+    for line in file1:
+        if '#' not in line:
+            chrom, start, stop = line.strip().split()[0:3]
+            d1[(int(start),int(stop),chrom)] = []
+    return d1
+    
 #Create a dictionary from a bed file with chromosome locations creates list of tuples (start,stop) for each chrom
 #(format needs to be: 'Chromosome'\t'Start'\t'Stop'..., if header = True, remove first line of file containing header info)
 def create_tup_dict_largeheader_strandprob(filename, headerlines):
@@ -79,9 +89,9 @@ def create_tup_fimo(filename, header):
         chrom, start, stop = line.strip().split()[0:3]
         pval = line.strip().split()[5]
         if chrom in d1:
-            d1[chrom].append((float(start),float(stop),float(pval)))
+            d1[chrom].append((float(start),float(stop),pval))
         else:
-            d1[chrom] = [(float(start), float(stop),float(pval))]
+            d1[chrom] = [(float(start), float(stop),pval)]
     return d1
     
     
@@ -429,6 +439,34 @@ def get_distances_pad(file1, header1, file2, header2, pad):
 def get_distances_pad_v3(file1, file2, header2, pad):
     file1dict = create_tup_bidir(file1)
     file2dict = create_tup_dict(file2, header2)
+    distances = []
+    for chrom in file1dict:
+        if chrom in file2dict:
+            file1list = file1dict[chrom]
+            chromtree = []
+            for item1 in file1list:
+                start, stop = item1[0:2]
+                mid = (float(start)+float(stop))/2
+                chromtree.append((mid-pad,mid+pad))
+            chromtree = node.tree(chromtree)
+            for item2 in file2dict[chrom]:
+                for item3 in chromtree.searchInterval(item2):
+                    start1 = float(item3[0])
+                    stop1 = float(item3[1])
+                    i = (start1+stop1)/2
+                    start2 = float(item2[0])
+                    stop2 = float(item2[1])
+                    x = (start2+stop2)/2
+                    distances.append((i-x)/((stop1-start1)/2))
+                    
+    return distances
+    
+#For each site in file1, get middle point and add and subtract pad.  For each site in file2, 
+#determine whether site is in file1, if so get distance from middle of site in file2 to middle 
+#of site in file1. Returns list of distances.
+def get_distances_pad_FIMO(file1, file2, header2, pad):
+    file1dict = create_tup_bidir(file1)
+    file2dict = create_tup_fimo(file2, header2)
     distances = []
     for chrom in file1dict:
         if chrom in file2dict:

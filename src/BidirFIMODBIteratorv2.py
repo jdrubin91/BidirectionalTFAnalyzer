@@ -33,7 +33,9 @@ def run(bidirfile, fimodir):
             distances[TF] = [k[1],p,m,x]
         
     return distances
-        
+    
+
+##This file is used to submit jobs to calculate distances for all HOCOMOCO TFs for each bidirectional file in a directory 
 if __name__ == "__main__":
    
     #Submits a job for each bidirectional file that finds motif distances to bidir sites for each TF in HOCOMOCO database
