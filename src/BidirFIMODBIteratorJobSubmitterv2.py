@@ -15,7 +15,7 @@ def run(bidirfile, fimodir):
     
     distances = dict()
     directorylist = [fimodir + '/' + item for item in os.listdir(fimodir) if 'fimo_out' in item]
-    bidirsites = Functions.create_site_dict(bidirfile)
+    bidirsites = Functions.create_site_bidir(bidirfile)
     for item in directorylist:
         print item
         TF = item.split('/')[5].split('_')[0]
