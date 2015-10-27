@@ -61,18 +61,27 @@ if __name__ == "__main__":
     
     distances,bidirsites = run(bidirfile, fimodir)
     print bidirsites
-    #sorted_distances = sorted(distances.items(), key=itemgetter(1))
-    #outfile = open(outfiledir + '/FIMO_OUT/' + bidirfile.split('/')[6][0:bidirfile.split('/')[6].index('.')] + '.txt', 'w')
-    #outfile.write("TF\tUniform p-val\tCentered(0) p-val\tBimodality (1=True)\tDistance List\n")
-    #for item in sorted_distances:
-    #    outfile.write(str(item[0]))
-    #    outfile.write("\t")
-    #    outfile.write(str(item[1][0]))
-    #    outfile.write("\t")
-    #    outfile.write(str(item[1][1]))
-    #    outfile.write("\t")
-    #    outfile.write(str(item[1][2]))
-    #    outfile.write("\n")
-    #
-    #outfile.write("#########################################################################\n")
-    #
+    sorted_distances = sorted(distances.items(), key=itemgetter(1))
+    outfile = open(outfiledir + '/FIMO_OUT/' + bidirfile.split('/')[6][0:bidirfile.split('/')[6].index('.')] + '.txt', 'w')
+    outfile.write("TF\tUniform p-val\tCentered(0) p-val\tBimodality (1=True)\tDistance List\n")
+    for item in sorted_distances:
+        outfile.write(str(item[0]))
+        outfile.write("\t")
+        outfile.write(str(item[1][0]))
+        outfile.write("\t")
+        outfile.write(str(item[1][1]))
+        outfile.write("\t")
+        outfile.write(str(item[1][2]))
+        outfile.write("\n")
+    
+    outfile.write("#########################################################################\n")
+    outfile.write("#Bidirectional Sites#\n")
+    outfile.write("chrom\tstart\tstop\tTF:distance,p-val\n")
+    for key in bidirsites:
+        start,stop,chrom = key
+        outfile.wirte(chrom + "\t" + str(start) + "\t" + str(stop) + "\t")
+        for TF in bidirsites[key]:
+            outfile.write(TF + ":")
+            for distance in TF[1]:
+                outfile.write(str(distance) + ",")
+        outfile.write("\n")
