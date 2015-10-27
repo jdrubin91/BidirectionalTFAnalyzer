@@ -24,7 +24,7 @@ def run(bidirfile, fimodir):
             sigma = np.std(x)
             mu = np.mean(x)
             N = len(x)
-            y = np.random.uniform(start, stop, N)
+            #y = np.random.uniform(start, stop, N)
             y = np.linspace(start,stop,N)
             z = mu/(sigma/math.sqrt(N))
             p = 1 - scipy.special.ndtr(z)
@@ -34,7 +34,7 @@ def run(bidirfile, fimodir):
                 m = 0
             else:
                 m = 1
-            distances[TF] = [k[1],p,m,x]
+            distances[TF] = [k[1],p,m]
         
     return distances
     
