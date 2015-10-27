@@ -19,7 +19,7 @@ def run(bidirfile, fimodir):
     for item in directorylist:
         print item
         TF = item.split('/')[5].split('_')[0]
-        fimodict = Functions.create_tup_fimo(item, True)
+        fimodict = Functions.create_tup_fimo(item + "/fimo.cut.txt", True)
         for key in bidirsites:
             start,stop,chrom = key
             fimotree = fimodict[chrom]
