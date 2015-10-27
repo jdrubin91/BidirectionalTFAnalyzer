@@ -24,6 +24,21 @@ def create_dict(filename, header):
             d1[chrom] = [[float(start), float(stop)]]
     return d1
     
+#Create a dictionary from a bed file with chromosome locations creates a list of lists [start,stop] for each chrom
+#(format needs to be: 'Chromosome'\t'Start'\t'Stop'..., if header = True, remove first line of file containing header info)
+def create_bedgraph_dict(filename, header):
+    d1 = dict()
+    file1 = open(filename)
+    if header:
+        file1.readline()
+    for line in file1:
+        chrom, start, stop, peak = line.strip().split()[0:4]
+        if chrom in d1:
+            d1[chrom].append([float(start),float(stop),float(peak)])
+        else:
+            d1[chrom] = [[float(start), float(stop),float(peak)]]
+    return d1
+    
 #Create a dictionary from a bed file with chromosome locations creates list of tuples (start,stop) for each chrom
 #(format needs to be: 'Chromosome'\t'Start'\t'Stop'..., if header = True, remove first line of file containing header info)
 def create_tup_dict(filename, header):
