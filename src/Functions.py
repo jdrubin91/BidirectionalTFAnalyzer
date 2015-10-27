@@ -213,6 +213,7 @@ def fimo_directories(rootdirectory):
                 directorylist.append(rootdirectory + "/" + TF + "/peak_files/outfiles/MEME/" + fimofolder)
     
     return directorylist
+    
         
 #Return parent directory
 def parent_dir(directory):
