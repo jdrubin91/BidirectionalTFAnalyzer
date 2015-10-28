@@ -21,7 +21,8 @@ def run(TFGeneNames, refFile, RNASeqFile):
     refDict = dict()
     for line in file2:
         line = line.strip().split()
-        chrom, start, stop = line[0:3]
+        chrom = line[0]
+        start, stop = line[3:5]
         gene = line[line.index('gene_id')+1]
         gene = ''.join([gene[i] for i in range(0,len(gene)) if gene[i] not in string.punctuation])
         if gene in refDict:
