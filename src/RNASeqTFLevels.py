@@ -41,6 +41,8 @@ def run(TFGeneNames, refFile, RNASeqFile):
                 exonLength = 0
                 for site in refDict[gene]:
                     chrom, start, stop = site
+                    start = float(start)
+                    stop = float(stop)
                     exonLength += stop-start
                     if chrom in RNASeqDict:
                         tree = RNASeqDict[chrom]
