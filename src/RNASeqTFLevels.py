@@ -3,6 +3,7 @@ __author__ = 'Jonathan Rubin'
 import Functions
 import node
 import sys
+import string
 
 #This code will take a file with gene names for TFs, search for the chromosomal 
 #locations of these TF genes using a annotated reference file and return number 
@@ -19,30 +20,39 @@ def run(TFGeneNames, refFile, RNASeqFile):
     file2 = open(refFile)
     refDict = dict()
     for line in file2:
-        chrom, start, stop, gene = line.strip().split()[0:4]
-        refDict[gene] = [chrom,start,stop]
+        line = line.strip().split()
+        chrom, start, stop = line[0:3]
+        gene = line[line.index('gene_id')+1]
+        gene = ''.join([gene[i] for i in range(0,len(gene)) if gene[i] not in string.punctuation])
+        if gene in refDict:
+            refDict[gene].append((chrom,start,stop))
+        else:
+            refDict[gene] = [(chrom,start,stop)]
         
     RNASeqDict = Functions.create_bedgraph_dict(RNASeqFile, False)
     
+    
+
     
     
     for TF in TFGenesDict:
         for gene in TF:
             if gene in refDict:
-                chrom, start, stop = refDict[gene]
-                if chrom in RNASeqDict:
-                    tree = RNASeqDict[chrom]
-                    tree = node.tree(tree)
-                    peakval = 0
-                    for item in tree.searchInterval((start,stop)):
-                        peakval += item[2]
-                TFGenesDict[TF].append(peakval)
+                for site in refDict[gene]:
+                    chrom, start, stop = site
+                    if chrom in RNASeqDict:
+                        tree = RNASeqDict[chrom]
+                        tree = node.tree(tree)
+                        peakval = 0
+                        for item in tree.searchInterval((start,stop)):
+                            peakval += item[2]
+                    TFGenesDict[TF].append(peakval)
     
     return TFGenesDict
 
 if __name__ == "__main__":
     TFGeneNames = '/scratch/Users/joru1876/HOCOMOCODatabaseFIMO/HOCOMOCOGeneNames.txt'
-    refFile = '/scratch/Users/joru1876/hg19_reference_files/refFlat_hg19.bed'
+    refFile = '/scratch/Shares/pubgro/genomefiles/human/hg19.refGene.gtf'
     RNASeqFile = sys.argv[1]
     
     TFGenesDict = run(TFGeneNames, refFile, RNASeqFile)

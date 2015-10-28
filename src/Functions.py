@@ -32,7 +32,9 @@ def create_bedgraph_dict(filename, header):
     if header:
         file1.readline()
     for line in file1:
-        chrom, start, stop, peak = line.strip().split()[0:4]
+        line = line.strip().split()
+        chrom, start, stop = line[0:3]
+        peak = sum([int(val) for val in line[3:len(line)]])/len(line)-3
         if chrom in d1:
             d1[chrom].append((float(start),float(stop),float(peak)))
         else:
