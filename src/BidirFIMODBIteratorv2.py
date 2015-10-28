@@ -39,7 +39,7 @@ def run(bidirfile, fimodir):
 if __name__ == "__main__":
    
     #Submits a job for each bidirectional file that finds motif distances to bidir sites for each TF in HOCOMOCO database
-    fimodir = '/Users/joru1876/HOCOMOCODatabaseFIMO/FIMO_OUT'
+    fimodir = '/scratch/Users/joru1876/HOCOMOCODatabaseFIMO/FIMO_OUT'
     bidirDir = '/projects/dowellLab/TFIT'
     
     for exp in os.listdir(bidirDir):
