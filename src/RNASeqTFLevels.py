@@ -38,15 +38,17 @@ def run(TFGeneNames, refFile, RNASeqFile):
     for TF in TFGenesDict:
         for gene in TF:
             if gene in refDict:
+                exonLength = 0
                 for site in refDict[gene]:
                     chrom, start, stop = site
+                    exonLength += stop-start
                     if chrom in RNASeqDict:
                         tree = RNASeqDict[chrom]
                         tree = node.tree(tree)
                         peakval = 0
                         for item in tree.searchInterval((start,stop)):
                             peakval += item[2]
-                    TFGenesDict[TF].append(peakval)
+                    TFGenesDict[TF].append(peakval/exonLength)
     
     return TFGenesDict
 
