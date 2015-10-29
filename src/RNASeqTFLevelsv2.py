@@ -8,7 +8,7 @@ import string
 #This code will take a file with gene names for TFs, search for the chromosomal 
 #locations of these TF genes using a annotated reference file and return number 
 #of reads from an RNA-Seq bedgraph file
-def run(TFGeneNames, refFile, RNASeqFile):
+def run(TFGeneNames, refFile):
     file1 = open(TFGeneNames)
     file1.readline()
     TFGenesDict = dict()
@@ -43,9 +43,8 @@ def run(TFGeneNames, refFile, RNASeqFile):
 if __name__ == "__main__":
     TFGeneNames = '/scratch/Users/joru1876/HOCOMOCODatabaseFIMO/HOCOMOCOGeneNames.txt'
     refFile = '/scratch/Users/joru1876/HCT116RNASeq.gtf'
-    RNASeqFile = sys.argv[1]
     
-    TFGenesDict = run(TFGeneNames, refFile, RNASeqFile)
+    TFGenesDict = run(TFGeneNames, refFile)
     
     outfile = open('../files/RNASeqTFLevels.txt','w')
     outfile.write("TF\tRNA-Seq reads")
