@@ -50,5 +50,5 @@ if __name__ == "__main__":
     outfile = open('/scratch/Users/joru1876/BidirectionalTFAnalyzer/files/RNASeqTFLevels.txt','w')
     outfile.write("TF\tRNA-Seq reads\n")
     for TF in TFGenesDict:
-        outfile.write(TF + "\t" + TFGenesDict[TF][0] + "\n")
+        outfile.write(TF + "\t" + TFGenesDict[TF][len(TFGenesDict[TF])] + "\n")
     
