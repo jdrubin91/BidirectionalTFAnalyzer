@@ -32,7 +32,7 @@ if __name__ == "__main__":
     correct = 0
     incorrect = 0
     for TF in CombinedDict:
-        if len(CombinedDict[TF] > 1):
+        if len(CombinedDict[TF]) > 1:
             if CombinedDict[TF][0] > RNASeqCutoff and CombinedDict[TF][1] < PvalCutoff:
                 correct += 1
             else:
