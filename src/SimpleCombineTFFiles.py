@@ -30,6 +30,7 @@ if __name__ == "__main__":
     outfile.write("TF\tRNA-Seq reads\tUniform\tCenter=0\tBimodal\n")
     for TF in CombinedDict:
         outfile.write(TF + "\t" + CombinedDict[TF][0] + "\t")
-        for item in CombinedDict[TF][1]:
-            outfile.write(item + "\t")
+        if len(CombinedDict[TF]) > 1:
+            for item in CombinedDict[TF][1]:
+                outfile.write(item + "\t")
         outfile.write("\n") 
