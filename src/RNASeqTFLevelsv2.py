@@ -36,7 +36,7 @@ def run(TFGeneNames, refFile):
         print TF
         for gene in TF:
             if gene in refDict:
-                TFGenesDict[TF].append(refDict[gene][3])
+                TFGenesDict[TF].append(refDict[gene][0][3])
     
     return TFGenesDict
 
