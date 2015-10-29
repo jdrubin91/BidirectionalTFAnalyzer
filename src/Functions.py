@@ -112,6 +112,24 @@ def create_tup_fimo(filename, header):
             d1[chrom] = [(float(start), float(stop),pval)]
     return d1
     
+#Create a dictionary from a fimo bed file with chromosome locations creates list of triples (start,stop,p-val) for each chrom
+#(format needs to be: 'Chromosome'\t'Start'\t'Stop'\t'Strand'\t'Score'\t'P-val'..., if header = True, remove first line of file containing header info)
+def create_tup_fimo2(filename, header):
+    d1 = dict()
+    file1 = open(filename)
+    if header:
+        file1.readline()
+    for line in file1:
+        line = line.strip().split()
+        chrom, start, stop = line[0:3]
+        strand = line[3]
+        pval,qval,motif = line[5:8]
+        if chrom in d1:
+            d1[chrom].append((float(start),float(stop),(motif,pval,qval,strand)))
+        else:
+            d1[chrom] = [(float(start), float(stop),(motif,pval,qval,strand))]
+    return d1
+    
     
 #Returns parsed file list from bidirectional site without header and with parameters as their own list
 #Ex: [chr, start, stop, [pi,lamda, ..etc]]

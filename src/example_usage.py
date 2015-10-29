@@ -84,8 +84,8 @@ print "---------------------------------------------"
 #===================================================================
 #I also wrote a plotter to show the venn diagram that depends 
 #only matplotlib
-V 							= ST.compute_venn(0,1, 2,  display=True )
-V 							= ST.compute_venn(0,  2,  display=True )
+V 							= ST.compute_venn(0,1, 2,  display=True , labels=("A", "B", "C"))
+V 							= ST.compute_venn(0,  2,  display=True, labels=("A", "B", "C") )
 #===================================================================
 #go ahead and test on your on bed files
 

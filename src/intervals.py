@@ -115,9 +115,10 @@ class comparison:
 		overlaps 			= list()
 		for a in A:
 			FINDS 			= node_B.searchInterval((a.start, a.stop))
-			overlaps 	   += [(max(a.start, st), min(a.stop, sp), [f for f in F]+ [a]) for st, sp, F in FINDS]
-			overlaps.sort()
-		
+			if FINDS:
+				overlaps 	   += [(max(a.start, st), min(a.stop, sp), [f for f in F]+ [a]) for st, sp, F in FINDS]
+				overlaps.sort()
+			
 		return node.tree(overlaps)
 	def _get_overlaps_pairwase(self, A, B):
 		j,N 		= 0,len(B)
@@ -220,7 +221,10 @@ class comparison:
 		return CT
 	def _draw_venn_dendrogram(self, *args, **kwargs):
 		args 	= args[0]
-		labels 	= ["set " + str(a+1) for a in args]
+		if "labels" not in kwargs:
+			labels 	= ["set " + str(a+1) for a in args]
+		else:
+			labels 	= kwargs["labels"]	
 		if len(args)==3:
 			F 	= plt.figure(figsize=(5,5))
 			ax1 = F.add_subplot(1,1,1)
@@ -281,7 +285,6 @@ class comparison:
 		if len(args)==1:
 			args 	= args[0]
 		display 	= False
-		labels 		= []
 		if "display" in kwargs:
 			display 	= kwargs['display']
 		power_set 		= [ i for i in self._list_powerset( args ) if (len(i) > 1)]
@@ -306,7 +309,11 @@ class comparison:
 
 		if display:
 			assert 1< len(args) < 4,"interval_package: display only supported for 2 or 3 comparisons"
-			self._draw_venn_dendrogram(args)
+			if "labels" in kwargs:
+				self._draw_venn_dendrogram(args, labels=kwargs["labels"])
+			else:
+				self._draw_venn_dendrogram(args)
+				
 		return venn_struct(A)
 
 

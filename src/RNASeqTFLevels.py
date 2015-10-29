@@ -14,8 +14,9 @@ def run(TFGeneNames, refFile, RNASeqFile):
     TFGenesDict = dict()
     for line in file1:
         line = line.strip().split()
-        TF, geneNames = line[1],line[3:len(line)]
+        TF, geneNames = line[1][0:line.index('_')],line[3:len(line)]
         TFGenesDict[TF] = geneNames
+    print "TFGenesDict",TFGenesDict
         
     file2 = open(refFile)
     refDict = dict()
@@ -30,13 +31,17 @@ def run(TFGeneNames, refFile, RNASeqFile):
         else:
             refDict[gene] = [(chrom,start,stop)]
         
+    print "refDict:",refDict
+    
     RNASeqDict = Functions.create_bedgraph_dict(RNASeqFile, False)
+    print "RNASeqDict:",RNASeqDict
     
     
 
     
     
     for TF in TFGenesDict:
+        print TF
         for gene in TF:
             if gene in refDict:
                 exonLength = 0
