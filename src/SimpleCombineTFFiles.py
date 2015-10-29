@@ -32,14 +32,16 @@ if __name__ == "__main__":
     incorrect = 0
     for TF in CombinedDict:
         if len(CombinedDict[TF]) > 1:
-            print float(CombinedDict[TF][0])
-            print float(CombinedDict[TF][1][0])
-            print float(CombinedDict[TF][0]) > RNASeqCutoff and float(CombinedDict[TF][1][0]) < PvalCutoff
+            #print float(CombinedDict[TF][0])
+            #print float(CombinedDict[TF][1][0])
+            #print float(CombinedDict[TF][0]) > RNASeqCutoff and float(CombinedDict[TF][1][0]) < PvalCutoff
             if (float(CombinedDict[TF][0]) > RNASeqCutoff) and (float(CombinedDict[TF][1][0]) < PvalCutoff):
                 correct += 1
             else:
                 incorrect += 1
     
+    print correct
+    print incorrect
     outfile = open('/scratch/Users/joru1876/BidirectionalTFAnalyzer/files/CombinedTFFiles.txt','w')
     outfile.write("TF\tRNA-Seq reads\tUniform\tCenter=0\tBimodal\n")
     for TF in CombinedDict:
