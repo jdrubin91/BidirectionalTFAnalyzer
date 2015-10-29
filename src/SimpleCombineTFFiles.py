@@ -14,8 +14,9 @@ def run(RNASeq, Bidir):
     file2 = open(Bidir)
     file2.readline()
     for line in file2:
-        TF,pval,cen0,bimod = line.strip().split()[0:5]
-        CombinedDict[TF].append((pval,cen0,bimod))
+        TF,pval,cen0,bimod = line.strip().split()[0:4]
+        if TF in CombinedDict:
+            CombinedDict[TF].append((pval,cen0,bimod))
         
     return CombinedDict
     
@@ -25,10 +26,10 @@ if __name__ == "__main__":
     
     CombinedDict = run(RNASeq,Bidir)
     
-    outfile = open('/scratch/Users/joru1876/BidirectionalTFAnalyzer/files/RNASeqTFLevels.txt','w')
+    outfile = open('/scratch/Users/joru1876/BidirectionalTFAnalyzer/files/CombinedTFFiles.txt','w')
     outfile.write("TF\tRNA-Seq reads\tUniform\tCenter=0\tBimodal\n")
     for TF in CombinedDict:
         outfile.write(TF + "\t")
         for item in CombinedDict[TF]:
             outfile.write(item + "\t")
-        outfile.write("\n")
+        outfile.write("\n") 
