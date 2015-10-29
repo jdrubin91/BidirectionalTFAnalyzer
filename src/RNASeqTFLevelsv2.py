@@ -30,6 +30,7 @@ def run(TFGeneNames, refFile):
             refDict[gene].append((chrom,start,stop,coverage))
         else:
             refDict[gene] = [(chrom,start,stop,coverage)]
+    print refDict
         
     
     for TF in TFGenesDict:
@@ -47,7 +48,7 @@ if __name__ == "__main__":
     TFGenesDict = run(TFGeneNames, refFile)
     
     outfile = open('/scratch/Users/joru1876/BidirectionalTFAnalyzer/files/RNASeqTFLevels.txt','w')
-    outfile.write("TF\tRNA-Seq reads")
+    outfile.write("TF\tRNA-Seq reads\n")
     for TF in TFGenesDict:
         outfile.write(TF + "\t" + TFGenesDict[TF][0] + "\n")
     
