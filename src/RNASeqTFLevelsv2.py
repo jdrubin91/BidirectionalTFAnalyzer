@@ -30,16 +30,17 @@ def run(TFGeneNames, refFile):
             refDict[gene].append((chrom,start,stop,coverage))
         else:
             refDict[gene] = [(chrom,start,stop,coverage)]
-    print refDict
         
-    
+    TFCoverage = dict()
     for TF in TFGenesDict:
-        print TF
         for gene in TF:
             if gene in refDict:
-                TFGenesDict[TF].append(refDict[gene][0][3])
+                coverage = refDict[gene][0][3]
+                TFCoverage[TF] = [coverage]
     
-    return TFGenesDict
+    print TFCoverage
+    
+    return TFCoverage
 
 if __name__ == "__main__":
     TFGeneNames = '/scratch/Users/joru1876/HOCOMOCODatabaseFIMO/HOCOMOCOGeneNames.txt'
