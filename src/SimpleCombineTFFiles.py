@@ -34,6 +34,7 @@ if __name__ == "__main__":
         if len(CombinedDict[TF]) > 1:
             print float(CombinedDict[TF][0])
             print float(CombinedDict[TF][1][0])
+            print float(CombinedDict[TF][0]) > RNASeqCutoff and float(CombinedDict[TF][1][0]) < PvalCutoff
             if (float(CombinedDict[TF][0]) > RNASeqCutoff) and (float(CombinedDict[TF][1][0]) < PvalCutoff):
                 correct += 1
             else:
