@@ -33,7 +33,7 @@ def run(TFGeneNames, refFile):
         
     TFCoverage = dict()
     for TF in TFGenesDict:
-        for gene in TF:
+        for gene in TFGenesDict[TF]:
             if gene in refDict:
                 coverage = refDict[gene][0][3]
                 TFCoverage[TF] = [coverage]
