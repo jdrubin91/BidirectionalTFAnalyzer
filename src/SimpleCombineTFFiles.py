@@ -28,11 +28,12 @@ if __name__ == "__main__":
     PvalCutoff = 0.00005
     
     CombinedDict = run(RNASeq,Bidir)
-    print CombinedDict
     correct = 0
     incorrect = 0
     for TF in CombinedDict:
         if len(CombinedDict[TF]) > 1:
+            print float(CombinedDict[TF][0])
+            print float(CombinedDict[TF][1][0])
             if (float(CombinedDict[TF][0]) > RNASeqCutoff) and (float(CombinedDict[TF][1][0]) < PvalCutoff):
                 correct += 1
             else:
