@@ -31,13 +31,6 @@ def run(TFGeneNames, refFile, RNASeqFile):
         else:
             refDict[gene] = [(chrom,start,stop,coverage)]
         
-    print "refDict:",refDict
-    
-
-    
-    
-
-    
     
     for TF in TFGenesDict:
         print TF
@@ -49,7 +42,7 @@ def run(TFGeneNames, refFile, RNASeqFile):
 
 if __name__ == "__main__":
     TFGeneNames = '/scratch/Users/joru1876/HOCOMOCODatabaseFIMO/HOCOMOCOGeneNames.txt'
-    refFile = '/scratch/Shares/pubgro/genomefiles/human/hg19.refGene.gtf'
+    refFile = '/scratch/Users/joru1876/HCT116RNASeq.gtf'
     RNASeqFile = sys.argv[1]
     
     TFGenesDict = run(TFGeneNames, refFile, RNASeqFile)
