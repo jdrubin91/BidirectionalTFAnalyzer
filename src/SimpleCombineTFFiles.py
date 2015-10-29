@@ -24,7 +24,18 @@ if __name__ == "__main__":
     Bidir = '/projects/dowellLab/TFIT/Allen2014/FIMO_OUT/Allen2014_DMSO2_3-1_bidirectional_hits_intervals.txt'
     RNASeq = '/scratch/Users/joru1876/BidirectionalTFAnalyzer/files/RNASeqTFLevels.txt'
     
+    RNASeqCutoff = 0
+    PvalCutoff = 0.00005
+    
     CombinedDict = run(RNASeq,Bidir)
+    
+    correct = 0
+    incorrect = 0
+    for TF in CombinedDict:
+        if CombinedDict[TF][0] > RNASeqCutoff and CombinedDict[TF][1] < PvalCutoff:
+            correct += 1
+        else:
+            incorrect += 1
     
     outfile = open('/scratch/Users/joru1876/BidirectionalTFAnalyzer/files/CombinedTFFiles.txt','w')
     outfile.write("TF\tRNA-Seq reads\tUniform\tCenter=0\tBimodal\n")
@@ -33,4 +44,5 @@ if __name__ == "__main__":
         if len(CombinedDict[TF]) > 1:
             for item in CombinedDict[TF][1]:
                 outfile.write(item + "\t")
-        outfile.write("\n") 
+        outfile.write("\n")
+    outfile.write(str(correct/(correct+incorrect)))
