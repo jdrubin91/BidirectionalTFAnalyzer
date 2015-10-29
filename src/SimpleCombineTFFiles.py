@@ -46,4 +46,4 @@ if __name__ == "__main__":
             for item in CombinedDict[TF][1]:
                 outfile.write(item + "\t")
         outfile.write("\n")
-    outfile.write(str(correct/(correct+incorrect)))
+    outfile.write("Percent Correct:" + str(correct/(correct+incorrect)) + "%")
