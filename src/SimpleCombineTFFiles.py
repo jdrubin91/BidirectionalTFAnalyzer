@@ -29,19 +29,20 @@ if __name__ == "__main__":
     
     CombinedDict = run(RNASeq,Bidir)
     correct = 0
-    incorrect = 0
+    falseneg = 0
+    falsepos = 0
     for TF in CombinedDict:
         if len(CombinedDict[TF]) > 1:
-            #print float(CombinedDict[TF][0])
-            #print float(CombinedDict[TF][1][0])
-            #print float(CombinedDict[TF][0]) > RNASeqCutoff and float(CombinedDict[TF][1][0]) < PvalCutoff
             if (float(CombinedDict[TF][0]) > RNASeqCutoff) and (float(CombinedDict[TF][1][0]) < PvalCutoff):
                 correct += 1
-            else:
-                incorrect += 1
+            elif float(CombinedDict[TF][0]) > RNASeqCutoff and float(CombinedDict[TF][1][0]) > PvalCutoff:
+                falseneg += 1
+            elif float(CombinedDict[TF][0]) <= RNASeqCutoff and float(CombinedDict[TF][1][0]) < PvalCutoff:
+                falsepos += 1
     
     print correct
-    print incorrect
+    print falsepos
+    print falseneg
     outfile = open('/scratch/Users/joru1876/BidirectionalTFAnalyzer/files/CombinedTFFiles.txt','w')
     outfile.write("TF\tRNA-Seq reads\tUniform\tCenter=0\tBimodal\n")
     for TF in CombinedDict:
@@ -50,4 +51,4 @@ if __name__ == "__main__":
             for item in CombinedDict[TF][1]:
                 outfile.write(item + "\t")
         outfile.write("\n")
-    outfile.write("Percent Correct:" + str(correct/(correct+incorrect)) + "%")
+    #outfile.write("Percent Correct:" + str(correct/(correct+incorrect)) + "%")
