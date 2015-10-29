@@ -29,7 +29,7 @@ if __name__ == "__main__":
     outfile = open('/scratch/Users/joru1876/BidirectionalTFAnalyzer/files/CombinedTFFiles.txt','w')
     outfile.write("TF\tRNA-Seq reads\tUniform\tCenter=0\tBimodal\n")
     for TF in CombinedDict:
-        outfile.write(TF + "\t")
-        for item in CombinedDict[TF]:
+        outfile.write(TF + "\t" + CombinedDict[TF][0] + "\t")
+        for item in CombinedDict[TF][1]:
             outfile.write(item + "\t")
         outfile.write("\n") 
