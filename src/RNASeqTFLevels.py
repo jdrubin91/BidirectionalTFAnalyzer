@@ -14,7 +14,7 @@ def run(TFGeneNames, refFile, RNASeqFile):
     TFGenesDict = dict()
     for line in file1:
         line = line.strip().split()
-        TF, geneNames = line[1][0:line.index('_')],line[3:len(line)]
+        TF, geneNames = line[1][0:line[1].index('_')],line[3:len(line)]
         TFGenesDict[TF] = geneNames
     print "TFGenesDict",TFGenesDict
         
