@@ -32,20 +32,22 @@ def run(TFGeneNames, refFile):
             refDict[gene] = [(chrom,start,stop,coverage)]
         
     TFCoverage = dict()
+    TFGenes = dict()
     for TF in TFGenesDict:
         for gene in TFGenesDict[TF]:
             if gene in refDict:
+                TFGenes[gene] = refDict[gene]
                 coverage = refDict[gene][0][3]
                 TFCoverage[TF] = [coverage]
 
     
-    return TFCoverage, refDict
+    return TFCoverage, TFGenes
 
 if __name__ == "__main__":
     TFGeneNames = '/scratch/Users/joru1876/HOCOMOCODatabaseFIMO/HOCOMOCOGeneNames.txt'
     refFile = '/scratch/Users/joru1876/HCT116RNASeq.gtf'
     
-    TFCoverage,refDict = run(TFGeneNames, refFile)
+    TFCoverage,TFGenes = run(TFGeneNames, refFile)
     
     outfile = open('/scratch/Users/joru1876/BidirectionalTFAnalyzer/files/RNASeqTFLevels.txt','w')
     outfile.write("TF\tRNA-Seq reads\n")
@@ -53,10 +55,10 @@ if __name__ == "__main__":
         outfile.write(TF + "\t" + TFCoverage[TF][0] + "\n")
     
     outfile2 = open('/scratch/Users/joru1876/BidirectionalTFAnalyzer/files/FIMOGenes.txt','w')
-    for gene in refDict:
+    for gene in TFGenes:
         outfile2.write(gene)
         outfile2.write('\t')
-        for item in refDict[gene][0]:
+        for item in TFGenes[gene][0]:
             outfile2.write(item)
             outfile2.write('\t')
         outfile2.write('\n')
