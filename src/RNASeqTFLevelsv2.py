@@ -54,7 +54,9 @@ if __name__ == "__main__":
     
     outfile2 = open('/scratch/Users/joru1876/BidirectionalTFAnalyzer/files/FIMOGenes.txt','w')
     for gene in refDict:
-        outfile2.write(gene+'\t')
+        outfile2.write(gene)
+        outfile2.write('\t')
         for item in refDict[gene]:
-            outfile2.write(item+'\t')
+            outfile2.write(item)
+            outfile2.write('\t')
         outfile2.write('\n')
