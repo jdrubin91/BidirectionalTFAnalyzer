@@ -56,7 +56,7 @@ if __name__ == "__main__":
     for gene in refDict:
         outfile2.write(gene)
         outfile2.write('\t')
-        for item in refDict[gene]:
+        for item in refDict[gene][0]:
             outfile2.write(item)
             outfile2.write('\t')
         outfile2.write('\n')
