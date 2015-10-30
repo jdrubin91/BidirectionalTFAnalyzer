@@ -39,7 +39,7 @@ def run(TFGeneNames, refFile):
                 TFCoverage[TF] = [coverage]
 
     
-    return TFCoverage, refDict[gene]
+    return TFCoverage, refDict
 
 if __name__ == "__main__":
     TFGeneNames = '/scratch/Users/joru1876/HOCOMOCODatabaseFIMO/HOCOMOCOGeneNames.txt'
