@@ -39,16 +39,22 @@ def run(TFGeneNames, refFile):
                 TFCoverage[TF] = [coverage]
 
     
-    return TFCoverage
+    return TFCoverage, refDict[gene]
 
 if __name__ == "__main__":
     TFGeneNames = '/scratch/Users/joru1876/HOCOMOCODatabaseFIMO/HOCOMOCOGeneNames.txt'
     refFile = '/scratch/Users/joru1876/HCT116RNASeq.gtf'
     
-    TFCoverage = run(TFGeneNames, refFile)
+    TFCoverage,refDict = run(TFGeneNames, refFile)
     
     outfile = open('/scratch/Users/joru1876/BidirectionalTFAnalyzer/files/RNASeqTFLevels.txt','w')
     outfile.write("TF\tRNA-Seq reads\n")
     for TF in TFCoverage:
         outfile.write(TF + "\t" + TFCoverage[TF][0] + "\n")
     
+    outfile2 = open('/scratch/Users/joru1876/BidirectionalTFAnalyzer/files/FIMOGenes.txt','w')
+    for gene in refDict:
+        outfile2.write(gene+'\t')
+        for item in refDict[gene]:
+            outfile2.write(item+'\t')
+        outfile2.write('\n')
