@@ -6,7 +6,7 @@ import intervals,load
 #or not and can be any size
 
 A 	= [(1,5, "A1"), (4,10, "A2"),  (13,15, "A3"), (32, 34, "A4"), (61,68, "A5")]
-B 	= [(1,6, "B1"), (7,15, "B2"),  (16,17, "B3" ), (62,69, "B4") ]
+B 	= [(1,6), (7,15, "B2"),  (16,17, "B3" ), (62,69, "B4") ]
 C 	= [(2,6, "C1"), (18,20, "C2"),  (21,23, "C3"), (25, 29), (31, 35)]
 D 	= [(2,7, "D1"), (12, 17, "D2"), (61,65, "D3")]
 
@@ -36,6 +36,7 @@ for O in OVERLAPS_0_1_2:
 	print "Overlap Instance: ", O, O.start, O.stop, len(O.overlaps.keys())
 	print "Intervals within: "
 	for interval_original in O.overlaps:
+	        print interval_original.INFO == ''
 		print interval_original, interval_original.start, interval_original.stop, interval_original.INFO
 print "---------------------------------------------"
 

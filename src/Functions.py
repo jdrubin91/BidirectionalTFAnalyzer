@@ -7,6 +7,7 @@ import sys
 #sys.path.append("C:\home\Jonathan\interval_searcher")
 from operator import itemgetter
 import node
+import numpy as np
 #from interval_searcher import intervals
 
 #Create a dictionary from a bed file with chromosome locations creates a list of lists [start,stop] for each chrom
@@ -112,7 +113,7 @@ def create_tup_fimo(filename, header):
             d1[chrom] = [(float(start), float(stop),pval)]
     return d1
     
-#Create a dictionary from a fimo bed file with chromosome locations creates list of triples (start,stop,p-val) for each chrom
+#Create a dictionary from a fimo bed file with chromosome locations creates list of 3-tuples (start,stop,(motif,p-val,qval,strand)) for each chrom
 #(format needs to be: 'Chromosome'\t'Start'\t'Stop'\t'Strand'\t'Score'\t'P-val'..., if header = True, remove first line of file containing header info)
 def create_tup_fimo2(filename, header):
     d1 = dict()
@@ -130,6 +131,42 @@ def create_tup_fimo2(filename, header):
             d1[chrom] = [(float(start), float(stop),(motif,pval,qval,strand))]
     return d1
     
+#Create a dictionary from a fimo bed file that is uncut (i.e. has first column as TF name) 
+#with chromosome locations creates list of 3-tuples (start,stop,(motif,p-val,qval,strand)) for each chrom
+#(format needs to be: 'Chromosome'\t'Start'\t'Stop'\t'Strand'\t'Score'\t'P-val'..., if header = True, remove first line of file containing header info)
+def create_tup_uncut_fimo2(filename, header):
+    d1 = dict()
+    file1 = open(filename)
+    if header:
+        file1.readline()
+    for line in file1:
+        line = line.strip().split()
+        chrom, start, stop = line[1:4]
+        strand = line[4]
+        pval,qval,motif = line[6:9]
+        if chrom in d1:
+            d1[chrom].append((float(start),float(stop),(motif,pval,qval,strand)))
+        else:
+            d1[chrom] = [(float(start), float(stop),(motif,pval,qval,strand))]
+    return d1
+
+#Creates a dictionary with chromosome as a key and sites of equally spaced windows of size windowsize
+#along each chromosome
+def create_randomized_sites(windowsize):
+    sizes = [16569,59373566,155270560,249250621,243199373,198022430,191154276,180915260,171115067,
+            159138663,146364022,141213431,135534747,135006516,133851895,115169878,107349540,102531392,
+            90354753,81195210,78077248,59128983,63025520,48129895,51304566]
+    chromosomes = ['chrM','chrY','chrX','chr1','chr2','chr3','chr4','chr5','chr6','chr7','chr8','chr9',
+                    'chr10','chr11','chr12','chr13','chr14','chr15','chr16','chr17','chr18','chr19',
+                    'chr20','chr21','chr22']
+    d1 = dict()
+    for i in range(0,len(chromosomes)):
+        d1[chromosomes[i]] = list()
+        y = np.linspace(windowsize,sizes[i]-windowsize,sizes[i]/(2*windowsize))
+        for item in y:
+            d1[chromosomes[i]].append((item-windowsize,item+windowsize))
+    return d1
+
     
 #Returns parsed file list from bidirectional site without header and with parameters as their own list
 #Ex: [chr, start, stop, [pi,lamda, ..etc]]
@@ -247,6 +284,13 @@ def chip_peak_directories(rootdirectory):
         directorylist.append(rootdirectory + "/" + TF + "/peak_files")
     return directorylist
 
+#Return a list of peak_file directories
+def chip_bedgraph_directories(rootdirectory):
+    directorylist = []
+    for TF in os.listdir(rootdirectory):
+        directorylist.append(rootdirectory + "/" + TF + "/bedgraph_files")
+    return directorylist
+
 
 #Return a list of fimo_out directories
 def fimo_directories(rootdirectory):
@@ -257,6 +301,15 @@ def fimo_directories(rootdirectory):
             FileList = [item for item in os.listdir(os.getcwd()) if 'fimo_out' in item]
             for fimofolder in FileList:
                 directorylist.append(rootdirectory + "/" + TF + "/peak_files/outfiles/MEME/" + fimofolder)
+    
+    return directorylist
+    
+#Return a list of HOCOMOCO fimo_out directories
+def HOCOMOCO_fimo_directories(rootdirectory):
+    directorylist = []
+    for TF in os.listdir(rootdirectory):
+        if os.path.exists(rootdirectory + "/" + TF):
+            directorylist.append(rootdirectory + "/" + TF + "/peak_files/outfiles/MEME")
     
     return directorylist
     
