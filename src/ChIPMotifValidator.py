@@ -122,7 +122,7 @@ if __name__ == "__main__":
         directorylist = directory.split('/')
         TF = directorylist[len(directorylist)-2]
         if TF in FIMOTFDict:
-	    print os.listdir(directory)
+	    print TF
             ChipFile = directory + '/' + [i for i in os.listdir(directory) if 'ENC' in i][0]
             BackgroundDict, FnoBDict, FandBDict = run(BidirFile,ChipFile,FIMOTFDict[TF] + '/fimo.txt')
             
