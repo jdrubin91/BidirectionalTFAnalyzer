@@ -307,9 +307,8 @@ def fimo_directories(rootdirectory):
 #Return a list of HOCOMOCO fimo_out directories
 def HOCOMOCO_fimo_directories(rootdirectory):
     directorylist = []
-    for TF in os.listdir(rootdirectory):
-        if os.path.exists(rootdirectory + "/" + TF):
-            directorylist.append(rootdirectory + "/" + TF + "/peak_files/outfiles/MEME")
+    for TF in os.listdir(rootdirectory + '/FIMO_OUT'):
+        directorylist.append(rootdirectory + "/" + TF)
     
     return directorylist
     
