@@ -124,3 +124,25 @@ if __name__ == "__main__":
         if TF in FIMOTFDict:
             ChipFile = directory + '/' + [i for i in os.listdir(directory) if 'ENC' in i][0]
             BackgroundDict, FnoBDict, FandBDict = run(BidirFile,directory,FIMOTFDict[TF])
+            
+            if not os.path.exists(directory + '/ChIPMotifValidator_out'):
+                os.mkdir(directory + '/ChIPMotifValidator_out')
+            os.chdir(directory + '/ChIPMotifValidator_out')
+            outfile1 = open('Background.txt','w')
+            for chrom in BackgroundDict:
+                outfile1.write(chrom)
+                outfile1.write('\t')
+                outfile1.write(BackgroundDict[chrom])
+                outfile1.write('\n')
+            outfile2 = open('FnoB.txt','w')
+            for chrom in FnoBDict:
+                outfile2.write(chrom)
+                outfile2.write('\t')
+                outfile2.write(FnoBDict[chrom])
+                outfile2.write('\n')
+            outfile3 = open('FandB.txt','w')
+            for chrom in FandBDict:
+                outfile3.write(chrom)
+                outfile3.write('\t')
+                outfile3.write(FandBDict[chrom])
+                outfile3.write('\n')
