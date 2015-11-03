@@ -110,7 +110,7 @@ if __name__ == "__main__":
     #Specify paths to directories or files
     BidirFile = '/scratch/Users/joru1876/Allen2014_DMSO2_3-1_bidirectional_hits_intervals.bed'
     ChipDir = '/scratch/Users/joru1876/HCT116v2'
-    FimoDir = '/scratch/Users/joru1876/HOCOMOCODatabaseFIMO'
+    FimoDir = '/scratch/Users/joru1876/HOCOMOCODatabaseFIMO/FIMO_OUT'
     
     FIMOTFDict = dict()
     for TF in Functions.HOCOMOCO_fimo_directories(FimoDir):
@@ -119,11 +119,12 @@ if __name__ == "__main__":
     
     ChipDirList = Functions.chip_bedgraph_directories(ChipDir)
     for directory in ChipDirList:
-        directory = directory.split('/')
-        TF = directory[len(directory)-1]
+        directorylist = directory.split('/')
+        TF = directorylist[len(directorylist)-2]
         if TF in FIMOTFDict:
+	    print os.listdir(directory)
             ChipFile = directory + '/' + [i for i in os.listdir(directory) if 'ENC' in i][0]
-            BackgroundDict, FnoBDict, FandBDict = run(BidirFile,directory,FIMOTFDict[TF])
+            BackgroundDict, FnoBDict, FandBDict = run(BidirFile,ChipFile,FIMOTFDict[TF] + '/fimo.txt')
             
             if not os.path.exists(Functions.parent_dir(directory) + '/ChIPMotifValidator_out'):
                 os.mkdir(Functions.parent_dir(directory) + '/ChIPMotifValidator_out')
