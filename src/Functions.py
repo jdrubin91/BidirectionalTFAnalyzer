@@ -308,7 +308,7 @@ def fimo_directories(rootdirectory):
 def HOCOMOCO_fimo_directories(rootdirectory):
     directorylist = []
     for TF in os.listdir(rootdirectory + '/FIMO_OUT'):
-        directorylist.append(rootdirectory + "/" + TF)
+        directorylist.append(rootdirectory + "/FIMO_OUT/" + TF)
     
     return directorylist
     
