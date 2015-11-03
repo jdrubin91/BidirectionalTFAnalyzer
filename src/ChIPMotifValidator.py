@@ -125,9 +125,9 @@ if __name__ == "__main__":
             ChipFile = directory + '/' + [i for i in os.listdir(directory) if 'ENC' in i][0]
             BackgroundDict, FnoBDict, FandBDict = run(BidirFile,directory,FIMOTFDict[TF])
             
-            if not os.path.exists(directory + '/ChIPMotifValidator_out'):
-                os.mkdir(directory + '/ChIPMotifValidator_out')
-            os.chdir(directory + '/ChIPMotifValidator_out')
+            if not os.path.exists(Functions.parent_dir(directory) + '/ChIPMotifValidator_out'):
+                os.mkdir(Functions.parent_dir(directory) + '/ChIPMotifValidator_out')
+            os.chdir(Functions.parent_dir(directory) + '/ChIPMotifValidator_out')
             outfile1 = open('Background.txt','w')
             for chrom in BackgroundDict:
                 outfile1.write(chrom)
