@@ -10,27 +10,29 @@ def run(BidirFile, ChipFile, FimoFile):
     #Give size of window to look at ChIP reads
     windowsize = 100
     
+    #Create list of TruePositives,TrueNegatives,FalsePositives,FalseNegatives
+    matrix = list()
     
     BidirDict = Functions.create_tup_bidir(BidirFile)
-    ChipDict = Functions.create_bedgraph_dict(ChipFile, False)
+    ChipDict = Functions.create_tup_dict(ChipFile, False)
     FimoDict = Functions.create_tup_uncut_fimo2(FimoFile, True)
-    RandomizedDict = Functions.create_randomized_sites(windowsize)
+    #RandomizedDict = Functions.create_randomized_sites(windowsize)
     
     #Calculate reads over background by generating equally spaced random sites that are 
     #2xwindowsize in length
     #background = 0
     #genomesize = 3234830000
-    BackgroundDict = dict()
-    for chrom in RandomizedDict:
-        if chrom in ChipDict:
-            RandomList = RandomizedDict[chrom]
-            ChipList = ChipDict[chrom]
-            BackgroundDict[chrom] = list()
-            STBackground = intervals.comparison((RandomList,ChipList))
-            for O in STBackground.find_overlaps(0,1):
-                for interval_original in O.overlaps:
-                        if not interval_original.INFO == '':
-                            BackgroundDict[chrom].append(interval_original.INFO)
+    #BackgroundDict = dict()
+    #for chrom in RandomizedDict:
+    #    if chrom in ChipDict:
+    #        RandomList = RandomizedDict[chrom]
+    #        ChipList = ChipDict[chrom]
+    #        BackgroundDict[chrom] = list()
+    #        STBackground = intervals.comparison((RandomList,ChipList))
+    #        for O in STBackground.find_overlaps(0,1):
+    #            for interval_original in O.overlaps:
+    #                    if not interval_original.INFO == '':
+    #                        BackgroundDict[chrom].append(interval_original.INFO)
     
     #Bulk of code. Will populate dictionaries (key = chrom) with ChIP coverage
     #for motif sites not in bidirectionals (as defined by motifcutoff) and for 
@@ -80,7 +82,7 @@ def run(BidirFile, ChipFile, FimoFile):
                             FandBList.append((mid-windowsize,mid+windowsize))
                             
                 
-                #Find ChIP coverage over motif sites that do not overlap a bidir
+                #Find ChIP sites over motif sites that do not overlap a bidir
                 ST2 = intervals.comparison(FnoBList, ChipSites)
                 FnoBChipOverlaps = ST2.find_overlaps(0,1)
                 #FnoBtotalsize = 0
@@ -117,7 +119,7 @@ if __name__ == "__main__":
         TFlist = TF.split('/')
         FIMOTFDict[TFlist[len(TFlist)-1][0:TFlist[len(TFlist)-1].index('_')]] = TF
     
-    ChipDirList = Functions.chip_bedgraph_directories(ChipDir)
+    ChipDirList = Functions.chip_peak_directories(ChipDir)
     for directory in ChipDirList:
         directorylist = directory.split('/')
         TF = directorylist[len(directorylist)-2]
@@ -126,22 +128,22 @@ if __name__ == "__main__":
             ChipFile = directory + '/' + [i for i in os.listdir(directory) if 'ENC' in i][0]
             BackgroundDict, FnoBDict, FandBDict = run(BidirFile,ChipFile,FIMOTFDict[TF] + '/fimo.txt')
             
-            if not os.path.exists(Functions.parent_dir(directory) + '/ChIPMotifValidator_out'):
-                os.mkdir(Functions.parent_dir(directory) + '/ChIPMotifValidator_out')
-            os.chdir(Functions.parent_dir(directory) + '/ChIPMotifValidator_out')
-            outfile1 = open('Background100.txt','w')
+            if not os.path.exists(Functions.parent_dir(directory) + '/ChIPPeakMotifValidator_out'):
+                os.mkdir(Functions.parent_dir(directory) + '/ChIPPeakMotifValidator_out')
+            os.chdir(Functions.parent_dir(directory) + '/ChIPPeakMotifValidator_out')
+            outfile1 = open('Background.txt','w')
             for chrom in BackgroundDict:
                 outfile1.write(chrom)
                 outfile1.write('\t')
                 outfile1.write(BackgroundDict[chrom])
                 outfile1.write('\n')
-            outfile2 = open('FnoB100.txt','w')
+            outfile2 = open('FnoB.txt','w')
             for chrom in FnoBDict:
                 outfile2.write(chrom)
                 outfile2.write('\t')
                 outfile2.write(FnoBDict[chrom])
                 outfile2.write('\n')
-            outfile3 = open('FandB100.txt','w')
+            outfile3 = open('FandB.txt','w')
             for chrom in FandBDict:
                 outfile3.write(chrom)
                 outfile3.write('\t')
