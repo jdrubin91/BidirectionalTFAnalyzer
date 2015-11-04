@@ -33,6 +33,8 @@ if __name__ == "__main__":
         outfile.write(exp)
         outfile.write('\t')
         for val in TFITDict[exp]:
-            outfile.write(val)
-            outfile.write('\t')
+            outfile.write(val[0])
+            outfile.write(',')
+            outfile.write(val[1])
+            outfile.write(',')
         outfile.write('\n')
