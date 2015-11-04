@@ -14,9 +14,9 @@ def run(TFITDir):
                 file1 = open(directory + '/' + bidirfile)
                 file1.readline()
                 for line in file1:
-                    if not line=='':
-                        TF,pval = line.strip().split()[0:2]
-                        TFITDict[bidirfile].append((TF,pval))
+                    print line
+                    TF,pval = line.strip().split()[0:2]
+                    TFITDict[bidirfile].append((TF,pval))
         
     
     return TFITDict
