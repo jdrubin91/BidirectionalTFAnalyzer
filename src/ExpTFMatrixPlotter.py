@@ -46,12 +46,12 @@ def run(masterfile,pvalcutoff):
     vectors = list()
     for tuple1 in TForder:
         TF = tuple1[0]
+        explist = list()
         for tuple2 in exporder:
             exp = tuple2[0]
-            explist = list()
             for tuple3 in masterdict[exp]:
                 if tuple3[0]==TF:
-                    if tuple3[0] < pvalcutoff:
+                    if float(tuple3[1]) < pvalcutoff:
                         explist.append(1)
                     else:
                         explist.append(0)
