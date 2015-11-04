@@ -316,7 +316,8 @@ def HOCOMOCO_fimo_directories(rootdirectory):
 def TFIT_fimo_directories(rootdirectory):
     directorylist = []
     for exp in os.listdir(rootdirectory):
-        directorylist.append(rootdirectory + '/' + exp + '/FIMO_OUT/')
+        if os.path.exists(rootdirectory + '/' + exp + '/FIMO_OUT/'):
+            directorylist.append(rootdirectory + '/' + exp + '/FIMO_OUT/')
     
     return directorylist
     
