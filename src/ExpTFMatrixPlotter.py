@@ -66,3 +66,6 @@ if __name__ == "__main__":
     exporder,TForder,vectors = run(masterfile,pvalcutoff)
     
     print exporder,TForder,vectors
+    
+    for item in vectors:
+        print len(item)
