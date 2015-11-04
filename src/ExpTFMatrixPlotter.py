@@ -11,7 +11,7 @@ def run(masterfile,pvalcutoff):
         exp = linetabsplit[0][0:linetabsplit[0].index('.')]
         masterdict[exp] = list()
         linecommasplit = linetabsplit[1].split(',')
-        for i in range(0,len(linecommasplit),2):
+        for i in range(0,len(linecommasplit)-1,2):
             TF = linecommasplit[i]
             pval = linecommasplit[i+1]
             if pval < pvalcutoff:
