@@ -55,7 +55,7 @@ def run(masterfile,pvalcutoff):
                         explist.append(1)
                     else:
                         explist.append(0)
-        vectors.append(explist)
+        vectors.append((TF,explist))
     
     
     return exporder,TForder,vectors
