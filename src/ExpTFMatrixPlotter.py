@@ -8,13 +8,12 @@ def run(masterfile,pvalcutoff):
     masterdict = dict()
     for line in open(masterfile):
         linetabsplit = line.strip().split()
-        exp = linetabsplit[0][0,linetabsplit[0].index('.')]
+        exp = linetabsplit[0][0:linetabsplit[0].index('.')]
         masterdict[exp] = list()
         linecommasplit = linetabsplit[1].split(',')
-        for i in range(0,len(linecommasplit)):
+        for i in range(0,len(linecommasplit),2):
             TF = linecommasplit[i]
-            i+=1
-            pval = linecommasplit[i]
+            pval = linecommasplit[i+1]
             if pval < pvalcutoff:
                 pval = 1
             else:
