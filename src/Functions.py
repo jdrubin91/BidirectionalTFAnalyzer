@@ -312,6 +312,14 @@ def HOCOMOCO_fimo_directories(rootdirectory):
     
     return directorylist
     
+#Return a list of HOCOMOCO fimo_out directories
+def TFIT_fimo_directories(rootdirectory):
+    directorylist = []
+    for exp in os.listdir(rootdirectory + '/FIMO_OUT'):
+        directorylist.append(rootdirectory + '/' + exp + '/FIMO_OUT/')
+    
+    return directorylist
+    
         
 #Return parent directory
 def parent_dir(directory):
