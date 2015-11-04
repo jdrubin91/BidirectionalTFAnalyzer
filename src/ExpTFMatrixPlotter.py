@@ -1,6 +1,7 @@
 __author__ = 'Jonathan Rubin'
 
 import matplotlib
+from operator import itemgetter
 
 def run(masterfile,pvalcutoff):
     #Takes as input a master file with format 'Exp\tTF\tpval\tTF\tpval...etc'
@@ -19,9 +20,45 @@ def run(masterfile,pvalcutoff):
             else:
                 pval = 0
             masterdict[exp].append((TF,pval))
-            
     
-    return masterdict
+    #Order experiments by number of active TFs
+    exporder = list()
+    for key in masterdict:
+        size = 0
+        for tuples in masterdict[key]:
+            size += tuples[1]
+        exporder.append((key,size))
+    exporder = sorted(exporder,key=itemgetter(1))
+    
+    #Order TFs by times active in exp
+    TFdict = dict()
+    TForder = list()
+    for key in masterdict:
+        for tuples in masterdict[key]:
+            if tuples[0] not in TFdict:
+                TFdict[tuples[0]] = 0
+            TFdict[tuples[0]]+=tuples[1]
+    for key in TFdict:
+        TForder.append(key, TFdict[key])
+    TForder = sorted(TForder,key=itemgetter(1))
+    
+    #Generate activity vectors for each TF based on exporder
+    vectors = list()
+    for tuple1 in TForder:
+        TF = tuple1[0]
+        for tuple2 in exporder:
+            exp = tuple2[0]
+            explist = list()
+            for tuple3 in masterdict[exp]:
+                if tuple3[0]==TF:
+                    if tuple3[0] < pvalcutoff:
+                        explist.append(1)
+                    else:
+                        explist.append(0)
+        vectors.append(explist)
+    
+    
+    return exporder,TForder,vectors
     
 if __name__ == "__main__":
     #Specify location of master file. Must be in format: 'Exp\tTF\tpval\tTF\tpval...etc'
@@ -29,6 +66,6 @@ if __name__ == "__main__":
     #Specify pvalue cutoff to determine whether TF is 'active'
     pvalcutoff = 0.0001
     
-    masterdict = run(masterfile,pvalcutoff)
+    exporder,TForder,vectors = run(masterfile,pvalcutoff)
     
-    print masterdict
+    print exporder,TForder,vectors
