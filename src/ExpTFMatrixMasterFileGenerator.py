@@ -9,7 +9,7 @@ def run(TFITDir):
     TFITDict = dict()
     for directory in Functions.TFIT_fimo_directories(TFITDir):
         for bidirfile in os.listdir(directory):
-            if 'GSM' not in bidirfile:
+            if 'GSM' not in bidirfile and 'SRR' in bidirfile:
                 TFITDict[bidirfile] = list()
                 file1 = open(directory + '/' + bidirfile)
                 file1.readline()
