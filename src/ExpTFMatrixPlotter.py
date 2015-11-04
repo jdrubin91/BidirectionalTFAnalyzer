@@ -28,7 +28,7 @@ def run(masterfile,pvalcutoff):
         for tuples in masterdict[key]:
             size += tuples[1]
         exporder.append((key,size))
-    exporder = sorted(exporder,key=itemgetter(1))
+    exporder = sorted(exporder,key=itemgetter(1),reverse=True)
     
     #Order TFs by times active in exp
     TFdict = dict()
@@ -39,8 +39,8 @@ def run(masterfile,pvalcutoff):
                 TFdict[tuples[0]] = 0
             TFdict[tuples[0]]+=tuples[1]
     for key in TFdict:
-        TForder.append(key, TFdict[key])
-    TForder = sorted(TForder,key=itemgetter(1))
+        TForder.append((key, TFdict[key]))
+    TForder = sorted(TForder,key=itemgetter(1),reverse=True)
     
     #Generate activity vectors for each TF based on exporder
     vectors = list()
