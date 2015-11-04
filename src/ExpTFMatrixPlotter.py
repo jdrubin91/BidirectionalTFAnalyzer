@@ -14,7 +14,7 @@ def run(masterfile,pvalcutoff):
         for i in range(0,len(linecommasplit)-1,2):
             TF = linecommasplit[i]
             pval = linecommasplit[i+1]
-            if pval < pvalcutoff:
+            if float(pval) < pvalcutoff:
                 pval = 1
             else:
                 pval = 0
