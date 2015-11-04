@@ -29,6 +29,9 @@ def run(masterfile,pvalcutoff):
             size += tuples[1]
         exporder.append((key,size))
     exporder = sorted(exporder,key=itemgetter(1),reverse=True)
+    exporder1 = list()
+    for item in exporder:
+        exporder1.append(item[0])
     
     #Order TFs by times active in exp
     TFdict = dict()
@@ -41,6 +44,9 @@ def run(masterfile,pvalcutoff):
     for key in TFdict:
         TForder.append((key, TFdict[key]))
     TForder = sorted(TForder,key=itemgetter(1),reverse=True)
+    TForder1 = list()
+    for item in TForder:
+        TForder1.append(item[0])
     
     #Generate activity vectors for each TF based on exporder
     vectors = list()
@@ -55,7 +61,7 @@ def run(masterfile,pvalcutoff):
         vectors.append(explist)
     
     
-    return exporder,TForder,vectors
+    return exporder1,TForder1,vectors
     
 if __name__ == "__main__":
     #Specify location of master file. Must be in format: 'Exp\tTF\tpval\tTF\tpval...etc'
@@ -67,5 +73,3 @@ if __name__ == "__main__":
     
     print exporder,TForder,vectors
     
-    for item in vectors:
-        print len(item)
