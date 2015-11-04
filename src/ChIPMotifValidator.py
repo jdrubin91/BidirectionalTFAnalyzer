@@ -119,6 +119,7 @@ if __name__ == "__main__":
     
     ChipDirList = Functions.chip_bedgraph_directories(ChipDir)
     for directory in ChipDirList:
+        print Functions.parent_dir(directory) + '/ChIPMotifValidator_out'
         directorylist = directory.split('/')
         TF = directorylist[len(directorylist)-2]
         if TF in FIMOTFDict:
