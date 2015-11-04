@@ -120,12 +120,12 @@ if __name__ == "__main__":
     ChipDirList = Functions.chip_bedgraph_directories(ChipDir)
     for directory in ChipDirList:
         print Functions.parent_dir(directory) + '/ChIPMotifValidator_out'
-        print not os.path.exists(Functions.parent_dir(directory) + '/ChIPMotifValidator_out')
         directorylist = directory.split('/')
         TF = directorylist[len(directorylist)-2]
         if TF in FIMOTFDict:
 	    print TF
             ChipFile = directory + '/' + [i for i in os.listdir(directory) if 'ENC' in i][0]
+            print ChipFile
             BackgroundDict, FnoBDict, FandBDict = run(BidirFile,ChipFile,FIMOTFDict[TF] + '/fimo.txt')
             
             if not os.path.exists(Functions.parent_dir(directory) + '/ChIPMotifValidator_out'):
