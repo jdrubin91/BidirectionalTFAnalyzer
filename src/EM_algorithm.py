@@ -41,7 +41,7 @@ def fit(X, s=100,mu=0):
 		#M-step
 		w 	= EN / (EU+ EN)
 		t+=1
-	return x
+	return w
 
 
 
