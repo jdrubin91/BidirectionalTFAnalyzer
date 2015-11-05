@@ -40,7 +40,7 @@ if __name__ == "__main__":
    
     #Submits a job for each bidirectional file that finds motif distances to bidir sites for each TF in HOCOMOCO database
     fimodir = '/scratch/Users/joru1876/HOCOMOCODatabaseFIMO/FIMO_OUT'
-    bidirDir = '/projects/dowellLab/TFIT'
+    bidirDir = '/scratch/Shares/dowell/TFIT'
     
     for exp in os.listdir(bidirDir):
         print exp
@@ -61,7 +61,7 @@ if __name__ == "__main__":
                 if not os.path.exists(outfiledir + '/FIMO_OUT'):
                     os.mkdir(outfiledir + '/FIMO_OUT')
                     
-                os.system("qsub -v arg1='" + bidirfile + "',arg2='" + fimodir + "',arg3='" + outfiledir + "' /scratch/Users/joru1876/runBidirHOCOMOCOTemplate.sh")
+                os.system("qsub -v arg1='" + bidirfile + "',arg2='" + fimodir + "',arg3='" + outfiledir + "' /scratch/Users/joru1876/JDRScripts/runBidirHOCOMOCOTemplate.sh")
                     
             
             
