@@ -19,8 +19,9 @@ def run(bidirfile, fimodir):
         print item
         TF = item.split('/')[5].split('_')[0]
         x = Functions.get_distances_pad_v3(bidirfile, item + "/fimo.cut.txt", True, 1500)
-        for val in x:
-            val = val*1500
+        for i in range(len(x)):
+            x[i] = x[i]*1500
+            
         if len(x) != 0:
             counts,edges 	= np.histogram(x, bins=200)
             edges 			= edges[1:]
