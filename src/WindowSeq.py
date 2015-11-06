@@ -29,6 +29,7 @@ if __name__ == "__main__":
     for directory in Functions.TFIT_EMG_OUT_directories(TFIT):
         for bidirfile in os.listdir(directory):
             if 'bed' in bidirfile:
+                print bidirfile
                 bidirdict = run(directory + '/' + bidirfile, windowsize)
                 if not os.path.exists(Functions.parent_dir(directory) + '/WindowSeq_out'):
                     os.mkdir(Functions.parent_dir(directory) + '/WindowSeq_out')
