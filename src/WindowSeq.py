@@ -7,7 +7,8 @@ def run(bidirfile,windowsize):
     #Takes in a bidirectional file and outputs a dictionary of {chrom: [(start,stop)]}
     #based on windowsize
     bidirdict = dict()
-    for item in Functions.parse_bidirfile(bidirfile):
+    bidirlist = Functions.parse_bidirfile(bidirfile)
+    for item in bidirlist:
         chrom,start,stop = item[0:3]
         if not chrom in bidirdict:
             bidirdict[chrom] = list()
