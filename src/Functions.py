@@ -177,7 +177,8 @@ def parse_bidirfile(bidirectionalfile):
         if not '#' in line:
             bidirlist.append(line.strip().split())
     for item in bidirlist:
-        item[3] = item[3].split('_')
+        if len(item) > 2:
+            item[3] = item[3].split('_')
         
     return bidirlist
     
