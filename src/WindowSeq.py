@@ -38,8 +38,8 @@ if __name__ == "__main__":
                     start, stop = tup
                     outfile.write(chrom)
                     outfile.write('\t')
-                    outfile.write(start)
+                    outfile.write(str(start))
                     outfile.write('\t')
-                    outfile.write(stop)
+                    outfile.write(str(stop))
                     outfile.write('\n')
             os.system("bedtools getfasta -fi " + referencefilepath + " -bed WindowSeq.bed -fo WindowSeq.fasta")
