@@ -13,7 +13,7 @@ def run(bidirfile,windowsize):
         if not chrom in bidirdict:
             bidirdict[chrom] = list()
         mid = (float(start)+float(stop))/2
-        bidirdict[chrom].append((mid-windowsize,mid+windowsize))
+        bidirdict[chrom].append((int(mid-windowsize),int(mid+windowsize)))
     
     return bidirdict
     
