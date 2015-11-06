@@ -44,4 +44,4 @@ if __name__ == "__main__":
                         outfile.write('\t')
                         outfile.write(str(stop))
                         outfile.write('\n')
-                os.system("bedtools getfasta -fi " + referencefilepath + " -bed WindowSeq.bed -fo WindowSeq.fasta")
+                os.system("bedtools getfasta -fi " + referencefilepath + " -bed " + bidirfile[0:bidirfile.index('.')] + ".wseq.bed -fo " + bidirfile[0:bidirfile.index('.')] + '.wseq.fasta')
