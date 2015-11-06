@@ -34,7 +34,7 @@ if __name__ == "__main__":
                 if not os.path.exists(Functions.parent_dir(directory) + '/WindowSeq_out'):
                     os.mkdir(Functions.parent_dir(directory) + '/WindowSeq_out')
                 os.chdir(Functions.parent_dir(directory) + '/WindowSeq_out')
-                outfile = open('WindowSeq.bed','w')
+                outfile = open(bidirfile[0:bidirfile.index('.')] + '.wseq.bed','w')
                 for chrom in bidirdict:
                     for tup in bidirdict[chrom]:
                         start, stop = tup
