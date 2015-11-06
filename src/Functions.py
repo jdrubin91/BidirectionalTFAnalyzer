@@ -324,8 +324,8 @@ def TFIT_fimo_directories(rootdirectory):
 def TFIT_EMG_OUT_directories(rootdirectory):
     directorylist = []
     for exp in os.listdir(rootdirectory):
-        if os.path.exists(rootdirectory + '/' + exp + '/EMG_out_files/'):
-            directorylist.append(rootdirectory + '/' + exp + '/EMG_out_files/')
+        if os.path.exists(rootdirectory + '/' + exp + '/EMG_out_files'):
+            directorylist.append(rootdirectory + '/' + exp + '/EMG_out_files')
     
     return directorylist
     
