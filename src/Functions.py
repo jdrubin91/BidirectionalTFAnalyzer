@@ -321,6 +321,15 @@ def TFIT_fimo_directories(rootdirectory):
     
     return directorylist
     
+#Return a list of HOCOMOCO fimo_out directories
+def TFIT_EMG_OUT_directories(rootdirectory):
+    directorylist = []
+    for exp in os.listdir(rootdirectory):
+        if os.path.exists(rootdirectory + '/' + exp + '/EMG_OUT_files/'):
+            directorylist.append(rootdirectory + '/' + exp + '/EMG_OUT_files/')
+    
+    return directorylist
+    
         
 #Return parent directory
 def parent_dir(directory):
