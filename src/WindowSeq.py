@@ -29,6 +29,8 @@ if __name__ == "__main__":
     for directory in Functions.TFIT_EMG_OUT_directories(TFIT):
         for bidirfile in os.listdir(directory):
             bidirdict = run(directory + '/' + bidirfile, windowsize)
+            if not os.path.exists(Functions.parent_dir(directory) + '/WindowSeq_out'):
+                os.mkdir(Functions.parent_dir(directory) + '/WindowSeq_out')
             os.chdir(Functions.parent_dir(directory) + '/WindowSeq_out')
             outfile = open('WindowSeq.bed','w')
             for chrom in bidirdict:
