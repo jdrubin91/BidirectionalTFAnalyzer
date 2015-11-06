@@ -28,18 +28,19 @@ if __name__ == "__main__":
     
     for directory in Functions.TFIT_EMG_OUT_directories(TFIT):
         for bidirfile in os.listdir(directory):
-            bidirdict = run(directory + '/' + bidirfile, windowsize)
-            if not os.path.exists(Functions.parent_dir(directory) + '/WindowSeq_out'):
-                os.mkdir(Functions.parent_dir(directory) + '/WindowSeq_out')
-            os.chdir(Functions.parent_dir(directory) + '/WindowSeq_out')
-            outfile = open('WindowSeq.bed','w')
-            for chrom in bidirdict:
-                for tup in bidirdict[chrom]:
-                    start, stop = tup
-                    outfile.write(chrom)
-                    outfile.write('\t')
-                    outfile.write(str(start))
-                    outfile.write('\t')
-                    outfile.write(str(stop))
-                    outfile.write('\n')
-            os.system("bedtools getfasta -fi " + referencefilepath + " -bed WindowSeq.bed -fo WindowSeq.fasta")
+            if 'bed' in bidirfile:
+                bidirdict = run(directory + '/' + bidirfile, windowsize)
+                if not os.path.exists(Functions.parent_dir(directory) + '/WindowSeq_out'):
+                    os.mkdir(Functions.parent_dir(directory) + '/WindowSeq_out')
+                os.chdir(Functions.parent_dir(directory) + '/WindowSeq_out')
+                outfile = open('WindowSeq.bed','w')
+                for chrom in bidirdict:
+                    for tup in bidirdict[chrom]:
+                        start, stop = tup
+                        outfile.write(chrom)
+                        outfile.write('\t')
+                        outfile.write(str(start))
+                        outfile.write('\t')
+                        outfile.write(str(stop))
+                        outfile.write('\n')
+                os.system("bedtools getfasta -fi " + referencefilepath + " -bed WindowSeq.bed -fo WindowSeq.fasta")
