@@ -25,6 +25,19 @@ def create_dict(filename, header):
             d1[chrom] = [[float(start), float(stop)]]
     return d1
     
+#Create a dictionary from a bed file with chromosome locations creates a list of lists [start,stop] for each chrom
+#(format needs to be: 'Chromosome'\t'Start'\t'Stop'..., if header = True, remove first line of file containing header info)
+def create_dictv2(filename):
+    d1 = dict()
+    file1 = open(filename)
+    for line in file1:
+        if not '#' in line:
+            chrom = line.strip().split()[0]
+            if not chrom in d1:
+                d1[chrom] = list()
+            d1[chrom].append(line.strip().split())
+    return d1
+    
 #Create a dictionary from a bedgraph file with chromosome locations creates a list of 3-tuples (start,stop, coverage) 
 #for each chrom (format needs to be: 'Chromosome'\t'Start'\t'Stop\tCoverage'..., if header = True, remove first line 
 #of file containing header info)
@@ -623,7 +636,54 @@ def get_distances_pad_directional(file1, headerlines, file2, header2, pad):
                         distances.append((i-x)/((stop1-start1)/2))
                     
     return distances
+    
+
+#Returns two lists of overlapping sites between two files list = ((chrom,start,stop),(chrom,start,stop))
+#Assumes both files contain non-overlapping intervals and headers begin with '#'
+def find_overlaps(file1, file2):
+    list1 = list()
+    list2 = list()
+    ##Create dictionary from file1
+    file1dict = create_dictv2(file1, False)
+
+
+    file2 = open(file2)
+    for line in file2:
+        if not '#' in line:
+            line = line.strip().split()
+            chrom, start, stop = line[0:3]
+            start = float(start)
+            stop = float(stop)
+            
+            ##At a new chromosome in file, get dict[chromosome] (list of positions) 
+            #and start from beginnning of chromosome
+            prevChrom = 'None'
+            if chrom!=prevChrom:
+                if chrom in file1dict:
+                    
+                    ##N makes sure we stop at the end of the chromosome
+                    N = len(file1dict[chrom])
+                    
+                    ##j is a counter to move up the chromosome
+                    j = 0
+                else:
+                    N = 0
+                    
+            ##As long as j does not surpass N (at which point you reach the end of 
+            #the chromosome) and as long as x is not within the stop site (indicative 
+            #of a hit) increase counter (move up chromosome location), will stop when 
+            #you either reach a hit or finish scanning the chromosome
+            while j < N and float(file1dict[chrom][j][1]) < stop:
+                j+=1
+            
+            ##If we are still within the chromosome and x is within the start and 
+            #stop (i.e. greater than start but lesser than stop positions) x is 
+            #located within a bidirectional site
+            if j < N and float(file1dict[chrom][j][0]) < start:
+                list1.append(file1dict[chrom][j])
+                list2.append(line)
                 
+    return list1,list2
 
 
             
