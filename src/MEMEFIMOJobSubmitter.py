@@ -20,7 +20,7 @@ if __name__ == "__main__":
     shellscripttemplatedir = '/scratch/Users/joru1876/HOCOMOCODatabaseFIMO'
     packagedir = '/scratch/Shares/dowell/ENCODE/HCT116v2'
     
-    for TF in packagedir:
+    for TF in os.listdir(packagedir):
         motiflist = run(packagedir + '/' + TF + '/peak_files/outfiles/MEME/combined.meme', True)
                 
         os.chdir(shellscripttemplatedir)
