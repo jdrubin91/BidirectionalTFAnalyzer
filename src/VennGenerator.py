@@ -19,21 +19,21 @@ def run(bidirfile, chipfile, fimofile, labels):
     for chrom in A:
         i = chromosomes.index(chrom)
         for interval in A[chrom]:
-            Alist.append((interval[0]+sum(sizes[0:i]),interval[1]+sum(sizes[0:i])))
+            Alist.append((int(interval[0])+sum(sizes[0:i]),int(interval[1])+sum(sizes[0:i])))
             
     B = Functions.create_dictv2(chipfile)
     Blist = list()
     for chrom in B:
         i = chromosomes.index(chrom)
         for interval in B[chrom]:
-            Blist.append((interval[0]+sum(sizes[0:i]),interval[1]+sum(sizes[0:i])))
+            Blist.append((int(interval[0])+sum(sizes[0:i]),int(interval[1])+sum(sizes[0:i])))
             
     C = Functions.create_dictv2(fimofile)
     Clist = list()
     for chrom in C:
         i = chromosomes.index(chrom)
         for interval in C[chrom]:
-            Clist.append((interval[0]+sum(sizes[0:i]),interval[1]+sum(sizes[0:i])))
+            Clist.append((int(interval[0])+sum(sizes[0:i]),int(interval[1])+sum(sizes[0:i])))
     
     ST = intervals.comparison(Alist,Blist,Clist)
     
