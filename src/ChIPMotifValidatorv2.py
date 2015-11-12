@@ -128,21 +128,22 @@ if __name__ == "__main__":
             print ChipFile
             BackgroundDict, FnoBDict, FandBDict = run(BidirFile,ChipFile,FIMOTFDict[TF] + '/fimo.txt')
             
-            #if not os.path.exists(Functions.parent_dir(directory) + '/ChIPMotifValidator_out'):
-            os.mkdir(Functions.parent_dir(directory) + '/ChIPMotifValidator_out')
-            outfile1 = open(Functions.parent_dir(directory) + '/ChIPMotifValidator_out/'+'Background100.txt','w')
+            if not os.path.exists(Functions.parent_dir(directory) + '/ChIPMotifValidator_out'):
+                os.mkdir(Functions.parent_dir(directory) + '/ChIPMotifValidator_out')
+            os.chdir(Functions.parent_dir(directory) + '/ChIPMotifValidator_out')
+            outfile1 = open('Background100.txt','w')
             for chrom in BackgroundDict:
                 outfile1.write(chrom)
                 outfile1.write('\t')
                 outfile1.write(BackgroundDict[chrom])
                 outfile1.write('\n')
-            outfile2 = open(Functions.parent_dir(directory) + '/ChIPMotifValidator_out/' + 'FnoB100.txt','w')
+            outfile2 = open('FnoB100.txt','w')
             for chrom in FnoBDict:
                 outfile2.write(chrom)
                 outfile2.write('\t')
                 outfile2.write(FnoBDict[chrom])
                 outfile2.write('\n')
-            outfile3 = open(Functions.parent_dir(directory) + '/ChIPMotifValidator_out/' + 'FandB100.txt','w')
+            outfile3 = open('FandB100.txt','w')
             for chrom in FandBDict:
                 outfile3.write(chrom)
                 outfile3.write('\t')

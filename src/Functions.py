@@ -644,7 +644,7 @@ def find_overlaps(file1, file2):
     list1 = list()
     list2 = list()
     ##Create dictionary from file1
-    file1dict = create_dictv2(file1, False)
+    file1dict = create_dictv2(file1)
 
 
     file2 = open(file2)
@@ -655,30 +655,29 @@ def find_overlaps(file1, file2):
             start = float(start)
             stop = float(stop)
             
-            ##At a new chromosome in file, get dict[chromosome] (list of positions) 
+            ##At a new chromosome in file2, get file1[chromosome] (list of positions) 
             #and start from beginnning of chromosome
             prevChrom = 'None'
             if chrom!=prevChrom:
                 if chrom in file1dict:
                     
-                    ##N makes sure we stop at the end of the chromosome
+                    ##N makes sure we stop at the end of the chromosome of file1
                     N = len(file1dict[chrom])
                     
-                    ##j is a counter to move up the chromosome
+                    ##j is a counter to move up the chromosome of file1
                     j = 0
                 else:
                     N = 0
                     
             ##As long as j does not surpass N (at which point you reach the end of 
-            #the chromosome) and as long as x is not within the stop site (indicative 
-            #of a hit) increase counter (move up chromosome location), will stop when 
-            #you either reach a hit or finish scanning the chromosome
+            #the chromosome) and as long as file2 stop is not within the file1 
+            #stop site (indicative of a hit) increase counter (move up chromosome 
+            #location), will stop when you either reach a hit or finish scanning the chromosome
             while j < N and float(file1dict[chrom][j][1]) < stop:
                 j+=1
             
-            ##If we are still within the chromosome and x is within the start and 
-            #stop (i.e. greater than start but lesser than stop positions) x is 
-            #located within a bidirectional site
+            ##If we are still within the chromosome and file2 start is within the file1 start and 
+            #stop then there is an overlapping interval hit so save both sites in separate lists
             if j < N and float(file1dict[chrom][j][0]) < start:
                 list1.append(file1dict[chrom][j])
                 list2.append(line)
