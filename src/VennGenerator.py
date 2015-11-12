@@ -2,6 +2,7 @@ __author__ = "Jonathan Rubin"
 
 import intervals,load
 import Functions
+import os
 
 def run(bidirfile, chipfile, fimofile, labels):
     
@@ -15,7 +16,12 @@ def run(bidirfile, chipfile, fimofile, labels):
     
     
 if __name__ == "__main__":
-    bidirfile = 'path to bidirectional file'
-    chipfilelist = Functions.chip_peak_directories('path to HCT116')
+    bidirfile = '/scratch/Shares/dowell/TFIT/Allen2014/EMG_out_files/Allen2014_DMSO2_3-1_bidirectional_hits_intervals.bed'
+    chipdir = '/scratch/Shares/dowell/ENCODE/HCT116v2'
     
-    
+    for TF in os.listdir(chipdir):
+        chipfile = chipdir + '/' + TF + '/peak_files' + [i for i in os.listdir(chipdir + '/' + TF + '/peak_files') if 'ENC' in i][0]
+        for fimofolder in [i for i in os.listdir(chipdir + '/' + TF + '/peak_files/outfiles/MEME') if 'fimo_out' in i and i[0].isdigit()]:
+            fimofile = chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.txt'
+            venn = run(bidirfile,chipfile,fimofile,['Bidirectionals',TF + 'ChIP', 'motif' + fimofolder[0]])
+            savefig('venn.png')
