@@ -1,17 +1,41 @@
 __author__ = "Jonathan Rubin"
 
-import intervals,load
+import intervals
 import Functions
 import os
 import pylab
 
 def run(bidirfile, chipfile, fimofile, labels):
     
-    A = load.bed_file(bidirfile)
-    B = load.bed_file(chipfile)
-    C = load.bed_file(fimofile)
+    sizes = [16569,59373566,155270560,249250621,243199373,198022430,191154276,180915260,171115067,
+            159138663,146364022,141213431,135534747,135006516,133851895,115169878,107349540,102531392,
+            90354753,81195210,78077248,59128983,63025520,48129895,51304566]
+    chromosomes = ['chrM','chrY','chrX','chr1','chr2','chr3','chr4','chr5','chr6','chr7','chr8','chr9',
+                    'chr10','chr11','chr12','chr13','chr14','chr15','chr16','chr17','chr18','chr19',
+                    'chr20','chr21','chr22']
     
-    ST = intervals.comparison(A,B,C)
+    A = Functions.create_dictv2(bidirfile)
+    Alist = list()
+    for chrom in A:
+        i = chromosomes.index(chrom)
+        for interval in A[chrom]:
+            Alist.append((interval[0]+sum(sizes[0:i]),interval[1]+sum(sizes[0:i])))
+            
+    B = Functions.create_dictv2(chipfile)
+    Blist = list()
+    for chrom in B:
+        i = chromosomes.index(chrom)
+        for interval in B[chrom]:
+            Blist.append((interval[0]+sum(sizes[0:i]),interval[1]+sum(sizes[0:i])))
+            
+    C = Functions.create_dictv2(fimofile)
+    Clist = list()
+    for chrom in C:
+        i = chromosomes.index(chrom)
+        for interval in C[chrom]:
+            Clist.append((interval[0]+sum(sizes[0:i]),interval[1]+sum(sizes[0:i])))
+    
+    ST = intervals.comparison(Alist,Blist,Clist)
     
     return ST.compute_venn(0,1,2, display = False, labels = labels)
     
@@ -28,5 +52,5 @@ if __name__ == "__main__":
             Functions.cut_file(chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.txt',[1,2,3],chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.cut.txt')
             fimofile = chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.cut.txt'
             Functions.replace_header(fimofile, '#')
-            venn = run(bidirfile,chipfile,fimofile,['Bidirectionals',TF + 'ChIP', 'motif' + fimofolder[0]])
+            venn = run(bidirfile,chipfile,fimofile,('Bidirectionals',TF + 'ChIP', 'motif' + fimofolder[0]))
             pylab.savefig('venn.png')
