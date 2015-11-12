@@ -17,23 +17,26 @@ def run(bidirfile, chipfile, fimofile, labels):
     A = Functions.create_dictv2(bidirfile)
     Alist = list()
     for chrom in A:
-        i = chromosomes.index(chrom)
-        for interval in A[chrom]:
-            Alist.append((int(interval[0])+sum(sizes[0:i]),int(interval[1])+sum(sizes[0:i])))
+        if chrom in chromosomes:
+            i = chromosomes.index(chrom)
+            for interval in A[chrom]:
+                Alist.append((int(interval[0])+sum(sizes[0:i]),int(interval[1])+sum(sizes[0:i])))
             
     B = Functions.create_dictv2(chipfile)
     Blist = list()
     for chrom in B:
-        i = chromosomes.index(chrom)
-        for interval in B[chrom]:
-            Blist.append((int(interval[0])+sum(sizes[0:i]),int(interval[1])+sum(sizes[0:i])))
+        if chrom in chromosomes:
+            i = chromosomes.index(chrom)
+            for interval in B[chrom]:
+                Blist.append((int(interval[0])+sum(sizes[0:i]),int(interval[1])+sum(sizes[0:i])))
             
     C = Functions.create_dictv2(fimofile)
     Clist = list()
     for chrom in C:
-        i = chromosomes.index(chrom)
-        for interval in C[chrom]:
-            Clist.append((int(interval[0])+sum(sizes[0:i]),int(interval[1])+sum(sizes[0:i])))
+        if chrom in chromosomes:
+            i = chromosomes.index(chrom)
+            for interval in C[chrom]:
+                Clist.append((int(interval[0])+sum(sizes[0:i]),int(interval[1])+sum(sizes[0:i])))
     
     ST = intervals.comparison(Alist,Blist,Clist)
     
