@@ -5,7 +5,7 @@ def bed_file(FILE, FILTER=None):
 	N 	= 0.
 	with open(FILE) as FH:
 		for line in FH:
-			if "#" not in line[0]:
+			if "#" not in line:
 				chrom,start, stop, INFO 	= line.strip("\n").split("\t")[0:4]
 				if chrom not in G:
 					G[chrom] 	= list()
