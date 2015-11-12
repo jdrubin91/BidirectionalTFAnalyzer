@@ -3,6 +3,7 @@ __author__ = "Jonathan Rubin"
 import intervals,load
 import Functions
 import os
+import pylab
 
 def run(bidirfile, chipfile, fimofile, labels):
     
@@ -24,4 +25,4 @@ if __name__ == "__main__":
         for fimofolder in [i for i in os.listdir(chipdir + '/' + TF + '/peak_files/outfiles/MEME') if 'fimo_out' in i and i[0].isdigit()]:
             fimofile = chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.txt'
             venn = run(bidirfile,chipfile,fimofile,['Bidirectionals',TF + 'ChIP', 'motif' + fimofolder[0]])
-            savefig('venn.png')
+            pylab.savefig('venn.png')
