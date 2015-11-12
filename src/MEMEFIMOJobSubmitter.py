@@ -21,10 +21,11 @@ if __name__ == "__main__":
     packagedir = '/scratch/Shares/dowell/ENCODE/HCT116v2'
     
     for TF in os.listdir(packagedir):
-        motiflist = run(packagedir + '/' + TF + '/peak_files/outfiles/MEME/combined.meme', True)
-                
-        os.chdir(shellscripttemplatedir)
-        for motif in motiflist:
-            os.system("qsub -v arg1='/scratch/Shares/dowell/ENCODE/HCT116v2/" + TF + "/peak_files/outfiles/MEME/" + motif + "_fimo_out',arg2='" + motif + "' arg3='" + packagedir + "/" + TF + "/peak_files/outfiles/MEME/combined.meme' runMEMEFIMOTemplate.sh")
+        if os.path.exists(packagedir + '/' + TF + '/peak_files/outfiles/MEME/combined.meme'):
+            motiflist = run(packagedir + '/' + TF + '/peak_files/outfiles/MEME/combined.meme', True)
+                    
+            os.chdir(shellscripttemplatedir)
+            for motif in motiflist:
+                os.system("qsub -v arg1='/scratch/Shares/dowell/ENCODE/HCT116v2/" + TF + "/peak_files/outfiles/MEME/" + motif + "_fimo_out',arg2='" + motif + "',arg3='" + packagedir + "/" + TF + "/peak_files/outfiles/MEME/combined.meme' runMEMEFIMOTemplate.sh")
         
     
