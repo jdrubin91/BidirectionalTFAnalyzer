@@ -35,7 +35,7 @@ def create_dictv2(filename):
             chrom = line.strip().split()[0]
             if not chrom in d1:
                 d1[chrom] = list()
-            d1[chrom].append(line.strip().split())
+            d1[chrom].append(line.strip().split()[1:len(line.strip().split())])
     return d1
     
 #Create a dictionary from a bedgraph file with chromosome locations creates a list of 3-tuples (start,stop, coverage) 
