@@ -27,5 +27,6 @@ if __name__ == "__main__":
             print fimofolder
             Functions.cut_file(chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.txt',[1,2,3],chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.cut.txt')
             fimofile = chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.cut.txt'
+            Functions.remove_lines(fimofile, 0, 1)
             venn = run(bidirfile,chipfile,fimofile,['Bidirectionals',TF + 'ChIP', 'motif' + fimofolder[0]])
             pylab.savefig('venn.png')
