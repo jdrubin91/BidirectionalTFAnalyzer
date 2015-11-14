@@ -20,7 +20,7 @@ if __name__ == "__main__":
             fimodir = directory + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder
             fimodict = dict()
             fimodict[fimofolder] = run(fimodir)
-        outfile = open(directory + '/' + TF + '/peak_files/outfiles/MEME/fimo.cat.txt')
+        outfile = open(directory + '/' + TF + '/peak_files/outfiles/MEME/fimo.cat.txt','w')
         for key in fimodict:
             for item in fimodict[key]:
                 outfile.write(item)
