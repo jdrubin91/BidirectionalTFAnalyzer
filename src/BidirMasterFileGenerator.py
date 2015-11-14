@@ -64,7 +64,7 @@ if __name__ == "__main__":
             bidirdict[','.join(line.strip().split()[0:3])] = list()
     bidirlist = list()
     for key in bidirdict:
-        chrom,start,stop = key
+        chrom,start,stop = key.split(',')
         if chrom in chromosomes:
             i = chromosomes.index(chrom)
             bidirlist.append((int(start)+sum(sizes[0:i]),int(stop)+sum(sizes[0:i])))
