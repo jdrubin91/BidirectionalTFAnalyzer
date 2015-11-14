@@ -22,6 +22,7 @@ if __name__ == "__main__":
                 fimodict = dict()
                 fimodict[fimofolder] = run(fimodir)
             outfile = open(directory + '/' + TF + '/peak_files/outfiles/MEME/fimo.cat.txt','w')
+            print fimodict
             for key in fimodict:
                 for item in fimodict[key]:
                     for val in item:
