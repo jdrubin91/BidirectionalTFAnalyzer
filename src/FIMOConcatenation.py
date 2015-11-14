@@ -10,7 +10,7 @@ def run(fimodir):
     Functions.cut_file(fimofile, [1,2,3], fimodir + '/fimo.cut.txt')
     
     
-    return Functions.parse_file(fimodir + '/fimo.cut.txt')
+    return Functions.parse_file(fimodir + '/fimo.cut.txt')[1:len(Functions.parse_file(fimodir + '/fimo.cut.txt'))]
     
 if __name__ == "__main__":
     directory = '/scratch/Shares/dowell/ENCODE/HCT116v2'
@@ -23,7 +23,8 @@ if __name__ == "__main__":
         outfile = open(directory + '/' + TF + '/peak_files/outfiles/MEME/fimo.cat.txt','w')
         for key in fimodict:
             for item in fimodict[key]:
-                outfile.write(item)
-                outfile.write('\t')
+                for val in item:
+                    outfile.write(val)
+                    outfile.write('\t')
                 outfile.write(key)
                 outfile.write('\n')
