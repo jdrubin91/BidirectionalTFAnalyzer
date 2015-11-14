@@ -17,9 +17,9 @@ if __name__ == "__main__":
         print TF
         if os.path.exists(directory + '/' + TF + '/peak_files/outfiles/MEME'):
             print 'exists'
+            fimodict = dict()
             for fimofolder in [i for i in os.listdir(directory + '/' + TF + '/peak_files/outfiles/MEME') if 'fimo_out' in i and i[0].isdigit()]:
                 fimodir = directory + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder
-                fimodict = dict()
                 fimodict[fimofolder] = run(fimodir)
             outfile = open(directory + '/' + TF + '/peak_files/outfiles/MEME/fimo.cat.txt','w')
             print fimodict
