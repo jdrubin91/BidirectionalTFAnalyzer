@@ -146,7 +146,7 @@ def create_tup_fimo2(filename, header):
     
 #Create a dictionary from a fimo bed file that is uncut (i.e. has first column as TF name) 
 #with chromosome locations creates list of 3-tuples (start,stop,(motif,p-val,qval,strand)) for each chrom
-#(format needs to be: 'Chromosome'\t'Start'\t'Stop'\t'Strand'\t'Score'\t'P-val'..., if header = True, remove first line of file containing header info)
+#(format needs to be: 'Pattern Name'\t'Chromosome'\t'Start'\t'Stop'\t'Strand'\t'Score'\t'P-val'..., if header = True, remove first line of file containing header info)
 def create_tup_uncut_fimo2(filename, header):
     d1 = dict()
     file1 = open(filename)
@@ -638,51 +638,66 @@ def get_distances_pad_directional(file1, headerlines, file2, header2, pad):
     return distances
     
 
-#Returns two lists of overlapping sites between two files list = ((chrom,start,stop),(chrom,start,stop))
-#Assumes both files contain non-overlapping intervals and headers begin with '#'
-def find_overlaps(file1, file2):
-    list1 = list()
-    list2 = list()
-    ##Create dictionary from file1
-    file1dict = create_dictv2(file1)
+#Takes two ordered disjoint lists as input, returns four lists total: 1) intervals in 
+#list1 that overlap list2 2) intervals in list2 that overlap list1 3) intervals
+#in list1 that do not overlap list2 4) intervals list2 that do not overlap list1
+def find_overlaps(list1, list2):
+    list1overlaps = list()
+    list2overlaps = list()
+    list1unique = list()
+    list2unique = list()
+    
+    for item in list2:
+        start,stop = item[0:2]
+        start = float(start)
+        stop = float(stop)
 
+            
+        ##N makes sure we stop at the end of list1
+        N = len(list1)
+        
+        ##j is a counter to move up the chromosome of file1
+        j = 0
+                        
+        ##As long as j does not surpass N (at which point you reach the end of 
+        #the chromosome) and as long as file2 stop is not within the file1 
+        #stop site (indicative of a hit) increase counter (move up chromosome 
+        #location), will stop when you either reach a hit or finish scanning the chromosome
+        while j < N and float(list1[j][1]) < start:
+            if not list1[j] in list1unique and not list1[j] in list1overlaps:
+                list1unique.append(list1[j])
+            j+=1
 
-    file2 = open(file2)
-    for line in file2:
-        if not '#' in line:
-            line = line.strip().split()
-            chrom, start, stop = line[0:3]
-            start = float(start)
-            stop = float(stop)
-            
-            ##At a new chromosome in file2, get file1[chromosome] (list of positions) 
-            #and start from beginnning of chromosome
-            prevChrom = 'None'
-            if chrom!=prevChrom:
-                if chrom in file1dict:
-                    
-                    ##N makes sure we stop at the end of the chromosome of file1
-                    N = len(file1dict[chrom])
-                    
-                    ##j is a counter to move up the chromosome of file1
-                    j = 0
-                else:
-                    N = 0
-                    
-            ##As long as j does not surpass N (at which point you reach the end of 
-            #the chromosome) and as long as file2 stop is not within the file1 
-            #stop site (indicative of a hit) increase counter (move up chromosome 
-            #location), will stop when you either reach a hit or finish scanning the chromosome
-            while j < N and float(file1dict[chrom][j][1]) < stop:
-                j+=1
-            
-            ##If we are still within the chromosome and file2 start is within the file1 start and 
-            #stop then there is an overlapping interval hit so save both sites in separate lists
-            if j < N and float(file1dict[chrom][j][0]) < start:
-                list1.append(file1dict[chrom][j])
-                list2.append(line)
+        
+        ##If we are still within the chromosome and file2 start is within the file1 start and 
+        #stop then there is an overlapping interval hit so save both sites in separate lists
+        while j < N and not float(list1[j][0]) > stop:
+            if j < N and (float(list1[j][0]) <= start <= float(list1[j][1]) or float(list1[j][0]) <= stop <= float(list1[j][1]) or start <= float(list1[j][1]) <= stop or start <= float(list1[j][0]) <= stop):
+                if not item in list2overlaps:
+                    list2overlaps.append(item)
+                if not list1[j] in list1overlaps:
+                    list1overlaps.append(list1[j])
+            #else:
+            #    if not item in list2unique:
+            #        list2unique.append(item)
+            j+=1
+        if not item in list2overlaps:
+            list2unique.append(item)
+    
+    for item2 in list1[list1.index(list1overlaps[len(list1overlaps)-1])+1:len(list1)]:
+        list1unique.append(item2)
                 
-    return list1,list2
+    return list1overlaps,list2overlaps,list1unique,list2unique
 
-
+#Takes in three lists of disjoint ordered intervals and a list of labels and 
+#returns a venn diagram of the three lists
+def venn(L1,L2,L3,labels):
+    list1overlaps,list2overlaps,list1unique,list2unique = find_overlaps(L1,L2)
+    list2overlaps,list3overlaps,list2unique,list3unique = find_overlaps(L2,L3)
+    list1overlaps,list3overlaps,list1unique,list3unique = find_overlaps(L1,L3)
+    
+    
+    
+    
+    return 'something'
             
