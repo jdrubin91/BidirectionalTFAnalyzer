@@ -20,4 +20,4 @@ if __name__ == "__main__":
             for bidirfile in bidirfiles:
                 print bidirfile
                     
-                os.system("qsub -v arg1='" + bidirfile + "' /scratch/Users/joru1876/JDRScripts/faster_interval_searcher.sh")
+                os.system("qsub -v arg1='" + bidirfile + "',arg2='" + exp + "' /scratch/Users/joru1876/JDRScripts/faster_interval_searcher.sh")
