@@ -11,7 +11,7 @@ import Functions
 #    return
     
 if __name__ == "__main__":
-    directory = '/scratch/Shares/dowell/ENCODE/HOCOMOCODatabaseFIMO/FIMO_OUT'
+    directory = '/scratch/Shares/dowell/ENCODE/HOCOMOCODatabaseFIMO'
     outfiledir = '/scratch/Shares/dowell/ENCODE/HOCOMOCODatabaseFIMO/FIMO_Files'
     
     for fimodir in Functions.HOCOMOCO_fimo_directories(directory):
