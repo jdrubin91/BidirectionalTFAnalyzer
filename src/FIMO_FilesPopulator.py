@@ -15,5 +15,5 @@ if __name__ == "__main__":
     outfiledir = '/scratch/Shares/dowell/ENCODE/HOCOMOCODatabaseFIMO/FIMO_Files'
     
     for fimodir in Functions.HOCOMOCO_fimo_directories(directory):
-        TF = fimodir.split('/')[len(fimodir.split('/'))]
+        TF = fimodir.split('/')[len(fimodir.split('/'))-1]
         os.system("cat " + fimodir + "/fimo.txt > " + outfiledir + "/" + TF + ".txt")
