@@ -14,7 +14,7 @@ if __name__ == "__main__":
     for TF in os.listdir(chipdir):
         newdir = chipdir + '/' + TF + '/peak_files'
         if len(os.listdir(newdir)) > 1:
-            newdir = newdir + [i for i in os.listdir(newdir) if 'ENC' in i][0]
+            newdir = newdir + '/' + [i for i in os.listdir(newdir) if 'ENC' in i][0]
             for fimo in os.listdir(fimodir):
                 if TF in fimo:
                     os.system("cat " + newdir + " > " + outdirectory + "/" + TF + ".bed")
