@@ -17,5 +17,5 @@ if __name__ == "__main__":
         for fimo in os.listdir(fimodir):
             if TF in fimo:
                 os.system("cat " + newdir + " > " + outdirectory + "/" + TF + ".bed")
-                os.systme("scp " + fimodir + "/" + fimo + " " + outdirectory)
+                os.system("scp " + fimodir + "/" + fimo + " " + outdirectory)
         
