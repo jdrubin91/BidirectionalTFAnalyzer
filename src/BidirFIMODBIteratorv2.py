@@ -64,9 +64,8 @@ if __name__ == "__main__":
     for exp in os.listdir(bidirDir):
         if 'bidirectional_hits_intervals' in exp:
             bidirfile = bidirDir + '/' + exp
-            print bidirfile
             outfiledir = bidirDir
-            #os.system("qsub -v arg1='" + bidirfile + "',arg2='" + fimodir + "',arg3='" + outfiledir + "' /scratch/Users/joru1876/JDRScripts/runBidirHOCOMOCOTemplate.sh")
+            os.system("qsub -v arg1='" + bidirfile + "',arg2='" + fimodir + "',arg3='" + outfiledir + "' /scratch/Users/joru1876/JDRScripts/runBidirHOCOMOCOTemplate.sh")
                     
             
             
