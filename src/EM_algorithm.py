@@ -1,6 +1,10 @@
+__author__ = 'Joseph Azofeifa'
+
 import numpy as np
 import matplotlib.pyplot as plt
 import math
+
+#Simulates data for testing purposes
 def simulate(w=0.5, s=10, N=1000, SHOW=True):
 	XS 	= list()
 	for n in range(N):
@@ -19,11 +23,17 @@ def simulate(w=0.5, s=10, N=1000, SHOW=True):
 	X[:,0] 			= edges
 	X[:,1] 			= counts
 	return X
+
+#pdf of normal distribution
 def normal(x, mu, si):
 	return (1.0 / (math.sqrt(2*math.pi) * si ))* math.exp(-pow(x-mu,2)/(2*pow(si,2)))
+	
+#pdf of uniform distribution
 def uniform(x,a,b):
 	return 1.0 / (b-a)
 
+#Expectation maximization algorithm, iterates until convergence or 100 times, models
+#normal and uniform distributions from a dataset
 def fit(X, s=100,mu=0):
 	w 	= np.random.uniform(0,1)
 	t 	= 0
