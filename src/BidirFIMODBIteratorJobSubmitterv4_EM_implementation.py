@@ -70,7 +70,9 @@ if __name__ == "__main__":
         outfile.write("\t")
         outfile.write(str(item[1][2]))
         outfile.write("\t")
-        for val in item[1][3]:
+        outfile.write(str(item[1][3]))
+        outfile.write("\t")
+        for val in item[1][4]:
             outfile.write(str(val))
             outfile.write(",")
         outfile.write("\n")
