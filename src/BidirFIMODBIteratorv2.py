@@ -40,7 +40,7 @@ if __name__ == "__main__":
    
     #Submits a job for each bidirectional file that finds motif distances to bidir sites for each TF in HOCOMOCO database
     fimodir = '/scratch/Users/joru1876/HOCOMOCODatabaseFIMO/FIMO_OUT'
-    bidirDir = '/scratch/Shares/dowell/TFIT/Danko2013'
+    bidirDir = '/scratch/Shares/dowell/TFIT/Allen2014/EMG_out_files'
     
     #for exp in os.listdir(bidirDir):
     #    print exp
@@ -60,12 +60,15 @@ if __name__ == "__main__":
     #                outfiledir = Functions.parent_dir(bidirfile)
     #            if not os.path.exists(outfiledir + '/FIMO_OUT'):
     #                os.mkdir(outfiledir + '/FIMO_OUT')
-                    
-    for exp in os.listdir(bidirDir):
-        if 'bidirectional_hits_intervals' in exp:
-            bidirfile = bidirDir + '/' + exp
-            outfiledir = bidirDir
-            os.system("qsub -v arg1='" + bidirfile + "',arg2='" + fimodir + "',arg3='" + outfiledir + "' /scratch/Users/joru1876/JDRScripts/runBidirHOCOMOCOTemplate.sh")
+    #                
+    #for exp in os.listdir(bidirDir):
+    #    if 'bidirectional_hits_intervals' in exp:
+    exp = 'DMSO2_3-1_divergent_classifications.bed'
+    bidirfile = bidirDir + '/' + exp
+    outfiledir = bidirDir
+    if not os.path.exists(outfiledir + '/FIMO_OUT'):
+        os.mkdir(outfiledir + '/FIMO_OUT')
+    os.system("qsub -v arg1='" + bidirfile + "',arg2='" + fimodir + "',arg3='" + outfiledir + "' /scratch/Users/joru1876/JDRScripts/runBidirHOCOMOCOTemplate.sh")
                     
             
             
