@@ -25,16 +25,16 @@ if __name__ == "__main__":
     motiflist = run(packagedir + '/files/HOCOMOCOv10_HUMAN_mono_meme_format.meme', True)
     motiflist1 = []
     for item in motiflist:
-        #if not os.path.exists(shellscripttemplatedir + "/FIMO_OUT_v10/" + '_'.join(item.split('.')) +"_fimo_out"):
+        if not os.path.exists(shellscripttemplatedir + "/FIMO_OUT_v10/" + item + "_fimo_out"):
         #    os.mkdir(shellscripttemplatedir + "/FIMO_OUT_v10/" + '_'.join(item.split('.')) +"_fimo_out")
         #if Functions.line_count(shellscripttemplatedir + "/FIMO_OUT_v10/" + '_'.join(item.split('.')) +"_fimo_out"+ "/fimo.txt") < 2:
-        motiflist1.append(item)
+            motiflist1.append(item)
     
     print motiflist1
     print len(motiflist1)
             
     os.chdir(shellscripttemplatedir)
-    i = 0
+    i = 1
     for motif in motiflist1:
         os.system("qsub -v arg1='/scratch/Shares/dowell/ENCODE/HOCOMOCODatabaseFIMO/FIMO_OUT_v10/" + motif + "_fimo_out',arg2='" + motif + "' runHOCOMOCOv10FIMOTemplate.sh")
         if i%100 == 0:
