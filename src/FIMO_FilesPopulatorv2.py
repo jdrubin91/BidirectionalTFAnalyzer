@@ -15,7 +15,7 @@ if __name__ == "__main__":
     outfiledir = '/scratch/Shares/dowell/ENCODE/HOCOMOCODatabaseFIMO/FIMO_Files_v10'
     
     for fimodir in os.listdir(directory):
-        TF = fimodir.split('/')[len(fimodir.split('/'))]
+        TF = fimodir.split('/')[len(fimodir.split('/'))-1]
         fulldir = directory + '/' + fimodir + '/fimo.txt'
         os.system("cat " + fulldir + " > " + outfiledir + "/" + TF + ".txt")
     
