@@ -11,8 +11,8 @@ import Functions
 #    return
     
 if __name__ == "__main__":
-    directory = '/scratch/Shares/dowell/ENCODE/HOCOMOCODatabaseFIMO/FIMO_OUT_v10'
-    outfiledir = '/scratch/Shares/dowell/ENCODE/HOCOMOCODatabaseFIMO/FIMO_Files_v10'
+    directory = '/scratch/Shares/dowell/ENCODE/HOCOMOCODatabaseFIMO/FIMO_OUT_GC'
+    outfiledir = '/scratch/Shares/dowell/ENCODE/HOCOMOCODatabaseFIMO/FIMO_Files_GC'
     
     for fimodir in os.listdir(directory):
         TF = fimodir.split('/')[len(fimodir.split('/'))-1]
