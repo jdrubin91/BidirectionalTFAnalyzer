@@ -38,6 +38,6 @@ if __name__ == "__main__":
     for motif in motiflist1:
         os.system("qsub -v arg1='/scratch/Shares/dowell/ENCODE/HOCOMOCODatabaseFIMO/FIMO_OUT_HCT116/" + motif + "_fimo_out',arg2='" + motif + "' runHOCOMOCO_HCT116_FIMOTemplate.sh")
         if i%100 == 0:
-            time.sleep(21600)
+            time.sleep(36000)
         i+=1
     
