@@ -40,7 +40,7 @@ if __name__ == "__main__":
    
     #Submits a job for each bidirectional file that finds motif distances to bidir sites for each TF in HOCOMOCO database
     fimodir = '/scratch/Shares/dowell/ENCODE/HOCOMOCODatabaseFIMO/FIMO_OUT_v10'
-    bidirDir = '/Users/azofeifa/Lab/gro_seq_files/Allen2014/EMG_out_files'
+    bidirDir = '/scratch/Shares/dowell/pubgro/Allen2014'
     
     #for exp in os.listdir(bidirDir):
     #    print exp
