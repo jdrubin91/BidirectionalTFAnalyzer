@@ -13,5 +13,6 @@ if __name__ == "__main__":
         os.chdir(filepath + '/' + TF + '/')
         file1 = 'fimo.txt'
         if os.path.exists(filepath + '/' + TF + '/fimo.txt'):
+            print TF
             Functions.cut_file(file1, [1,2,3,4,5,6,7,8], Functions.get_mod_filename(file1,'cut'))
     
