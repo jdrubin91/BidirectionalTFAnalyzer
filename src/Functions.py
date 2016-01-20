@@ -71,6 +71,21 @@ def create_tup_dict(filename, header):
             d1[chrom] = [(float(start), float(stop))]
     return d1
     
+#Create a dictionary from a bed file with chromosome locations creates list of tuples (start,stop) for each chrom
+#(format needs to be: 'Chromosome'\t'Start'\t'Stop'..., if header = True, remove first line of file containing header info)
+def create_tup_dictv2(filename, header):
+    d1 = dict()
+    file1 = open(filename)
+    if header:
+        file1.readline()
+    for line in file1:
+        chrom, start, stop = line.strip().split()[1:4]
+        if chrom in d1:
+            d1[chrom].append((float(start),float(stop)))
+        else:
+            d1[chrom] = [(float(start), float(stop))]
+    return d1
+    
 #Create a dictionary from a bidir file with header of x length with each line starting with '#' chromosome locations creates list of tuples (start,stop) for each chrom
 #(format needs to be: 'Chromosome'\t'Start'\t'Stop'..., if header = True, remove first line of file containing header info)
 def create_tup_bidir(filename):
@@ -554,7 +569,7 @@ def get_distances_pad(file1, header1, file2, header2, pad):
 #of site in file1. Returns list of distances.
 def get_distances_pad_v3(file1, file2, header2, pad):
     file1dict = create_tup_bidir(file1)
-    file2dict = create_tup_dict(file2, header2)
+    file2dict = create_tup_dictv2(file2, header2)
     distances = []
     for chrom in file1dict:
         if chrom in file2dict:
