@@ -14,7 +14,7 @@ def run(bidirfile, fimodir):
     for item in directorylist:
         print item
         TF = item.split('/')[5].split('_')[0]
-        x = Functions.get_distances_pad_v3(bidirfile, item + "/fimo.cut.txt", True, 1500)
+        x = Functions.get_distances_pad_v3(bidirfile, item + "/fimo.txt", True, 1500)
         if len(x) != 0:
             start = min(x)
             stop = max(x)
