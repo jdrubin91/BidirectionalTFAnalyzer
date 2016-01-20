@@ -569,7 +569,7 @@ def get_distances_pad(file1, header1, file2, header2, pad):
 #of site in file1. Returns list of distances.
 def get_distances_pad_v3(file1, file2, header2, pad):
     file1dict = create_tup_bidir(file1)
-    file2dict = create_tup_dictv2(file2, header2)
+    file2dict = create_tup_dict(file2, header2)
     distances = []
     for chrom in file1dict:
         if chrom in file2dict:

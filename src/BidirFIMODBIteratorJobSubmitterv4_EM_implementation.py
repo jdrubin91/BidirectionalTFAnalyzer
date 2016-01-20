@@ -19,7 +19,7 @@ def run(bidirfile, fimodir):
     for item in directorylist:
         print item
         TF = item.split('/')[6].split('_')[0]
-        x = Functions.get_distances_pad_v3(bidirfile, item + "/fimo.txt", True, 1500)
+        x = Functions.get_distances_pad_v3(bidirfile, item + "/fimo.cut.txt", True, 1500)
         for i in range(len(x)):
             x[i] = x[i]*1500
             
