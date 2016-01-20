@@ -39,8 +39,8 @@ def run(bidirfile, fimodir):
 if __name__ == "__main__":
    
     #Submits a job for each bidirectional file that finds motif distances to bidir sites for each TF in HOCOMOCO database
-    fimodir = '/scratch/Users/joru1876/HOCOMOCODatabaseFIMO/FIMO_OUT'
-    bidirDir = '/scratch/Shares/dowell/TFIT/Allen2014/EMG_out_files'
+    fimodir = '/scratch/Shares/dowell/ENCODE/HOCOMOCODatabaseFIMO/FIMO_OUT_v10'
+    bidirDir = '/Users/azofeifa/Lab/gro_seq_files/Allen2014/EMG_out_files'
     
     #for exp in os.listdir(bidirDir):
     #    print exp
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     #                
     #for exp in os.listdir(bidirDir):
     #    if 'bidirectional_hits_intervals' in exp:
-    exp = 'DMSO2_3-1_divergent_classifications.bed'
+    exp = 'Allen2014_p53Null-1_divergent_classifications.bed'
     bidirfile = bidirDir + '/' + exp
     outfiledir = bidirDir
     if not os.path.exists(outfiledir + '/FIMO_OUT'):
