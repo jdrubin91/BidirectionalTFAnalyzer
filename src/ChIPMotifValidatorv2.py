@@ -109,7 +109,7 @@ def run(BidirFile, ChipFile, FimoFile):
 if __name__ == "__main__":
     #Specify paths to directories or files
     BidirFile = '/scratch/Users/joru1876/TFIT/Allen2014_DMSO2_3-1_bidirectional_hits_intervals.bed'
-    ChipDir = '/scratch/Users/joru1876/HCT116v2'
+    ChipDir = '/scratch/Shares/dowell/ENCODE/HCT116v2'
     FimoDir = '/scratch/Users/joru1876/HOCOMOCODatabaseFIMO'
     
     FIMOTFDict = dict()
