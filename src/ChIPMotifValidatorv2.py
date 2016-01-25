@@ -108,9 +108,9 @@ def run(BidirFile, ChipFile, FimoFile):
     
 if __name__ == "__main__":
     #Specify paths to directories or files
-    BidirFile = '/scratch/Users/joru1876/TFIT/Allen2014_DMSO2_3-1_bidirectional_hits_intervals.bed'
+    BidirFile = '/scratch/Shares/dowell/TFIT/Allen2014/EMG_out_files/current_predictions/Allen2014_DMSO2_3-19_divergent_classifications.bed'
     ChipDir = '/scratch/Shares/dowell/ENCODE/HCT116v2'
-    FimoDir = '/scratch/Users/joru1876/HOCOMOCODatabaseFIMO'
+    FimoDir = '/scratch/Shares/dowell/ENCODE/HOCOMOCODatabaseFIMO'
     
     FIMOTFDict = dict()
     for TF in Functions.HOCOMOCO_fimo_directories(FimoDir):
