@@ -46,7 +46,7 @@ def run(bidirfile, chipfile, fimofile, labels):
     
     
 if __name__ == "__main__":
-    bidirfile = '/scratch/Shares/dowell/TFIT/Allen2014/EMG_out_files/Allen2014_DMSO2_3-1_bidirectional_hits_intervals.bed'
+    bidirfile = '/scratch/Shares/dowell/TFIT/Allen2014/EMG_out_files/current_predictions/Allen2014_DMSO2_3-19_divergent_classifications.bed'
     chipdir = '/scratch/Shares/dowell/ENCODE/HCT116v2'
     
     for TF in os.listdir(chipdir):
