@@ -51,11 +51,12 @@ if __name__ == "__main__":
     
     for TF in os.listdir(chipdir):
         print TF
-        chipfile = chipdir + '/' + TF + '/peak_files/' + [i for i in os.listdir(chipdir + '/' + TF + '/peak_files') if 'ENC' in i][0]
-        for fimofolder in [i for i in os.listdir(chipdir + '/' + TF + '/peak_files/outfiles/MEME') if 'fimo_out' in i and i[0].isdigit()]:
-            print fimofolder
-            Functions.cut_file(chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.txt',[1,2,3],chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.cut.txt')
-            fimofile = chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.cut.txt'
-            Functions.replace_header(fimofile, '#')
-            venn = run(bidirfile,chipfile,fimofile,('Bidirectionals',TF + 'ChIP', 'motif' + fimofolder[0]))
-            pylab.savefig('venn.png')
+        if len(os.listdir(chipdir + '/' + TF + '/peak_files')) != 0:
+            chipfile = chipdir + '/' + TF + '/peak_files/' + [i for i in os.listdir(chipdir + '/' + TF + '/peak_files') if 'ENC' in i][0]
+            for fimofolder in [i for i in os.listdir(chipdir + '/' + TF + '/peak_files/outfiles/MEME') if 'fimo_out' in i and i[0].isdigit()]:
+                print fimofolder
+                Functions.cut_file(chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.txt',[1,2,3],chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.cut.txt')
+                fimofile = chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.cut.txt'
+                Functions.replace_header(fimofile, '#')
+                venn = run(bidirfile,chipfile,fimofile,('Bidirectionals',TF + 'ChIP', 'motif' + fimofolder[0]))
+                pylab.savefig('venn.png')
