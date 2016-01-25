@@ -1,5 +1,7 @@
 __author__ = "Jonathan Rubin"
 
+import matplotlib
+matplotlib.use('Agg')
 import intervals
 import Functions
 import os
