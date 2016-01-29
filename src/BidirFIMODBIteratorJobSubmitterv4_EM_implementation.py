@@ -51,7 +51,8 @@ def run(bidirfile, fimodir):
             else:
                 m = 1
             print w,k[1]
-            distances[TF] = [w,k[1],d,p,m,x]
+            #distances[TF] = [w,k[1],d,p,m,x]
+            distances[TF] = x
         
     return distances
     
@@ -63,22 +64,28 @@ if __name__ == "__main__":
     
     distances = run(bidirfile, fimodir)
     
-    sorted_distances = sorted(distances.items(), key=itemgetter(1))
+    #sorted_distances = sorted(distances.items(), key=itemgetter(1))
     outfile = open(outfiledir + '/FIMO_OUT/' + bidirfile.split('/')[7][0:bidirfile.split('/')[7].index('.')] + '.EM.txt', 'w')
-    outfile.write("TF\tSignal Ratio\tUniform p-val\tDepletion p-val\tCentered(0) p-val\tBimodality (1=True)\tDistance List")
+    #outfile.write("TF\tSignal Ratio\tUniform p-val\tDepletion p-val\tCentered(0) p-val\tBimodality (1=True)\tDistance List")
+    outfile.write("TF\tDistance List")
     outfile.write("\n")
-    for item in sorted_distances:
-        outfile.write(str(item[0]))
-        outfile.write("\t")
-        outfile.write(str(item[1][0]))
-        outfile.write("\t")
-        outfile.write(str(item[1][1]))
-        outfile.write("\t")
-        outfile.write(str(item[1][2]))
-        outfile.write("\t")
-        outfile.write(str(item[1][3]))
-        outfile.write("\t")
-        for val in item[1][4]:
+    for TF in distances:
+        outfile.write(TF + "\t")
+        for val in distances[TF]:
             outfile.write(str(val))
             outfile.write(",")
+    #for item in sorted_distances:
+        #outfile.write(str(item[0]))
+        #outfile.write("\t")
+        #outfile.write(str(item[1][0]))
+        #outfile.write("\t")
+        #outfile.write(str(item[1][1]))
+        #outfile.write("\t")
+        #outfile.write(str(item[1][2]))
+        #outfile.write("\t")
+        #outfile.write(str(item[1][3]))
+        #outfile.write("\t")
+        #for val in item[1][4]:
+            #outfile.write(str(val))
+            #outfile.write(",")
         outfile.write("\n")
