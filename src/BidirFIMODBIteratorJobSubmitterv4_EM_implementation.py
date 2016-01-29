@@ -23,34 +23,34 @@ def run(bidirfile, fimodir):
         for i in range(len(x)):
             x[i] = x[i]*1500
             
-        if len(x) != 0:
-            counts,edges 	= np.histogram(x, bins=200)
-            edges 			= edges[1:]
-            X 				= np.zeros((len(counts), 2))
-            X[:,0] 			= edges
-            X[:,1] 			= counts
-            w = em.fit(X)
-            ks = list()
-            for a in range(1000):
-                d = ds.simulate
-                ks.append(scipy.stats.ks_2samp(x,d))
-            d = np.mean(ks)
-            start = min(x)
-            stop = max(x)
-            sigma = np.std(x)
-            mu = np.mean(x)
-            N = len(x)
-            y = np.random.uniform(start, stop, N)
-            y = np.linspace(start,stop,N)
-            z = mu/(sigma/math.sqrt(N))
-            p = 1 - scipy.special.ndtr(z)
-            k = scipy.stats.ks_2samp(x,y)
-            m = scipy.stats.mode(x)[0][0]
-            if -0.25 < m < 0.25:
-                m = 0
-            else:
-                m = 1
-            print w,k[1]
+        #if len(x) != 0:
+        #    counts,edges 	= np.histogram(x, bins=200)
+        #    edges 			= edges[1:]
+        #    X 				= np.zeros((len(counts), 2))
+        #    X[:,0] 			= edges
+        #    X[:,1] 			= counts
+        #    w = em.fit(X)
+        #    ks = list()
+        #    for a in range(1000):
+        #        d = ds.simulate
+        #        ks.append(scipy.stats.ks_2samp(x,d))
+        #    d = np.mean(ks)
+        #    start = min(x)
+        #    stop = max(x)
+        #    sigma = np.std(x)
+        #    mu = np.mean(x)
+        #    N = len(x)
+        #    y = np.random.uniform(start, stop, N)
+        #    y = np.linspace(start,stop,N)
+        #    z = mu/(sigma/math.sqrt(N))
+        #    p = 1 - scipy.special.ndtr(z)
+        #    k = scipy.stats.ks_2samp(x,y)
+        #    m = scipy.stats.mode(x)[0][0]
+        #    if -0.25 < m < 0.25:
+        #        m = 0
+        #    else:
+        #        m = 1
+        #    print w,k[1]
             #distances[TF] = [w,k[1],d,p,m,x]
             distances[TF] = x
         
