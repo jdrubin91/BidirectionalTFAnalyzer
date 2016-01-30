@@ -65,7 +65,7 @@ if __name__ == "__main__":
     distances = run(bidirfile, fimodir)
     
     #sorted_distances = sorted(distances.items(), key=itemgetter(1))
-    outfile = open(outfiledir + '/FIMO_OUT/' + bidirfile.split('/')[7][0:bidirfile.split('/')[7].index('.')] + '.EM.txt', 'w')
+    outfile = open(outfiledir + '/FIMO_OUT/' + bidirfile.split('/')[8][0:bidirfile.split('/')[8].index('.')] + '.EM.txt', 'w')
     #outfile.write("TF\tSignal Ratio\tUniform p-val\tDepletion p-val\tCentered(0) p-val\tBimodality (1=True)\tDistance List")
     outfile.write("TF\tDistance List")
     outfile.write("\n")
