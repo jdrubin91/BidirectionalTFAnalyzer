@@ -48,15 +48,22 @@ def run(bidirfile, chipfile, fimofile, labels):
 if __name__ == "__main__":
     bidirfile = '/scratch/Shares/dowell/TFIT/Allen2014/EMG_out_files/current_predictions/Allen2014_DMSO2_3-19_divergent_classifications.bed'
     chipdir = '/scratch/Shares/dowell/ENCODE/HCT116v2'
+    fimodir = '/scratch/Shares/dowell/ENCODE/HOCOMOCODatabaseFIMO/FIMO_OUT_v10'
     
     for TF in os.listdir(chipdir):
         print TF
         if len(os.listdir(chipdir + '/' + TF + '/peak_files')) != 0:
-            chipfile = chipdir + '/' + TF + '/peak_files/' + [i for i in os.listdir(chipdir + '/' + TF + '/peak_files') if 'ENC' in i][0]
-            for fimofolder in [i for i in os.listdir(chipdir + '/' + TF + '/peak_files/outfiles/MEME') if 'fimo_out' in i and i[0].isdigit()]:
-                print fimofolder
-                Functions.cut_file(chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.txt',[1,2,3],chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.cut.txt')
-                fimofile = chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.cut.txt'
-                Functions.replace_header(fimofile, '#')
-                venn = run(bidirfile,chipfile,fimofile,('Bidirectionals',TF + 'ChIP', 'motif' + fimofolder[0]))
-                pylab.savefig('venn.png')
+            chipfile = chipdir + '/' + TF + '/peak_files/' + [i for i in os.listdir(chipdir + '/' + TF + '/peak_files') if 'bed' in i][0]
+            for fimoTF in os.listdir(fimodir):
+                if TF in fimoTF:
+                    print fimoTF
+                    fimofile = fimodir + '/' + fimoTF + '/fimo.cut.txt'
+            #for fimofolder in [i for i in os.listdir(chipdir + '/' + TF + '/peak_files/outfiles/MEME') if 'fimo_out' in i and i[0].isdigit()]:
+            #    print fimofolder
+            #    Functions.cut_file(chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.txt',[1,2,3],chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.cut.txt')
+            #    fimofile = chipdir + '/' + TF + '/peak_files/outfiles/MEME/' + fimofolder + '/fimo.cut.txt'
+            #    Functions.replace_header(fimofile, '#')
+                    venn = run(bidirfile,chipfile,fimofile,('Bidirectionals',TF + 'ChIP', fimoTF))
+                    pylab.savefig('venn.png')
+                else:
+                    print "TF not found in HOCOMOCO: ", TF
