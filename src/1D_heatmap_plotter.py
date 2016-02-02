@@ -1,7 +1,8 @@
 __author__ = 'Jonathan Rubin'
 
-import matplotlib.pyplot as plt
 import matplotlib as mpl
+mpl.use('Agg')
+import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.cm as cm
 import os
@@ -16,13 +17,14 @@ def run(filename,outdir):
                 j += 1
                 line = line.strip().split()
                 TF = line[0]
-                SN = line[1]
-                p = line[2]
-                cent = line[3]
-                bimodal = line[4]
-                x = line[5][0:len(line[5])-1].split(',')
+                #SN = line[1]
+                #p = line[2]
+                #cent = line[3]
+                #bimodal = line[4]
+                x = line[2][0:len(line[2])-1].split(',')
                 N = len(x)
-                infoDict[TF] = [str(N),SN,p,cent,bimodal]
+                infoDict[TF] = [str(N)]
+                #,SN,p,cent,bimodal]
                 for i in range(N):
                     x[i] = float(x[i])/1500
     
@@ -75,16 +77,16 @@ def run(filename,outdir):
                     os.remove(outdir + '/' + TF + '.png')
                 plt.savefig(outdir + '/' + TF)
                 plt.close()
-    outfile = open(outdir + '/info.txt','w')
-    outfile.write("TF\tN\tEM S/N\tuniform p-val\tcentered at 0 p-val\tbimodal (1=True)\n")
-    for TF in infoDict:
-        outfile.write(TF + "\t")
-        for item in infoDict[TF]:
-            outfile.write(item + "\t")
-        outfile.write("\n")
+    #outfile = open(outdir + '/info.txt','w')
+    #outfile.write("TF\tN\tEM S/N\tuniform p-val\tcentered at 0 p-val\tbimodal (1=True)\n")
+    #for TF in infoDict:
+    #    outfile.write(TF + "\t")
+    #    for item in infoDict[TF]:
+    #        outfile.write(item + "\t")
+    #    outfile.write("\n")
             
 if __name__ == "__main__":
-    directory = 'C:/cygwin64/home/Jonathan/BidirectionalTFAnalyzer/files'
+    directory = '/scratch/Shares/dowell/TFIT/Danko2013/EMG_out_files/new_predictions/FIMO_OUT'
     for filename in os.listdir(directory):
         if '.EM' in filename:
             print filename
