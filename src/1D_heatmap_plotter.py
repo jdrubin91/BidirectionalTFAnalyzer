@@ -21,7 +21,7 @@ def run(filename,outdir):
                 #p = line[2]
                 #cent = line[3]
                 #bimodal = line[4]
-                x = line[2][0:len(line[2])-1].split(',')
+                x = line[1][0:len(line[1])-1].split(',')
                 N = len(x)
                 infoDict[TF] = [str(N)]
                 #,SN,p,cent,bimodal]
