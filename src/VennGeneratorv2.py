@@ -113,6 +113,6 @@ if __name__ == "__main__":
     F = plt.figure()
     ax = plt.axes()
     plt.boxplot(list1)
-    ax.set_xticklabels(['Chip-Bidir/Total Chip', 'Chip-Motif/Total Chip', 'Chip-Bidir-Motif/Chip-Bidir','Chip-Bidir-Motif/Chip-Motif'])
+    ax.set_xticklabels(['Chip-Bid/Chip', 'Chip-Mot/Chip', 'Chip-Bid-Mot/Chip-Bid','Chip-Bid-Mot/Chip-Mot'])
     plt.savefig(chipdir + '/overlap_boxplot.png')
     
