@@ -149,8 +149,7 @@ if __name__ == "__main__":
     
     list1 = [[],[]]
     list2 = [[],[]]
-    list3 = [[],[],[]]
-    list4 = [[],[],[]]
+    list3 = [[],[],[],[],[]]
     for TF in os.listdir(chipdir):
         if os.path.exists(chipdir + '/' + TF + '/peak_files'):
             print TF
@@ -186,9 +185,8 @@ if __name__ == "__main__":
                         list3[0].append(fimochip/fimotot)
                         list3[1].append(bidirchip/bidirtot)
                         list3[2].append(bidirfimochip/bidirfimo)
-                        list4[0].append(chipdna/chiptot)
-                        list4[1].append(dnachipfimo/dnafimo)
-                        list4[2].append(dnachipfimobidir/dnafimobidir)
+                        list3[3].append(dnachipfimo/dnafimo)
+                        list3[4].append(dnachipfimobidir/dnafimobidir)
                         
     print list1
     F = plt.figure()
@@ -201,9 +199,7 @@ if __name__ == "__main__":
     ax2.boxplot(list2)
     ax2.set_xticklabels(['Chip-Mot/Chip', 'Chip-Bid-Mot/Chip-Bid'],rotation = 45, fontsize=8)
     ax3.boxplot(list3)
-    ax3.set_xticklabels(['Mot-Chip/Mot','Bid-Chip/Bid','Bid-Mot-Chip/Bid-Mot'],rotation = 45, fontsize=8)
-    ax4.boxplot(list4)
-    ax4.set_xticklabels(['Chip-DNAse/Chip','DNAse-Chip-Mot/DNAse-Mot','DNAse-Chip-Mot-Bid/DNAse-Mot-Bid'],rotation = 45, fontsize=8)
+    ax3.set_xticklabels(['Mot-Chip/Mot','Bid-Chip/Bid','Bid-Mot-Chip/Bid-Mot','DNAse-Chip-Mot/DNAse-Mot','DNAse-Chip-Mot-Bid/DNAse-Mot-Bid'],rotation = 45, fontsize=8)
     #ax = plt.axes()
     #plt.boxplot(list1)
     #title = bidirfile.split('/')[-1]
