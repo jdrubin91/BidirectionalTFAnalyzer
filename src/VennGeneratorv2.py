@@ -2,6 +2,7 @@ __author__ = "Jonathan Rubin"
 
 import matplotlib
 matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 import os
 
 def run(bidirfile, chipfile, fimofile, outdir):
@@ -11,6 +12,7 @@ def run(bidirfile, chipfile, fimofile, outdir):
     os.system("bedtools intersect -a " + bidirfile + " -b " + chipfile + " -c > " + outdir + "/bidirchipintersect.bed")
     os.system("bedtools intersect -a " + fimofile + " -b " + chipfile + " -c > " + outdir + "/fimochipintersect.bed")
     os.system("bedtools intersect -a " + fimofile + " -b " + bidirfile + " -c > " + outdir + "/fimobidirintersect.bed")
+    os.system("bedtools intersect -a " + outdir + "/chipbidirintersect.bed" + " -b " + fimofile + " -c > " + outdir + "/chipbidirfimointersect.bed")
     
     chiptot = 0
     fimotot = 0
@@ -21,6 +23,14 @@ def run(bidirfile, chipfile, fimofile, outdir):
     bidirchip = 0
     fimochip = 0
     fimobidir = 0
+    chipbidirfimo = 0
+    
+    with open(outdir + "/chipbidirintersect.bed") as F1:
+        for line in F1:
+            val1 = int(line.strip().split()[-1])
+            val2 = int(line.strip().split()[-2])
+            if val1 != 0 and val2 != 0:
+                chipbidirfimo += 1
     
     with open(outdir + "/chipbidirintersect.bed") as F1:
         for line in F1:
@@ -56,8 +66,9 @@ def run(bidirfile, chipfile, fimofile, outdir):
             fimobidir += val
             
     
-    print "chipfile:\tchiptotal\tbidirtotal\tfimototal\tchipbidir\tchipfimo\tbidirchip\tbidirfimo\tfimochip\tfimobidir\n"
+    print "chipfile:\tchiptotal\tbidirtotal\tfimototal\tchipbidir\tchipfimo\tbidirchip\tbidirfimo\tfimochip\tfimobidir"
     print chipfile,chiptot,bidirtot,fimotot,chipbidir,chipfimo,bidirchip,bidirfimo,fimochip,fimobidir
+    return chiptot, chipbidir, chipfimo, chipbidirfimo
     
 def fix_database(directory):
     for TF in os.listdir(directory):
@@ -77,6 +88,7 @@ if __name__ == "__main__":
     
     #fix_database(fimodir)
     
+    list1 = list()
     for TF in os.listdir(chipdir):
         print TF
         if len([i for i in os.listdir(chipdir + '/' + TF + '/peak_files') if 'bed' in i]) != 0:
@@ -85,4 +97,9 @@ if __name__ == "__main__":
                 if TF == fimoTF.split('_')[0]:
                     print fimoTF
                     fimofile = fimodir + '/' + fimoTF + '/fimo.bed'
-                    run(bidirfile,chipfile,fimofile,chipdir + '/' + TF)
+                    chiptot, chipbidir, chipfimo, chipbidirfimo = run(bidirfile,chipfile,fimofile,chipdir + '/' + TF)
+                    list1.append((chipbidir/chiptot, chipfimo/chiptot, chipbidirfimo/chiptot))
+    F = plt.figure()
+    plt.boxplot(list1)
+    plt.savefig(chipdir + '/overlap_boxplot.png')
+    
