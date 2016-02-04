@@ -129,13 +129,16 @@ if __name__ == "__main__":
                         list3[1].append(bidirfimochip/bidirfimo)
                         
     print list1
-    F,axarr = plt.subplots(3)
-    axarr[0].boxplot(list1)
-    axarr[0].set_xticklabels(['Chip-Bid/Chip','Chip-Bid-Mot/Chip-Mot'],rotation = 90, fontsize=8)
-    axarr[1].boxplot(list2)
-    axarr[1].set_xticklabels(['Chip-Mot/Chip', 'Chip-Bid-Mot/Chip-Bid'],rotation = 90, fontsize=8)
-    axarr[2].boxplot(list3)
-    axarr[2].set_xticklabels(['Mot-Chip/Mot','Bid-Mot-Chip/Bid-Mot'],rotation = 90, fontsize=8)
+    F = plt.figure()
+    ax1 = F.add_subplot(1,3,1)
+    ax2 = F.add_subplot(1,3,2)
+    ax3 = F.add_subplot(1,3,3)
+    ax1.boxplot(list1)
+    ax1.set_xticklabels(['Chip-Bid/Chip','Chip-Bid-Mot/Chip-Mot'],rotation = 90, fontsize=8)
+    ax2.boxplot(list2)
+    ax2.set_xticklabels(['Chip-Mot/Chip', 'Chip-Bid-Mot/Chip-Bid'],rotation = 90, fontsize=8)
+    ax3.boxplot(list3)
+    ax3.set_xticklabels(['Mot-Chip/Mot','Bid-Mot-Chip/Bid-Mot'],rotation = 90, fontsize=8)
     #ax = plt.axes()
     #plt.boxplot(list1)
     #title = bidirfile.split('/')[-1]
