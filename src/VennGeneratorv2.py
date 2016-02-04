@@ -193,7 +193,6 @@ if __name__ == "__main__":
     ax1 = F.add_subplot(1,4,1)
     ax2 = F.add_subplot(1,4,2)
     ax3 = F.add_subplot(1,4,3)
-    ax4 = F.add_subplot(1,4,4)
     ax1.boxplot(list1)
     ax1.set_xticklabels(['Chip-Bid/Chip','Chip-Bid-Mot/Chip-Mot'],rotation = 45, fontsize=8)
     ax2.boxplot(list2)
