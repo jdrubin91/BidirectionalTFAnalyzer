@@ -99,10 +99,15 @@ if __name__ == "__main__":
                         print fimoTF
                         fimofile = fimodir + '/' + fimoTF + '/fimo.bed'
                         chiptot, chipbidir, chipfimo, chipbidirfimo = run(bidirfile,chipfile,fimofile,chipdir + '/' + TF)
+                        chiptot = float(chiptot)
+                        chipbidir = float(chipbidir)
+                        chipfimo = float(chipfimo)
+                        chipbidirfimo = float(chipbidirfimo)
                         list1[0].append(chipbidir/chiptot)
                         list1[1].append(chipfimo/chiptot)
                         list1[2].append(chipbidirfimo/chipbidir)
                         list1[3].append(chipbidirfimo/chipfimo)
+    print list1
     F = plt.figure()
     plt.boxplot(list1)
     plt.savefig(chipdir + '/overlap_boxplot.png')
