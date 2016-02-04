@@ -128,6 +128,6 @@ if __name__ == "__main__":
     plt.boxplot(list1)
     title = bidirfile.split('/')[-1]
     plt.title(title)
-    ax.set_xticklabels(['Chip-Bid/Chip', 'Chip-Mot/Chip', 'Chip-Bid-Mot/Chip-Bid','Chip-Bid-Mot/Chip-Mot','Bid-Mot-Chip/Bid-Mot'],fontsize=8)
+    ax.set_xticklabels(['Chip-Bid/Chip', 'Chip-Mot/Chip', 'Chip-Bid-Mot/Chip-Bid','Chip-Bid-Mot/Chip-Mot','Bid-Mot-Chip/Bid-Mot'],rotation = 90, fontsize=8)
     plt.savefig(chipdir + '/overlap_boxplot2.png')
     
