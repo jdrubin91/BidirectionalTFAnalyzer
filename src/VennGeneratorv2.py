@@ -68,8 +68,8 @@ def run(bidirfile, chipfile, fimofile, outdir):
             fimobidir += val
             
     
-    print "chipfile:\tchiptotal\tbidirtotal\tfimototal\tchipbidir\tchipfimo\tbidirchip\tbidirfimo\tfimochip\tfimobidir"
-    print chipfile,chiptot,bidirtot,fimotot,chipbidir,chipfimo,bidirchip,bidirfimo,fimochip,fimobidir
+    print "chipfile:\tchiptotal\tbidirtotal\tfimototal\tchipbidir\tchipfimo\tbidirchip\tbidirfimo\tfimochip\tfimobidir\tchipbidirfimo"
+    print chipfile,chiptot,bidirtot,fimotot,chipbidir,chipfimo,bidirchip,bidirfimo,fimochip,fimobidir,chipbidirfimo
     return chiptot, chipbidir, chipfimo, chipbidirfimo
     
 def fix_database(directory):
@@ -111,6 +111,8 @@ if __name__ == "__main__":
                         list1[3].append(chipbidirfimo/chipfimo)
     print list1
     F = plt.figure()
+    ax = F.axes()
     plt.boxplot(list1)
+    ax.set_xticklabels(['Chip-Bidir/Total Chip', 'Chip-Motif/Total Chip', 'Chip-Bidir-Motif/Chip-Bidir','Chip-Bidir-Motif/Chip-Motif'])
     plt.savefig(chipdir + '/overlap_boxplot.png')
     
