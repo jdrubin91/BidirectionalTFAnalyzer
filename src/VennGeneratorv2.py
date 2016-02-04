@@ -6,13 +6,13 @@ import matplotlib.pyplot as plt
 import os
 
 def run(bidirfile, chipfile, fimofile, outdir):
-    os.system("bedtools intersect -a " + chipfile + " -b " + bidirfile + " -c > " + outdir + "/chipbidirintersect.bed")
-    os.system("bedtools intersect -a " + chipfile + " -b " + fimofile + " -c > " + outdir + "/chipfimointersect.bed")
-    os.system("bedtools intersect -a " + bidirfile + " -b " + fimofile + " -c > " + outdir + "/bidirfimointersect.bed")
-    os.system("bedtools intersect -a " + bidirfile + " -b " + chipfile + " -c > " + outdir + "/bidirchipintersect.bed")
-    os.system("bedtools intersect -a " + fimofile + " -b " + chipfile + " -c > " + outdir + "/fimochipintersect.bed")
-    os.system("bedtools intersect -a " + fimofile + " -b " + bidirfile + " -c > " + outdir + "/fimobidirintersect.bed")
-    os.system("bedtools intersect -a " + outdir + "/chipbidirintersect.bed" + " -b " + fimofile + " -c > " + outdir + "/chipbidirfimointersect.bed")
+    #os.system("bedtools intersect -a " + chipfile + " -b " + bidirfile + " -c > " + outdir + "/chipbidirintersect.bed")
+    #os.system("bedtools intersect -a " + chipfile + " -b " + fimofile + " -c > " + outdir + "/chipfimointersect.bed")
+    #os.system("bedtools intersect -a " + bidirfile + " -b " + fimofile + " -c > " + outdir + "/bidirfimointersect.bed")
+    #os.system("bedtools intersect -a " + bidirfile + " -b " + chipfile + " -c > " + outdir + "/bidirchipintersect.bed")
+    #os.system("bedtools intersect -a " + fimofile + " -b " + chipfile + " -c > " + outdir + "/fimochipintersect.bed")
+    #os.system("bedtools intersect -a " + fimofile + " -b " + bidirfile + " -c > " + outdir + "/fimobidirintersect.bed")
+    #os.system("bedtools intersect -a " + outdir + "/chipbidirintersect.bed" + " -b " + fimofile + " -c > " + outdir + "/chipbidirfimointersect.bed")
     
     chiptot = 0
     fimotot = 0
@@ -25,8 +25,8 @@ def run(bidirfile, chipfile, fimofile, outdir):
     fimobidir = 0
     chipbidirfimo = 0
     
-    with open(outdir + "/chipbidirintersect.bed") as F1:
-        for line in F1:
+    with open(outdir + "/chipbidirintersect.bed") as F0:
+        for line in F0:
             val1 = int(line.strip().split()[-1])
             val2 = int(line.strip().split()[-2])
             if val1 != 0 and val2 != 0:
@@ -35,13 +35,13 @@ def run(bidirfile, chipfile, fimofile, outdir):
     with open(outdir + "/chipbidirintersect.bed") as F1:
         for line in F1:
             val = int(line.strip().split()[-1])
-            chipbidir += val
+            chipbidir += 1
             chiptot += 1
             
     with open(outdir + "/chipfimointersect.bed") as F2:
         for line in F2:
             val = int(line.strip().split()[-1])
-            chipfimo += val
+            chipfimo += 1
             
     with open(outdir + "/bidirfimointersect.bed") as F3:
         for line in F3:
@@ -88,17 +88,21 @@ if __name__ == "__main__":
     
     #fix_database(fimodir)
     
-    list1 = list()
+    list1 = [[],[],[],[]]
     for TF in os.listdir(chipdir):
-        print TF
-        if len([i for i in os.listdir(chipdir + '/' + TF + '/peak_files') if 'bed' in i]) != 0:
-            chipfile = chipdir + '/' + TF + '/peak_files/' + [i for i in os.listdir(chipdir + '/' + TF + '/peak_files') if 'bed' in i][0]
-            for fimoTF in os.listdir(fimodir):
-                if TF == fimoTF.split('_')[0]:
-                    print fimoTF
-                    fimofile = fimodir + '/' + fimoTF + '/fimo.bed'
-                    chiptot, chipbidir, chipfimo, chipbidirfimo = run(bidirfile,chipfile,fimofile,chipdir + '/' + TF)
-                    list1.append((chipbidir/chiptot, chipfimo/chiptot, chipbidirfimo/chiptot))
+        if os.path.exists(chipdir + '/' + TF + '/peak_files'):
+            print TF
+            if len([i for i in os.listdir(chipdir + '/' + TF + '/peak_files') if 'bed' in i]) != 0:
+                chipfile = chipdir + '/' + TF + '/peak_files/' + [i for i in os.listdir(chipdir + '/' + TF + '/peak_files') if 'bed' in i][0]
+                for fimoTF in os.listdir(fimodir):
+                    if TF == fimoTF.split('_')[0]:
+                        print fimoTF
+                        fimofile = fimodir + '/' + fimoTF + '/fimo.bed'
+                        chiptot, chipbidir, chipfimo, chipbidirfimo = run(bidirfile,chipfile,fimofile,chipdir + '/' + TF)
+                        list1[0].append(chipbidir/chiptot)
+                        list1[1].append(chipfimo/chiptot)
+                        list1[2].append(chipbidirfimo/chipbidir)
+                        list1[3].append(chipbidirfimo/chipfimo)
     F = plt.figure()
     plt.boxplot(list1)
     plt.savefig(chipdir + '/overlap_boxplot.png')
