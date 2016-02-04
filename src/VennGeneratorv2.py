@@ -135,7 +135,7 @@ if __name__ == "__main__":
     bidirfile = '/scratch/Shares/dowell/ENCODE/DMSO2_3-2_divergent_classifications.bed'
     chipdir = '/scratch/Shares/dowell/ENCODE/HCT116v2'
     fimodir = '/scratch/Shares/dowell/ENCODE/HOCOMOCODatabaseFIMO/FIMO_OUT_v10'
-    dnasefile = '/scratch/Shares/dowell/ENCODE/wgEncodeUwDnaseHct116PkRep1.narrowPeak.bed'
+    dnasefile = '/scratch/Shares/dowell/ENCODE/wgEncodeUwDnaseHct116PkRep1.narrowPeak.fixed.bed'
     
     #fix_database(fimodir)
     
