@@ -25,7 +25,7 @@ def run(bidirfile, chipfile, fimofile, outdir):
     fimobidir = 0
     chipbidirfimo = 0
     
-    with open(outdir + "/chipbidirintersect.bed") as F0:
+    with open(outdir + "/chipbidirfimointersect.bed") as F0:
         for line in F0:
             val1 = int(line.strip().split()[-1])
             val2 = int(line.strip().split()[-2])
