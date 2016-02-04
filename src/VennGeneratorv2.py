@@ -30,18 +30,30 @@ def run(bidirfile, chipfile, fimofile, outdir):
             
     print chipfile,chipbidir,chipfimo,bidirfimo
     
+def fix_database(directory):
+    for TF in os.listdir(directory):
+        file1 = directory + '/' + TF + '/fimo.cut.txt'
+        outfile = open(directory + '/' + TF + '/fimo.bed')
+        with open(file1) as F1:
+            for line in F1:
+                if 'chr' in line.strip().split()[0]:
+                    chrom,start,stop = line.strip().split()[0:3]
+                    outfile.write(chrom + '\t' + start + '\t' + stop + '\n')
+        outfile.close()
+    
 if __name__ == "__main__":
     bidirfile = '/scratch/Shares/dowell/TFIT/Allen2014/EMG_out_files/current_predictions/Allen2014_DMSO2_3-19_divergent_classifications.bed'
     chipdir = '/scratch/Shares/dowell/ENCODE/HCT116v2'
     fimodir = '/scratch/Shares/dowell/ENCODE/HOCOMOCODatabaseFIMO/FIMO_OUT_v10'
     
-    for TF in os.listdir(chipdir):
-        print TF
-        if len([i for i in os.listdir(chipdir + '/' + TF + '/peak_files') if 'bed' in i]) != 0:
-            chipfile = chipdir + '/' + TF + '/peak_files/' + [i for i in os.listdir(chipdir + '/' + TF + '/peak_files') if 'bed' in i][0]
-            for fimoTF in os.listdir(fimodir):
-                if TF == fimoTF.split('_')[0]:
-                    print fimoTF
-                    os.system('cat ' + fimodir + '/' + fimoTF + '/fimo.cut.txt > ' + fimodir + '/' + fimoTF + '/fimo.bed')
-                    fimofile = fimodir + '/' + fimoTF + '/fimo.bed'
-                    run(bidirfile,chipfile,fimofile,chipdir + '/' + TF)
+    fix_database(fimodir)
+    
+    #for TF in os.listdir(chipdir):
+    #    print TF
+    #    if len([i for i in os.listdir(chipdir + '/' + TF + '/peak_files') if 'bed' in i]) != 0:
+    #        chipfile = chipdir + '/' + TF + '/peak_files/' + [i for i in os.listdir(chipdir + '/' + TF + '/peak_files') if 'bed' in i][0]
+    #        for fimoTF in os.listdir(fimodir):
+    #            if TF == fimoTF.split('_')[0]:
+    #                print fimoTF
+    #                fimofile = fimodir + '/' + fimoTF + '/fimo.bed'
+    #                run(bidirfile,chipfile,fimofile,chipdir + '/' + TF)
