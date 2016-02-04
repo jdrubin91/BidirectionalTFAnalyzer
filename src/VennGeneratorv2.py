@@ -16,6 +16,7 @@ def run(bidirfile, chipfile, fimofile, outdir):
     os.system("bedtools intersect -a " + fimofile + " -b " + bidirfile + " -c > " + outdir + "/fimobidirintersect.bed")
     os.system("bedtools intersect -a " + outdir + "/chipbidirintersect.bed" + " -b " + fimofile + " -c > " + outdir + "/chipbidirfimointersect.bed")
     os.system("bedtools intersect -a " + outdir + "/bidirfimointersect.bed" + " -b " + chipfile + " -c > " + outdir + "/bidirfimochipintersect.bed")
+    os.system("bedtools intersect -a " + outdir + "/fimochipintersect.bed" + " -b " + bidirfile + " -c > " + outdir + "/fimochipbidirintersect.bed")
     
     chiptot = 0
     fimotot = 0
@@ -28,6 +29,14 @@ def run(bidirfile, chipfile, fimofile, outdir):
     fimobidir = 0
     chipbidirfimo = 0
     bidirfimochip = 0
+    fimochipbidir = 0
+    
+    with open(outdir + "/fimochipbidirintersect.bed") as F0:
+        for line in F0:
+            val1 = int(line.strip().split()[-1])
+            val2 = int(line.strip().split()[-2])
+            if val1 != 0 and val2 != 0:
+                fimochipbidir += 1
     
     with open(outdir + "/bidirfimochipintersect.bed") as F0:
         for line in F0:
@@ -82,7 +91,7 @@ def run(bidirfile, chipfile, fimofile, outdir):
     
     print "chipfile:\tchiptotal\tbidirtotal\tfimototal\tchipbidir\tchipfimo\tbidirchip\tbidirfimo\tfimochip\tfimobidir\tchipbidirfimo"
     print chipfile,chiptot,bidirtot,fimotot,chipbidir,chipfimo,bidirchip,bidirfimo,fimochip,fimobidir,chipbidirfimo
-    return chiptot, chipbidir, chipfimo, chipbidirfimo, bidirfimo, bidirfimochip, fimochip, fimotot
+    return chiptot, chipbidir, chipfimo, chipbidirfimo, bidirfimo, bidirfimochip, fimochip, fimotot, fimochipbidir,bidirchip, bidirtot
     
 def fix_database(directory):
     for TF in os.listdir(directory):
@@ -104,7 +113,7 @@ if __name__ == "__main__":
     
     list1 = [[],[]]
     list2 = [[],[]]
-    list3 = [[],[]]
+    list3 = [[],[],[]]
     for TF in os.listdir(chipdir):
         if os.path.exists(chipdir + '/' + TF + '/peak_files'):
             print TF
@@ -114,7 +123,7 @@ if __name__ == "__main__":
                     if TF == fimoTF.split('_')[0]:
                         print fimoTF
                         fimofile = fimodir + '/' + fimoTF + '/fimo.bed'
-                        chiptot, chipbidir, chipfimo, chipbidirfimo,bidirfimo,bidirfimochip,fimochip,fimotot = run(bidirfile,chipfile,fimofile,chipdir + '/' + TF)
+                        chiptot, chipbidir, chipfimo, chipbidirfimo,bidirfimo,bidirfimochip,fimochip,fimotot,fimochipbidir,bidirchip, bidirtot = run(bidirfile,chipfile,fimofile,chipdir + '/' + TF)
                         chiptot = float(chiptot)
                         chipbidir = float(chipbidir)
                         chipfimo = float(chipfimo)
@@ -123,12 +132,16 @@ if __name__ == "__main__":
                         bidirfimochip = float(bidirfimochip)
                         fimochip = float(fimochip)
                         fimotot = float(fimotot)
+                        fimochipbidir = float(fimochipbidir)
+                        bidirchip = float(bidirchip)
+                        bidirtot = float(bidirtot)
                         list1[0].append(chipbidir/chiptot)
                         list1[1].append(chipbidirfimo/chipfimo)
                         list2[0].append(chipfimo/chiptot)
                         list2[1].append(chipbidirfimo/chipbidir)
                         list3[0].append(fimochip/fimotot)
-                        list3[1].append(bidirfimochip/bidirfimo)
+                        list3[1].append(bidirchip/bidirtot)
+                        list3[2].append(fimochipbidir/fimochip)
                         
     print list1
     F = plt.figure()
@@ -140,7 +153,7 @@ if __name__ == "__main__":
     ax2.boxplot(list2)
     ax2.set_xticklabels(['Chip-Mot/Chip', 'Chip-Bid-Mot/Chip-Bid'],rotation = 45, fontsize=8)
     ax3.boxplot(list3)
-    ax3.set_xticklabels(['Mot-Chip/Mot','Bid-Mot-Chip/Bid-Mot'],rotation = 45, fontsize=8)
+    ax3.set_xticklabels(['Mot-Chip/Mot','Bid-Chip/Bid','Mot-Chip-Bidir/Mot-Chip'],rotation = 45, fontsize=8)
     #ax = plt.axes()
     #plt.boxplot(list1)
     #title = bidirfile.split('/')[-1]
