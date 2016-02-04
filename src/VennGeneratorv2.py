@@ -42,5 +42,6 @@ if __name__ == "__main__":
             for fimoTF in os.listdir(fimodir):
                 if TF == fimoTF.split('_')[0]:
                     print fimoTF
-                    fimofile = fimodir + '/' + fimoTF + '/fimo.cut.txt'
+                    os.system('cat ' + fimodir + '/' + fimoTF + '/fimo.cut.txt > ' + fimodir + '/' + fimoTF + '/fimo.cut.bed')
+                    fimofile = fimodir + '/' + fimoTF + '/fimo.cut.bed'
                     run(bidirfile,chipfile,fimofile,chipdir + '/' + TF)
