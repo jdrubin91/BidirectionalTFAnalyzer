@@ -141,7 +141,7 @@ if __name__ == "__main__":
                         list2[1].append(chipbidirfimo/chipbidir)
                         list3[0].append(fimochip/fimotot)
                         list3[1].append(bidirchip/bidirtot)
-                        list3[2].append(fimochipbidir/fimochip)
+                        list3[2].append(bidirfimochip/bidirchip)
                         
     print list1
     F = plt.figure()
@@ -153,7 +153,7 @@ if __name__ == "__main__":
     ax2.boxplot(list2)
     ax2.set_xticklabels(['Chip-Mot/Chip', 'Chip-Bid-Mot/Chip-Bid'],rotation = 45, fontsize=8)
     ax3.boxplot(list3)
-    ax3.set_xticklabels(['Mot-Chip/Mot','Bid-Chip/Bid','Mot-Chip-Bidir/Mot-Chip'],rotation = 45, fontsize=8)
+    ax3.set_xticklabels(['Mot-Chip/Mot','Bid-Chip/Bid','Bid-Mot-Chip/Bid-Chip'],rotation = 45, fontsize=8)
     #ax = plt.axes()
     #plt.boxplot(list1)
     #title = bidirfile.split('/')[-1]
