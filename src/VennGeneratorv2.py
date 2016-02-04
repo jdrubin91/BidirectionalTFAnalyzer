@@ -33,7 +33,7 @@ def run(bidirfile, chipfile, fimofile, outdir):
 def fix_database(directory):
     for TF in os.listdir(directory):
         file1 = directory + '/' + TF + '/fimo.cut.txt'
-        outfile = open(directory + '/' + TF + '/fimo.bed')
+        outfile = open(directory + '/' + TF + '/fimo.bed','w')
         with open(file1) as F1:
             for line in F1:
                 if 'chr' in line.strip().split()[0]:
