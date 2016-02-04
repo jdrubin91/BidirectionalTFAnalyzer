@@ -35,13 +35,15 @@ def run(bidirfile, chipfile, fimofile, outdir):
     with open(outdir + "/chipbidirintersect.bed") as F1:
         for line in F1:
             val = int(line.strip().split()[-1])
-            chipbidir += 1
+            if val != 0:
+                chipbidir += 1
             chiptot += 1
             
     with open(outdir + "/chipfimointersect.bed") as F2:
         for line in F2:
             val = int(line.strip().split()[-1])
-            chipfimo += 1
+            if val != 0:
+                chipfimo += 1
             
     with open(outdir + "/bidirfimointersect.bed") as F3:
         for line in F3:
