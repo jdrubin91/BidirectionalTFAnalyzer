@@ -80,7 +80,7 @@ def run(bidirfile, chipfile, fimofile, outdir):
     
     print "chipfile:\tchiptotal\tbidirtotal\tfimototal\tchipbidir\tchipfimo\tbidirchip\tbidirfimo\tfimochip\tfimobidir\tchipbidirfimo"
     print chipfile,chiptot,bidirtot,fimotot,chipbidir,chipfimo,bidirchip,bidirfimo,fimochip,fimobidir,chipbidirfimo
-    return chiptot, chipbidir, chipfimo, chipbidirfimo, bidirfimo, bidirfimochip
+    return chiptot, chipbidir, chipfimo, chipbidirfimo, bidirfimo, bidirfimochip, fimochip, fimotot
     
 def fix_database(directory):
     for TF in os.listdir(directory):
@@ -100,7 +100,9 @@ if __name__ == "__main__":
     
     #fix_database(fimodir)
     
-    list1 = [[],[],[],[],[]]
+    list1 = [[],[]]
+    list2 = [[],[]]
+    list3 = [[],[]]
     for TF in os.listdir(chipdir):
         if os.path.exists(chipdir + '/' + TF + '/peak_files'):
             print TF
@@ -110,24 +112,34 @@ if __name__ == "__main__":
                     if TF == fimoTF.split('_')[0]:
                         print fimoTF
                         fimofile = fimodir + '/' + fimoTF + '/fimo.bed'
-                        chiptot, chipbidir, chipfimo, chipbidirfimo,bidirfimo,bidirfimochip = run(bidirfile,chipfile,fimofile,chipdir + '/' + TF)
+                        chiptot, chipbidir, chipfimo, chipbidirfimo,bidirfimo,bidirfimochip,fimochip,fimotot = run(bidirfile,chipfile,fimofile,chipdir + '/' + TF)
                         chiptot = float(chiptot)
                         chipbidir = float(chipbidir)
                         chipfimo = float(chipfimo)
                         chipbidirfimo = float(chipbidirfimo)
                         bidirfimo = float(bidirfimo)
                         bidirfimochip = float(bidirfimochip)
+                        fimochip = float(fimochip)
+                        fimotot = float(fimotot)
                         list1[0].append(chipbidir/chiptot)
-                        list1[1].append(chipfimo/chiptot)
-                        list1[2].append(chipbidirfimo/chipbidir)
-                        list1[3].append(chipbidirfimo/chipfimo)
-                        list1[4].append(bidirfimochip/bidirfimo)
+                        list1[1].append(chipbidirfimo/chipfimo)
+                        list2[0].append(chipfimo/chiptot)
+                        list2[1].append(chipbidirfimo/chipbidir)
+                        list3[0].append(fimochip/fimotot)
+                        list3[1].append(bidirfimochip/bidirfimo)
+                        
     print list1
-    F = plt.figure()
-    ax = plt.axes()
-    plt.boxplot(list1)
-    title = bidirfile.split('/')[-1]
-    plt.title(title)
-    ax.set_xticklabels(['Chip-Bid/Chip', 'Chip-Mot/Chip', 'Chip-Bid-Mot/Chip-Bid','Chip-Bid-Mot/Chip-Mot','Bid-Mot-Chip/Bid-Mot'],rotation = 90, fontsize=8)
+    F,axarr = plt.subplots(3)
+    axarr[0].boxplot(list1)
+    axarr[0].set_xticklabels(['Chip-Bid/Chip','Chip-Bid-Mot/Chip-Mot'],rotation = 90, fontsize=8)
+    axarr[1].boxplot(list2)
+    axarr[1].set_xticklabels(['Chip-Mot/Chip', 'Chip-Bid-Mot/Chip-Bid'],rotation = 90, fontsize=8)
+    axarr[2].boxplot(list3)
+    axarr[2].set_xticklabels(['Mot-Chip/Mot','Bid-Mot-Chip/Bid-Mot'],rotation = 90, fontsize=8)
+    #ax = plt.axes()
+    #plt.boxplot(list1)
+    #title = bidirfile.split('/')[-1]
+    #plt.title(title)
+    #ax.set_xticklabels(['Chip-Bid/Chip', 'Chip-Mot/Chip', 'Chip-Bid-Mot/Chip-Bid','Chip-Bid-Mot/Chip-Mot','Bid-Mot-Chip/Bid-Mot'],rotation = 90, fontsize=8)
     plt.savefig(chipdir + '/overlap_boxplot2.png')
     
