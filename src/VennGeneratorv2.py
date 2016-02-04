@@ -84,7 +84,7 @@ def fix_database(directory):
         outfile.close()
     
 if __name__ == "__main__":
-    bidirfile = '/scratch/Shares/dowell/ENCODE/Allen2014_DMSO2_3-17_divergent_classifications.bed'
+    bidirfile = '/scratch/Shares/dowell/ENCODE/DMSO2_3-2_divergent_classifications.bed'
     chipdir = '/scratch/Shares/dowell/ENCODE/HCT116v2'
     fimodir = '/scratch/Shares/dowell/ENCODE/HOCOMOCODatabaseFIMO/FIMO_OUT_v10'
     
@@ -113,6 +113,7 @@ if __name__ == "__main__":
     F = plt.figure()
     ax = plt.axes()
     plt.boxplot(list1)
+    plt.title('DMSO2_3-2_divergent_classifications.bed')
     ax.set_xticklabels(['Chip-Bid/Chip', 'Chip-Mot/Chip', 'Chip-Bid-Mot/Chip-Bid','Chip-Bid-Mot/Chip-Mot'],fontsize=8)
-    plt.savefig(chipdir + '/overlap_boxplot1.png')
+    plt.savefig(chipdir + '/overlap_boxplot2.png')
     
