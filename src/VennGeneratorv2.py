@@ -43,4 +43,4 @@ if __name__ == "__main__":
                 if TF in fimoTF:
                     print fimoTF
                     fimofile = fimodir + '/' + fimoTF + '/fimo.cut.txt'
-                    run(bidirfile,chipfile,fimofile,chipfile)
+                    run(bidirfile,chipfile,fimofile,chipfile + '/' + TF)
