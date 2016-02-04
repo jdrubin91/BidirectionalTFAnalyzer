@@ -40,7 +40,7 @@ if __name__ == "__main__":
         if len([i for i in os.listdir(chipdir + '/' + TF + '/peak_files') if 'bed' in i]) != 0:
             chipfile = chipdir + '/' + TF + '/peak_files/' + [i for i in os.listdir(chipdir + '/' + TF + '/peak_files') if 'bed' in i][0]
             for fimoTF in os.listdir(fimodir):
-                if TF in fimoTF:
+                if TF == fimoTF.split('_')[0]:
                     print fimoTF
                     fimofile = fimodir + '/' + fimoTF + '/fimo.cut.txt'
-                    run(bidirfile,chipfile,fimofile,chipfile + '/' + TF)
+                    run(bidirfile,chipfile,fimofile,chipdir + '/' + TF)
