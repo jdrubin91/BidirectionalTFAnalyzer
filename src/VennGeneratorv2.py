@@ -66,7 +66,7 @@ def run(bidirfile, chipfile, fimofile, outdir,dnasefile):
             fimo = int(line.strip().split()[-2])
             bidir = int(line.strip().split()[-3])
             if fimo == 0:
-                chipnofimo += 0
+                chipnofimo += 1
                 if bidir != 0:
                     chipnofimobidir += 1
                     if dna != 0:
