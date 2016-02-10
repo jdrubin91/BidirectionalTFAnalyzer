@@ -54,11 +54,25 @@ def run(bidirfile, chipfile, fimofile, outdir,dnasefile):
     chipnodnabidir = 0
     chipnodnafimobidir = 0
     
+    chipnofimo = 0
+    chipnofimobidir = 0
+    chipnofimodna = 0
+    chipnofimobidirdna = 0
+    
+    
     with open(outdir + "/chipbidirfimodnaintersect.bed") as F0:
         for line in F0:
             dna = int(line.strip().split()[-1])
             fimo = int(line.strip().split()[-2])
             bidir = int(line.strip().split()[-3])
+            if fimo == 0:
+                chipnofimo += 0
+                if bidir != 0:
+                    chipnofimobidir += 1
+                    if dna != 0:
+                        chipnofimobidirdna += 1
+                if dna != 0:
+                    chipnofimodna += 1
             if dna == 0:
                 chipnodna += 1
                 if fimo != 0:
@@ -159,7 +173,7 @@ def run(bidirfile, chipfile, fimofile, outdir,dnasefile):
     
     print "chipfile:\tchiptotal\tbidirtotal\tfimototal\tchipbidir\tchipfimo\tbidirchip\tbidirfimo\tfimochip\tfimobidir\tchipbidirfimo"
     print chipfile,chiptot,bidirtot,fimotot,chipbidir,chipfimo,bidirchip,bidirfimo,fimochip,fimobidir,chipbidirfimo
-    return chiptot, chipbidir, chipfimo, chipbidirfimo, bidirfimo, bidirfimochip, fimochip, fimotot, fimochipbidir,bidirchip, bidirtot,dnachip,dnafimo,dnatot,dnachipfimobidir,dnachipfimo,dnafimobidir,chipdna,chipnobidir, chipnobidirfimo, chipnobidirdna, chipnobidirfimodna, chipnodna, chipnodnafimo, chipnodnabidir, chipnodnafimobidir
+    return chiptot, chipbidir, chipfimo, chipbidirfimo, bidirfimo, bidirfimochip, fimochip, fimotot, fimochipbidir,bidirchip, bidirtot,dnachip,dnafimo,dnatot,dnachipfimobidir,dnachipfimo,dnafimobidir,chipdna,chipnobidir, chipnobidirfimo, chipnobidirdna, chipnobidirfimodna, chipnodna, chipnodnafimo, chipnodnabidir, chipnodnafimobidir, chipnofimo, chipnofimobidir, chipnofimodna, chipnofimobidirdna
     
 def fix_database(directory):
     for TF in os.listdir(directory):
@@ -185,6 +199,7 @@ if __name__ == "__main__":
     list3 = [[],[],[],[],[]]
     list4 = [[],[],[],[]]
     list5 = [[],[],[],[]]
+    list6 = [[],[],[],[]]
     for TF in os.listdir(chipdir):
         if os.path.exists(chipdir + '/' + TF + '/peak_files'):
             print TF
@@ -194,7 +209,7 @@ if __name__ == "__main__":
                     if TF == fimoTF.split('_')[0]:
                         print fimoTF
                         fimofile = fimodir + '/' + fimoTF + '/fimo.bed'
-                        chiptot, chipbidir, chipfimo, chipbidirfimo,bidirfimo,bidirfimochip,fimochip,fimotot,fimochipbidir,bidirchip, bidirtot,dnachip,dnafimo,dnatot,dnachipfimobidir,dnachipfimo,dnafimobidir,chipdna,chipnobidir, chipnobidirfimo, chipnobidirdna, chipnobidirfimodna, chipnodna, chipnodnafimo, chipnodnabidir, chipnodnafimobidir = run(bidirfile,chipfile,fimofile,chipdir + '/' + TF,dnasefile)
+                        chiptot, chipbidir, chipfimo, chipbidirfimo,bidirfimo,bidirfimochip,fimochip,fimotot,fimochipbidir,bidirchip, bidirtot,dnachip,dnafimo,dnatot,dnachipfimobidir,dnachipfimo,dnafimobidir,chipdna,chipnobidir, chipnobidirfimo, chipnobidirdna, chipnobidirfimodna, chipnodna, chipnodnafimo, chipnodnabidir, chipnodnafimobidir, chipnofimo, chipnofimobidir, chipnofimodna, chipnofimobidirdna = run(bidirfile,chipfile,fimofile,chipdir + '/' + TF,dnasefile)
                         chiptot = float(chiptot)
                         chipbidir = float(chipbidir)
                         chipfimo = float(chipfimo)
@@ -221,29 +236,42 @@ if __name__ == "__main__":
                         chipnodnafimo = float(chipnodnafimo)
                         chipnodnabidir = float(chipnodnabidir)
                         chipnodnafimobidir = float(chipnodnafimobidir)
+                        chipnofimo = float(chipnofimo)
+                        chipnofimobidir = float(chipnofimobidir)
+                        chipnofimodna = float(chipnofimodna)
+                        chipnofimobidirdna = float(chipnofimobidirdna)
                         list1[0].append(chipbidir/chiptot)
                         list1[1].append(chipbidirfimo/chipfimo)
+                        
                         list2[0].append(chipfimo/chiptot)
                         list2[1].append(chipbidirfimo/chipbidir)
+                        
                         list3[0].append(fimochip/fimotot)
                         list3[1].append(bidirchip/bidirtot)
                         list3[2].append(bidirfimochip/bidirfimo)
                         list3[3].append(dnachipfimo/dnafimo)
                         list3[4].append(dnachipfimobidir/dnafimobidir)
+                        
                         list4[0].append(chipnobidir/chiptot)
                         list4[1].append(chipnobidirfimo/chipnobidir)
                         list4[2].append(chipnobidirdna/chipnobidir)
                         list4[3].append(chipnobidirfimodna/chipnobidir)
+                        
                         list5[0].append(chipnodna/chiptot)
                         list5[1].append(chipnodnafimo/chipnodna)
                         list5[2].append(chipnodnabidir/chipnodna)
                         list5[3].append(chipnodnafimobidir/chipnodna)
                         
+                        list6[0].append(chipnofimo/chiptot)
+                        list6[1].append(chipnofimobidir/chipnofimo)
+                        list6[2].append(chipnofimodna/chipnofimo)
+                        list6[3].append(chipnofimobidirdna/chipnofimo)
+                        
     print list1
     F = plt.figure()
-    ax1 = F.add_subplot(1,2,1)
-    ax2 = F.add_subplot(1,2,2)
-    #ax3 = F.add_subplot(1,3,3)
+    ax1 = F.add_subplot(1,3,1)
+    ax2 = F.add_subplot(1,3,2)
+    ax3 = F.add_subplot(1,3,3)
     #ax4 = F.add_subplot(1,4,4)
     #ax1.boxplot(list1)
     #ax1.set_xticklabels(['Chip-Bid/Chip','Chip-Bid-Mot/Chip-Mot'],rotation = 45, fontsize=8)
@@ -255,6 +283,8 @@ if __name__ == "__main__":
     ax1.set_xticklabels(['Chip-Bid*/Chip','Chip-Bid*-Mot/Chip-Bid*','Chip-Bid*-DNAse/Chip-Bid*','Chip-Bid*-Mot-DNAse/Chip-Bid*'],rotation = 45, fontsize=8)
     ax2.boxplot(list5)
     ax2.set_xticklabels(['Chip-DNAse*/Chip','Chip-DNAse*-Mot/Chip-DNAse*','Chip-DNAse*-Bidir/Chip-DNAse*','Chip-DNAse*-Mot-Bidir/Chip-DNAse*'],rotation = 45, fontsize=8)
+    ax3.boxplot(list6)
+    ax3.set_xticklabels(['Chip-Mot*/Chip','Chip-Mot*-Bid/Chip-Mot*','Chip-Mot*-DNAse/Chip-Mot*','Chip-Mot*-Bidir-DNAse/Chip-Mot*'],rotation = 45, fontsize=8)
     #ax = plt.axes()
     #plt.boxplot(list1)
     #title = bidirfile.split('/')[-1]
