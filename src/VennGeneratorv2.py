@@ -214,7 +214,7 @@ if __name__ == "__main__":
                         list3[4].append(dnachipfimobidir/dnafimobidir)
                         list4[0].append(chipnobidir/chiptot)
                         list4[1].append(chipnobidirfimo/chipnobidir)
-                        list4[2].apend(chipnobidirdna/chipnobidir)
+                        list4[2].append(chipnobidirdna/chipnobidir)
                         list4[3].append(chipnobidirfimodna/chipnobidir)
                         
     print list1
