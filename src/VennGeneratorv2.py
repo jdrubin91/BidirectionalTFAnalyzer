@@ -56,9 +56,9 @@ def run(bidirfile, chipfile, fimofile, outdir,dnasefile):
     
     with open(outdir + "/chipbidirfimodnaintersect.bed") as F0:
         for line in F0:
-            bidir = int(line.strip().split()[-1])
+            dna = int(line.strip().split()[-1])
             fimo = int(line.strip().split()[-2])
-            dna = int(line.strip().split()[-3])
+            bidir = int(line.strip().split()[-3])
             if dna == 0:
                 chipnodna += 1
                 if fimo != 0:
