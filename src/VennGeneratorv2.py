@@ -346,8 +346,12 @@ if __name__ == "__main__":
     ax1.get_yaxis().tick_left()
     bp2 = ax2.boxplot(list8,patch_artist=True)
     ax2.set_xticklabels(['Chip-DNAse/Chip','Chip-DNAse-Mot/Chip-DNAse','Chip-DNAse-Bidir/Chip-DNAse','Chip-DNAse-Mot-Bidir/Chip-DNAse'],rotation = 45, fontsize=8)
+    ax2.get_xaxis().tick_bottom()
+    ax2.get_yaxis().tick_left()
     bp3 = ax3.boxplot(list9,patch_artist=True)
     ax3.set_xticklabels(['Chip-Mot/Chip','Chip-Mot-Bid/Chip-Mot','Chip-Mot-DNAse/Chip-Mot','Chip-Mot-Bidir-DNAse/Chip-Mot'],rotation = 45, fontsize=8)
+    ax3.get_xaxis().tick_bottom()
+    ax3.get_yaxis().tick_left()
     #ax = plt.axes()
     #plt.boxplot(list1)
     #title = bidirfile.split('/')[-1]
