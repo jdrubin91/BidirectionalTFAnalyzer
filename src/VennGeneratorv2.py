@@ -196,7 +196,7 @@ if __name__ == "__main__":
     
     list1 = [[],[]]
     list2 = [[],[]]
-    list3 = [[],[],[],[],[]]
+    list3 = [[],[],[],[],[],[]]
     list4 = [[],[],[],[]]
     list5 = [[],[],[],[]]
     list6 = [[],[],[],[]]
@@ -248,9 +248,10 @@ if __name__ == "__main__":
                         
                         list3[0].append(fimochip/fimotot)
                         list3[1].append(bidirchip/bidirtot)
-                        list3[2].append(bidirfimochip/bidirfimo)
-                        list3[3].append(dnachipfimo/dnafimo)
-                        list3[4].append(dnachipfimobidir/dnafimobidir)
+                        list3[2].append(dnachip/dnatot)
+                        list3[3].append(bidirfimochip/bidirfimo)
+                        list3[4].append(dnachipfimo/dnafimo)
+                        list3[5].append(dnachipfimobidir/dnafimobidir)
                         
                         list4[0].append(chipnobidir/chiptot)
                         list4[1].append(chipnobidirfimo/chipnobidir)
@@ -278,7 +279,7 @@ if __name__ == "__main__":
     #ax2.boxplot(list2)
     #ax2.set_xticklabels(['Chip-Mot/Chip', 'Chip-Bid-Mot/Chip-Bid'],rotation = 45, fontsize=8)
     ax1.boxplot(list3)
-    ax1.set_xticklabels(['Mot-Chip/Mot','Bid-Chip/Bid','Bid-Mot-Chip/Bid-Mot','DNAse-Chip-Mot/DNAse-Mot','DNAse-Chip-Mot-Bid/DNAse-Mot-Bid'],rotation = 45, fontsize=8)
+    ax1.set_xticklabels(['Mot-Chip/Mot','Bid-Chip/Bid','DNAse-Chip/DNAse','Bid-Mot-Chip/Bid-Mot','DNAse-Chip-Mot/DNAse-Mot','DNAse-Chip-Mot-Bid/DNAse-Mot-Bid'],rotation = 45, fontsize=8)
     #ax1.boxplot(list4)
     #ax1.set_xticklabels(['Chip-Bid*/Chip','Chip-Bid*-Mot/Chip-Bid*','Chip-Bid*-DNAse/Chip-Bid*','Chip-Bid*-Mot-DNAse/Chip-Bid*'],rotation = 45, fontsize=8)
     #ax2.boxplot(list5)
