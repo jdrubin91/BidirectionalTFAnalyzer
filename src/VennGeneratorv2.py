@@ -330,9 +330,9 @@ if __name__ == "__main__":
                         
     print list1
     F = plt.figure()
-    ax1 = F.add_subplot(1,3,1)
-    ax2 = F.add_subplot(1,3,2)
-    ax3 = F.add_subplot(1,3,3)
+    ax1 = F.add_subplot(1,1,1)
+    #ax2 = F.add_subplot(1,3,2)
+    #ax3 = F.add_subplot(1,3,3)
     #ax4 = F.add_subplot(1,4,4)
     #ax1.boxplot(list1)
     #ax1.set_xticklabels(['Chip-Bid/Chip','Chip-Bid-Mot/Chip-Mot'],rotation = 45, fontsize=8)
