@@ -338,7 +338,7 @@ if __name__ == "__main__":
     #ax1.set_xticklabels(['Chip-Bid/Chip','Chip-Bid-Mot/Chip-Mot'],rotation = 45, fontsize=8)
     #ax2.boxplot(list2)
     #ax2.set_xticklabels(['Chip-Mot/Chip', 'Chip-Bid-Mot/Chip-Bid'],rotation = 45, fontsize=8)
-    bp1 = ax1.boxplot(list3)
+    bp1 = ax1.boxplot(list3,patch_artist=True)
     ax1.set_xticklabels(['Mot-Chip/Mot','DNAse-Chip/DNAse','Bid-Chip/Bid','Bid-Mot-Chip/Bid-Mot','DNAse-Chip-Mot/DNAse-Mot','DNAse-Chip-Mot-Bid/DNAse-Mot-Bid'],rotation = 45, fontsize=8)
     ax1.get_xaxis().tick_bottom()
     ax1.get_yaxis().tick_left()
