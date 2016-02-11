@@ -338,20 +338,22 @@ if __name__ == "__main__":
     #ax1.set_xticklabels(['Chip-Bid/Chip','Chip-Bid-Mot/Chip-Mot'],rotation = 45, fontsize=8)
     #ax2.boxplot(list2)
     #ax2.set_xticklabels(['Chip-Mot/Chip', 'Chip-Bid-Mot/Chip-Bid'],rotation = 45, fontsize=8)
-    #bp1 = ax1.boxplot(list3)
-    #ax1.set_xticklabels(['Mot-Chip/Mot','DNAse-Chip/DNAse','Bid-Chip/Bid','Bid-Mot-Chip/Bid-Mot','DNAse-Chip-Mot/DNAse-Mot','DNAse-Chip-Mot-Bid/DNAse-Mot-Bid'],rotation = 45, fontsize=8)
-    bp1 = ax1.boxplot(list4,patch_artist=True)
-    ax1.set_xticklabels(['Chip-Bid*/Chip','Chip-Bid*-Mot/Chip-Bid','Chip-Bid*-DNAse/Chip-Bid*','Chip-Bid*-Mot-DNAse/Chip-Bid*'],rotation = 45, fontsize=8)
+    bp1 = ax1.boxplot(list3)
+    ax1.set_xticklabels(['Mot-Chip/Mot','DNAse-Chip/DNAse','Bid-Chip/Bid','Bid-Mot-Chip/Bid-Mot','DNAse-Chip-Mot/DNAse-Mot','DNAse-Chip-Mot-Bid/DNAse-Mot-Bid'],rotation = 45, fontsize=8)
     ax1.get_xaxis().tick_bottom()
     ax1.get_yaxis().tick_left()
-    bp2 = ax2.boxplot(list5,patch_artist=True)
-    ax2.set_xticklabels(['Chip-DNAse*/Chip','Chip-DNAse*-Mot/Chip-DNAse*','Chip-DNAse*-Bidir/Chip-DNAse*','Chip-DNAse*-Mot-Bidir/Chip-DNAse*'],rotation = 45, fontsize=8)
-    ax2.get_xaxis().tick_bottom()
-    ax2.get_yaxis().tick_left()
-    bp3 = ax3.boxplot(list6,patch_artist=True)
-    ax3.set_xticklabels(['Chip-Mot*/Chip','Chip-Mot*-Bid/Chip-Mot*','Chip-Mot*-DNAse/Chip-Mot*','Chip-Mot*-Bidir-DNAse/Chip-Mot*'],rotation = 45, fontsize=8)
-    ax3.get_xaxis().tick_bottom()
-    ax3.get_yaxis().tick_left()
+    #bp1 = ax1.boxplot(list4,patch_artist=True)
+    #ax1.set_xticklabels(['Chip-Bid*/Chip','Chip-Bid*-Mot/Chip-Bid','Chip-Bid*-DNAse/Chip-Bid*','Chip-Bid*-Mot-DNAse/Chip-Bid*'],rotation = 45, fontsize=8)
+    #ax1.get_xaxis().tick_bottom()
+    #ax1.get_yaxis().tick_left()
+    #bp2 = ax2.boxplot(list5,patch_artist=True)
+    #ax2.set_xticklabels(['Chip-DNAse*/Chip','Chip-DNAse*-Mot/Chip-DNAse*','Chip-DNAse*-Bidir/Chip-DNAse*','Chip-DNAse*-Mot-Bidir/Chip-DNAse*'],rotation = 45, fontsize=8)
+    #ax2.get_xaxis().tick_bottom()
+    #ax2.get_yaxis().tick_left()
+    #bp3 = ax3.boxplot(list6,patch_artist=True)
+    #ax3.set_xticklabels(['Chip-Mot*/Chip','Chip-Mot*-Bid/Chip-Mot*','Chip-Mot*-DNAse/Chip-Mot*','Chip-Mot*-Bidir-DNAse/Chip-Mot*'],rotation = 45, fontsize=8)
+    #ax3.get_xaxis().tick_bottom()
+    #ax3.get_yaxis().tick_left()
     #ax = plt.axes()
     #plt.boxplot(list1)
     #title = bidirfile.split('/')[-1]
@@ -377,44 +379,44 @@ if __name__ == "__main__":
     for flier in bp1['fliers']:
         flier.set(marker='o', color='#e7298a', alpha=0.5)
     
-    ## change outline color, fill color and linewidth of the boxes
-    for box in bp2['boxes']:
-        # change outline color
-        box.set( color='#7570b3', linewidth=2)
-        # change fill color
-        box.set( facecolor = '#1b9e77' )
-    ## change color and linewidth of the whiskers
-    for whisker in bp2['whiskers']:
-        whisker.set(color='#7570b3', linewidth=2)
-    ## change color and linewidth of the caps
-    for cap in bp2['caps']:
-        cap.set(color='#7570b3', linewidth=2)
-    ## change color and linewidth of the medians
-    for median in bp2['medians']:
-        median.set(color='#b2df8a', linewidth=2)
-    ## change the style of fliers and their fill
-    for flier in bp2['fliers']:
-        flier.set(marker='o', color='#e7298a', alpha=0.5)
-        
-    ## change outline color, fill color and linewidth of the boxes
-    for box in bp3['boxes']:
-        # change outline color
-        box.set( color='#7570b3', linewidth=2)
-        # change fill color
-        box.set( facecolor = '#1b9e77' )
-    ## change color and linewidth of the whiskers
-    for whisker in bp3['whiskers']:
-        whisker.set(color='#7570b3', linewidth=2)
-    ## change color and linewidth of the caps
-    for cap in bp3['caps']:
-        cap.set(color='#7570b3', linewidth=2)
-    ## change color and linewidth of the medians
-    for median in bp3['medians']:
-        median.set(color='#b2df8a', linewidth=2)
-    ## change the style of fliers and their fill
-    for flier in bp3['fliers']:
-        flier.set(marker='o', color='#e7298a', alpha=0.5)
+    ### change outline color, fill color and linewidth of the boxes
+    #for box in bp2['boxes']:
+    #    # change outline color
+    #    box.set( color='#7570b3', linewidth=2)
+    #    # change fill color
+    #    box.set( facecolor = '#1b9e77' )
+    ### change color and linewidth of the whiskers
+    #for whisker in bp2['whiskers']:
+    #    whisker.set(color='#7570b3', linewidth=2)
+    ### change color and linewidth of the caps
+    #for cap in bp2['caps']:
+    #    cap.set(color='#7570b3', linewidth=2)
+    ### change color and linewidth of the medians
+    #for median in bp2['medians']:
+    #    median.set(color='#b2df8a', linewidth=2)
+    ### change the style of fliers and their fill
+    #for flier in bp2['fliers']:
+    #    flier.set(marker='o', color='#e7298a', alpha=0.5)
+    #    
+    ### change outline color, fill color and linewidth of the boxes
+    #for box in bp3['boxes']:
+    #    # change outline color
+    #    box.set( color='#7570b3', linewidth=2)
+    #    # change fill color
+    #    box.set( facecolor = '#1b9e77' )
+    ### change color and linewidth of the whiskers
+    #for whisker in bp3['whiskers']:
+    #    whisker.set(color='#7570b3', linewidth=2)
+    ### change color and linewidth of the caps
+    #for cap in bp3['caps']:
+    #    cap.set(color='#7570b3', linewidth=2)
+    ### change color and linewidth of the medians
+    #for median in bp3['medians']:
+    #    median.set(color='#b2df8a', linewidth=2)
+    ### change the style of fliers and their fill
+    #for flier in bp3['fliers']:
+    #    flier.set(marker='o', color='#e7298a', alpha=0.5)
     
     
-    plt.savefig(chipdir + '/overlap_boxplot3.png')
+    plt.savefig(chipdir + '/overlap_boxplot2.png')
     
