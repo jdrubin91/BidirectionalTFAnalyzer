@@ -168,7 +168,7 @@ def fix_directory(directory):
                         outfile.write(line[0] + '\t' + line[1] + '\t' + line[2] + '\n')
                 outfile.close()
                 if os.path.exists(directory + '/' + cell + '/' + chip.split('.')[0] + '.cut.sorted.bed'):
-                    os.system("rm " + directory + '/' + cell + '/' + chip.split('.')[0] + ".cut.sortedbed")
+                    os.system("rm " + directory + '/' + cell + '/' + chip.split('.')[0] + ".cut.sorted.bed")
                 os.system("sort -k1,1 -k2,2n " + directory + '/' + cell + '/' + chip.split('.')[0] + ".cut.bed > " + directory + '/' + cell + '/' + chip.split('.')[0] + ".cut.sorted.bed")
                 
     
