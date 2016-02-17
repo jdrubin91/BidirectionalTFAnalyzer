@@ -157,6 +157,7 @@ def run(bidirfile, chipfile, fimofile, outdir,dnasefile):
     
 if __name__ == "__main__":
     for cell in os.listdir(directory):
+        print cell
         list3 = [[],[],[],[],[],[]]
         list4 = [[],[],[],[]]
         list5 = [[],[],[],[]]
@@ -174,10 +175,8 @@ if __name__ == "__main__":
         bidirfile = directory + '/' + cell + '/' + [chip for chip in os.listdir(directory + '/' + cell) if 'SRR' in chip][0]
         dnasefile = directory + '/' + cell + '/' + [dnase for dnase in os.listdir(directory + '/' + cell) if 'DNASE' in dnase][0]
         for chip in os.listdir(directory + '/' + cell):
-            print chip
             if chip in metadata:
                 TF = metadata[chip]
-                print TF
                 for fimoTF in os.listdir(fimodir):
                     if TF == fimoTF.split('_')[0]:
                         print TF,fimoTF
