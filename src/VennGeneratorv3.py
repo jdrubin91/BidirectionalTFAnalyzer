@@ -175,6 +175,7 @@ if __name__ == "__main__":
         for chip in os.listdir(directory + '/' + cell):
             if chip in metadata:
                 TF = metadata[chip]
+                print TF
                 for fimoTF in os.listdir(fimodir):
                     if TF == fimoTF.split('_')[0]:
                         print TF,fimoTF
