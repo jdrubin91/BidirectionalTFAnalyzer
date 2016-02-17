@@ -167,7 +167,7 @@ if __name__ == "__main__":
         metadata = dict()
         with open(directory + '/' + cell + '/metadata.tsv') as F1:
             for line in F1:
-                if 'E' in line[0] and 'optimal'in line[3]:
+                if 'E' in line[0] and 'optimal'in line:
                     line = line.strip().split()
                     metadata[line[0]] = line[18].split('-')[0]
         print metadata
