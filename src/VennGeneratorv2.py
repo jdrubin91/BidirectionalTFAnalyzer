@@ -201,8 +201,8 @@ def run(bidirfile, chipfile, fimofile, outdir,dnasefile):
             fimobidir += val
             
     
-    print "chipfile:\tchiptotal\tbidirtotal\tfimototal\tchipbidir\tchipfimo\tbidirchip\tbidirfimo\tfimochip\tfimobidir\tchipbidirfimo"
-    print chipfile,chiptot,bidirtot,fimotot,chipbidir,chipfimo,bidirchip,bidirfimo,fimochip,fimobidir,chipbidirfimo
+    #print "chipfile:\tchiptotal\tbidirtotal\tfimototal\tchipbidir\tchipfimo\tbidirchip\tbidirfimo\tfimochip\tfimobidir\tchipbidirfimo"
+    #print chipfile,chiptot,bidirtot,fimotot,chipbidir,chipfimo,bidirchip,bidirfimo,fimochip,fimobidir,chipbidirfimo
     return chiptot, chipbidir, chipfimo, chipbidirfimo, bidirfimo, bidirfimochip, fimochip, fimotot, fimochipbidir,bidirchip, bidirtot,dnachip,dnafimo,dnatot,dnachipfimobidir,dnachipfimo,dnafimobidir,chipdna,chipnobidir, chipnobidirfimo, chipnobidirdna, chipnobidirfimodna, chipnodna, chipnodnafimo, chipnodnabidir, chipnodnafimobidir, chipnofimo, chipnofimobidir, chipnofimodna, chipnofimobidirdna,chipbidirdna, chipbidirfimodna, chipfimobidir, chipfimodna, chipfimobidirdna, chipdnabidir, chipdnafimo, chipdnabidirfimo
     
 def fix_database(directory):
@@ -257,6 +257,7 @@ if __name__ == "__main__":
                         dnachip = float(dnachip)
                         dnafimo = float(dnafimo)
                         dnatot = float(dnatot)
+                        print str(dnachip/dnatot)
                         dnachipfimo = float(dnachipfimo)
                         dnafimobidir = float(dnafimobidir)
                         dnachipfimobidir = float(dnachipfimobidir)
