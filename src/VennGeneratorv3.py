@@ -169,7 +169,7 @@ if __name__ == "__main__":
             for line in F1:
                 if 'E' in line[0] and 'optimal'in line:
                     line = line.strip().split()
-                    metadata[line[0]] = line[18].split('-')[0]
+                    metadata[line[0] + '.bed'] = line[18].split('-')[0]
         print metadata
         bidirfile = directory + '/' + cell + '/' + [chip for chip in os.listdir(directory + '/' + cell) if 'SRR' in chip][0]
         dnasefile = directory + '/' + cell + '/' + [dnase for dnase in os.listdir(directory + '/' + cell) if 'DNASE' in dnase][0]
