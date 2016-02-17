@@ -5,6 +5,7 @@ matplotlib.use('Agg')
 from matplotlib import rcParams
 rcParams.update({'figure.autolayout': True})
 import matplotlib.pyplot as plt
+import scipy
 import os
 
 directory = '/scratch/Shares/dowell/ENCODE/TF_CT'
@@ -249,7 +250,28 @@ if __name__ == "__main__":
                         list9[1].append(chipfimobidir/chipfimo)
                         list9[2].append(chipfimodna/chipfimo)
                         list9[3].append(chipfimobidirdna/chipfimo)
-                        
+    
+    
+    print "Boxplot1:"
+    for i in range(len(list3)-1):
+        print scipy.stats.kstest(list3[i],list3[i+1])
+    print "Boxplot2:"
+    for i in range(len(list4)-1):
+        print scipy.stats.kstest(list4[i],list4[i+1])
+    for i in range(len(list5)-1):
+        print scipy.stats.kstest(list5[i],list5[i+1])
+    for i in range(len(list6)-1):
+        print scipy.stats.kstest(list6[i],list6[i+1])
+    print "Boxplot3:"
+    for i in range(len(list7)-1):
+        print scipy.stats.kstest(list7[i],list7[i+1])
+    for i in range(len(list8)-1):
+        print scipy.stats.kstest(list8[i],list8[i+1])
+    for i in range(len(list9)-1):
+        print scipy.stats.kstest(list9[i],list9[i+1])
+        
+        
+                            
     F = plt.figure()
     ax1 = F.add_subplot(1,1,1)
     bp1 = ax1.boxplot(list3,patch_artist=True)
@@ -276,7 +298,7 @@ if __name__ == "__main__":
         flier.set(marker='o', color='#e7298a', alpha=0.5)
     
     #plt.savefig(directory + '/' + cell + '/' + cell + '_overlap_boxplot1.png')
-    plt.savefig(directory + '/' + 'All_overlap_boxplot1.png')
+    plt.savefig(directory + '/' + 'All_overlap_boxplot1.svg')
     
     F1 = plt.figure()
     ax1 = F1.add_subplot(1,3,1)
@@ -355,7 +377,7 @@ if __name__ == "__main__":
     
     
     #plt.savefig(directory + '/' + cell + '/' + cell + '_overlap_boxplot2.png')
-    plt.savefig(directory + '/' + 'All_overlap_boxplot2.png')
+    plt.savefig(directory + '/' + 'All_overlap_boxplot2.svg')
     
     
     F2 = plt.figure()
@@ -435,4 +457,4 @@ if __name__ == "__main__":
     
     
     #plt.savefig(directory + '/' + cell + '/' + cell + '_overlap_boxplot3.png')
-    plt.savefig(directory + '/' + 'All_overlap_boxplot3.png')
+    plt.savefig(directory + '/' + 'All_overlap_boxplot3.svg')
