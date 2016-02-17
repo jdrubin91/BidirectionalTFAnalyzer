@@ -191,6 +191,7 @@ if __name__ == "__main__":
         dnasefile = directory + '/' + cell + '/' + [dnase for dnase in os.listdir(directory + '/' + cell) if 'DNASE' in dnase and 'sorted' in dnase][0]
         for chip in os.listdir(directory + '/' + cell):
             if chip in metadata:
+                print chip
                 TF = metadata[chip]
                 for fimoTF in os.listdir(fimodir):
                     if TF == fimoTF.split('_')[0]:
