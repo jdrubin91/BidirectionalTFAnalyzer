@@ -161,6 +161,7 @@ def fix_directory(directory):
     for cell in os.listdir(directory):
         for chip in os.listdir(directory + '/' + cell):
             if 'ENC' in chip and not 'sorted' in chip:
+                print chip
                 outfile = open(directory + '/' + cell + '/' + chip.split('.')[0] + '.cut.bed','w')
                 with open(directory + '/' + cell + '/' + chip) as F:
                     for line in F:
