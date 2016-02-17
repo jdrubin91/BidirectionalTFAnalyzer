@@ -60,6 +60,10 @@ def run(bidirfile, chipfile, fimofile, outdir,dnasefile):
     chipdnabidirfimo = 0
     bidirfimo = 0
     
+    with open(fimofile) as F:
+        for line in F:
+            fimotot += 1.0
+    
     with open(outdir + "/dnachipintersect.bed") as F:
         for line in F:
             chip = int(line.strip().split()[-1])
@@ -156,7 +160,7 @@ def run(bidirfile, chipfile, fimofile, outdir,dnasefile):
 def fix_directory(directory):
     for cell in os.listdir(directory):
         for chip in os.listdir(directory + '/' + cell):
-            if 'E' in chip[0]:
+            if 'ENC' in chip:
                 outfile = open(directory + '/' + cell + '/' + chip.split('.')[0] + '.cut.bed','w')
                 with open(directory + '/' + cell + '/' + chip) as F:
                     for line in F:
@@ -184,7 +188,7 @@ if __name__ == "__main__":
                     line = line.strip().split()
                     metadata[line[0] + '.cut.sorted.bed'] = line[18].split('-')[0]
         bidirfile = directory + '/' + cell + '/' + [chip for chip in os.listdir(directory + '/' + cell) if 'SRR' in chip][0]
-        dnasefile = directory + '/' + cell + '/' + [dnase for dnase in os.listdir(directory + '/' + cell) if 'DNASE' in dnase][0]
+        dnasefile = directory + '/' + cell + '/' + [dnase for dnase in os.listdir(directory + '/' + cell) if 'DNASE' in dnase and 'sorted' in dnase][0]
         for chip in os.listdir(directory + '/' + cell):
             if chip in metadata:
                 TF = metadata[chip]
