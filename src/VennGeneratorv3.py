@@ -170,9 +170,11 @@ if __name__ == "__main__":
                 if 'E' in line[0]:
                     line = line.strip().split()
                     metadata[line[0]] = line[15].split('-')[0]
+        print metadata
         bidirfile = directory + '/' + cell + '/' + [chip for chip in os.listdir(directory + '/' + cell) if 'SRR' in chip][0]
         dnasefile = directory + '/' + cell + '/' + [dnase for dnase in os.listdir(directory + '/' + cell) if 'DNASE' in dnase][0]
         for chip in os.listdir(directory + '/' + cell):
+            print chip
             if chip in metadata:
                 TF = metadata[chip]
                 print TF
