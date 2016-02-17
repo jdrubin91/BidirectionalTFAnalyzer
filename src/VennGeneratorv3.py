@@ -62,8 +62,7 @@ def run(bidirfile, chipfile, fimofile, outdir,dnasefile):
     
     with open(outdir + "/dnachipintersect.bed") as F:
         for line in F:
-            fimo = int(line.strip().split()[-1])
-            chip = int(line.strip().split()[-2])
+            chip = int(line.strip().split()[-1])
             fimotot += 1.0
             if chip != 0:
                 fimochip += 1.0
