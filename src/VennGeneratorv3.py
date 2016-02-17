@@ -155,8 +155,7 @@ def run(bidirfile, chipfile, fimofile, outdir,dnasefile):
     
 def fix_directory(directory):
     for cell in os.listdir(directory):
-        for chip in (directory + '/' + cell):
-            print chip
+        for chip in os.listdir(directory + '/' + cell):
             if 'E' in chip[0]:
                 outfile = open(directory + '/' + cell + '/' + chip.split('.')[0] + '.cut.bed','w')
                 with open(directory + '/' + cell + '/' + chip) as F:
