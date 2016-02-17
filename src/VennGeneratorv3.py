@@ -173,7 +173,7 @@ def fix_directory(directory):
                 
     
 if __name__ == "__main__":
-    #fix_directory(directory)
+    fix_directory(directory)
     for cell in os.listdir(directory):
         print cell
         list3 = [[],[],[],[],[],[]]
