@@ -177,6 +177,7 @@ if __name__ == "__main__":
                 TF = metadata[chip]
                 for fimoTF in os.listdir(fimodir):
                     if TF == fimoTF.split('_')[0]:
+                        print TF,fimoTF
                         fimofile = fimodir + '/' + fimoTF + '/fimo.bed'
                         chipfile = directory + '/' + cell + '/' + chip
                         outdir = directory + '/' + cell + '/temp'
