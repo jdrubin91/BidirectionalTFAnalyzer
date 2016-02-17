@@ -163,7 +163,7 @@ def fix_directory(directory):
                         line = line.strip().split()
                         outfile.write(line[0] + '\t' + line[1] + '\t' + line[2] + '\n')
                 outfile.close()
-                os.system("sort -k1,1 -k2,2n " + directory + '/' + cell + '/' + chip.split('.')[0] + ".cut.bed > " + directory + '/' + cell + '/' + chip.split('.')[0] + "cut.sorted.bed")
+                os.system("sort -k1,1 -k2,2n " + directory + '/' + cell + '/' + chip.split('.')[0] + ".cut.bed > " + directory + '/' + cell + '/' + chip.split('.')[0] + ".cut.sorted.bed")
                 
     
 if __name__ == "__main__":
