@@ -63,7 +63,6 @@ def run(bidirfile, chipfile, fimofile, outdir,dnasefile):
     with open(outdir + "/dnachipintersect.bed") as F:
         for line in F:
             chip = int(line.strip().split()[-1])
-            fimotot += 1.0
             if chip != 0:
                 fimochip += 1.0
                 
@@ -154,7 +153,21 @@ def run(bidirfile, chipfile, fimofile, outdir,dnasefile):
     
     return chiptot,fimotot,bidirtot,dnatot,dnachip,dnafimo,dnachipfimo,dnafimobidir,dnachipfimobidir,chipbidir,chipfimo,chipdna,bidirchip,fimochip,chipbidirfimo,bidirfimochip,chipnobidir,chipnobidirfimo,chipnobidirdna,chipnobidirfimodna,chipnodna,chipnodnafimo,chipnodnabidir,chipnodnafimobidir,chipnofimo,chipnofimobidir,chipnofimodna,chipnofimobidirdna,chipbidirdna,chipbidirfimodna,chipfimobidir,chipfimodna,chipfimobidirdna,chipdnabidir,chipdnafimo,chipdnabidirfimo,bidirfimo
     
+def fix_directory(directory):
+    for cell in os.listdir(directory):
+        for chip in (directory + '/' + cell):
+            if 'E' in chip[0]:
+                outfile = open(directory + '/' + cell + '/' + chip.split('.')[0] + '.cut.bed','w')
+                with open(directory + '/' + cell + '/' + chip) as F:
+                    for line in F:
+                        line = line.strip().split()
+                        outfile.write(line[0] + '\t' + line[1] + '\t' + line[2] + '\n')
+                outfile.close()
+                os.system("sort -k1,1 -k2,2n " + directory + '/' + cell + '/' + chip.split('.')[0] + ".cut.bed > " + directory + '/' + cell + '/' + chip.split('.')[0] + "cut.sorted.bed")
+                
+    
 if __name__ == "__main__":
+    fix_directory(directory)
     for cell in os.listdir(directory):
         print cell
         list3 = [[],[],[],[],[],[]]
@@ -169,7 +182,7 @@ if __name__ == "__main__":
             for line in F1:
                 if 'E' in line[0] and 'optimal'in line:
                     line = line.strip().split()
-                    metadata[line[0] + '.bed'] = line[18].split('-')[0]
+                    metadata[line[0] + '.cut.sorted.bed'] = line[18].split('-')[0]
         print metadata
         bidirfile = directory + '/' + cell + '/' + [chip for chip in os.listdir(directory + '/' + cell) if 'SRR' in chip][0]
         dnasefile = directory + '/' + cell + '/' + [dnase for dnase in os.listdir(directory + '/' + cell) if 'DNASE' in dnase][0]
