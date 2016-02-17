@@ -160,13 +160,15 @@ def run(bidirfile, chipfile, fimofile, outdir,dnasefile):
 def fix_directory(directory):
     for cell in os.listdir(directory):
         for chip in os.listdir(directory + '/' + cell):
-            if 'ENC' in chip:
+            if 'ENC' in chip and not 'sorted' in chip:
                 outfile = open(directory + '/' + cell + '/' + chip.split('.')[0] + '.cut.bed','w')
                 with open(directory + '/' + cell + '/' + chip) as F:
                     for line in F:
                         line = line.strip().split()
                         outfile.write(line[0] + '\t' + line[1] + '\t' + line[2] + '\n')
                 outfile.close()
+                if os.path.exists(directory + '/' + cell + '/' + chip.split('.')[0] + '.cut.sorted.bed'):
+                    os.system("rm " + directory + '/' + cell + '/' + chip.split('.')[0] + ".cut.sortedbed")
                 os.system("sort -k1,1 -k2,2n " + directory + '/' + cell + '/' + chip.split('.')[0] + ".cut.bed > " + directory + '/' + cell + '/' + chip.split('.')[0] + ".cut.sorted.bed")
                 
     
