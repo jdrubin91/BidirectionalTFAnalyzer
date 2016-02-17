@@ -5,7 +5,7 @@ matplotlib.use('Agg')
 from matplotlib import rcParams
 rcParams.update({'figure.autolayout': True})
 import matplotlib.pyplot as plt
-import scipy
+from scipy import stats
 import os
 
 directory = '/scratch/Shares/dowell/ENCODE/TF_CT'
@@ -255,21 +255,21 @@ if __name__ == "__main__":
     
     print "Boxplot1:"
     for i in range(len(list3)-1):
-        print scipy.stats.kstest(list3[i],list3[i+1])
+        print stats.ks_2samp(list3[i],list3[i+1])
     print "Boxplot2:"
     for i in range(len(list4)-1):
-        print scipy.stats.kstest(list4[i],list4[i+1])
+        print stats.ks_2samp(list4[i],list4[i+1])
     for i in range(len(list5)-1):
-        print scipy.stats.kstest(list5[i],list5[i+1])
+        print stats.ks_2samp(list5[i],list5[i+1])
     for i in range(len(list6)-1):
-        print scipy.stats.kstest(list6[i],list6[i+1])
+        print stats.ks_2samp(list6[i],list6[i+1])
     print "Boxplot3:"
     for i in range(len(list7)-1):
-        print scipy.stats.kstest(list7[i],list7[i+1])
+        print stats.ks_2samp(list7[i],list7[i+1])
     for i in range(len(list8)-1):
-        print scipy.stats.kstest(list8[i],list8[i+1])
+        print stats.ks_2samp(list8[i],list8[i+1])
     for i in range(len(list9)-1):
-        print scipy.stats.kstest(list9[i],list9[i+1])
+        print stats.ks_2samp(list9[i],list9[i+1])
         
         
                             
