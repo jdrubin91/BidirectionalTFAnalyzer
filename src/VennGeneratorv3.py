@@ -184,7 +184,7 @@ if __name__ == "__main__":
     list8 = [[],[],[],[]]
     list9 = [[],[],[],[]]
     for cell in os.listdir(directory):
-        if not 'boxplot' in cell:
+        if not 'boxplot' in cell and 'Peak' not in cell:
             print cell
             #list3 = [[],[],[],[],[],[]]
             #list4 = [[],[],[],[]]
@@ -207,50 +207,51 @@ if __name__ == "__main__":
                 if chip in metadata:
                     print chip
                     TF = metadata[chip]
-                    for fimoTF in os.listdir(fimodir):
-                        if TF == fimoTF.split('_')[0]:
-                            print TF,fimoTF
-                            fimofile = fimodir + '/' + fimoTF + '/fimo.bed'
-                            chipfile = directory + '/' + cell + '/' + chip
-                            outdir = directory + '/' + cell + '/temp'
-                            chiptot,fimotot,bidirtot,dnatot,dnachip,dnafimo,dnachipfimo,dnafimobidir,dnachipfimobidir,chipbidir,chipfimo,chipdna,bidirchip,fimochip,chipbidirfimo,bidirfimochip,chipnobidir,chipnobidirfimo,chipnobidirdna,chipnobidirfimodna,chipnodna,chipnodnafimo,chipnodnabidir,chipnodnafimobidir,chipnofimo,chipnofimobidir,chipnofimodna,chipnofimobidirdna,chipbidirdna,chipbidirfimodna,chipfimobidir,chipfimodna,chipfimobidirdna,chipdnabidir,chipdnafimo,chipdnabidirfimo,bidirfimo = run(bidirfile, chipfile, fimofile, outdir,dnasefile)
-                            
-                            list3[0].append(fimochip/fimotot)
-                            list3[1].append(dnachip/dnatot)
-                            list3[2].append(bidirchip/bidirtot)
-                            list3[3].append(bidirfimochip/bidirfimo)
-                            list3[4].append(dnachipfimo/dnafimo)
-                            list3[5].append(dnachipfimobidir/dnafimobidir)
-                            
-                            list4[0].append(chipnobidir/chiptot)
-                            list4[1].append(chipnobidirfimo/chipnobidir)
-                            list4[2].append(chipnobidirdna/chipnobidir)
-                            list4[3].append(chipnobidirfimodna/chipnobidir)
-                            
-                            list5[0].append(chipnodna/chiptot)
-                            list5[1].append(chipnodnafimo/chipnodna)
-                            list5[2].append(chipnodnabidir/chipnodna)
-                            list5[3].append(chipnodnafimobidir/chipnodna)
-                            
-                            list6[0].append(chipnofimo/chiptot)
-                            list6[1].append(chipnofimobidir/chipnofimo)
-                            list6[2].append(chipnofimodna/chipnofimo)
-                            list6[3].append(chipnofimobidirdna/chipnofimo)
-                            
-                            list7[0].append(chipbidir/chiptot)
-                            list7[1].append(chipbidirfimo/chipbidir)
-                            list7[2].append(chipbidirdna/chipbidir)
-                            list7[3].append(chipbidirfimodna/chipbidir)
-                            
-                            list8[0].append(chipdna/chiptot)
-                            list8[1].append(chipdnafimo/chipdna)
-                            list8[2].append(chipdnabidir/chipdna)
-                            list8[3].append(chipdnabidirfimo/chipdna)
-                            
-                            list9[0].append(chipfimo/chiptot)
-                            list9[1].append(chipfimobidir/chipfimo)
-                            list9[2].append(chipfimodna/chipfimo)
-                            list9[3].append(chipfimobidirdna/chipfimo)
+                    if 'REST' not in TF and 'CTCF' not in TF:
+                        for fimoTF in os.listdir(fimodir):
+                            if TF == fimoTF.split('_')[0]:
+                                print TF,fimoTF
+                                fimofile = fimodir + '/' + fimoTF + '/fimo.bed'
+                                chipfile = directory + '/' + cell + '/' + chip
+                                outdir = directory + '/' + cell + '/temp'
+                                chiptot,fimotot,bidirtot,dnatot,dnachip,dnafimo,dnachipfimo,dnafimobidir,dnachipfimobidir,chipbidir,chipfimo,chipdna,bidirchip,fimochip,chipbidirfimo,bidirfimochip,chipnobidir,chipnobidirfimo,chipnobidirdna,chipnobidirfimodna,chipnodna,chipnodnafimo,chipnodnabidir,chipnodnafimobidir,chipnofimo,chipnofimobidir,chipnofimodna,chipnofimobidirdna,chipbidirdna,chipbidirfimodna,chipfimobidir,chipfimodna,chipfimobidirdna,chipdnabidir,chipdnafimo,chipdnabidirfimo,bidirfimo = run(bidirfile, chipfile, fimofile, outdir,dnasefile)
+                                
+                                list3[0].append(fimochip/fimotot)
+                                list3[1].append(dnachip/dnatot)
+                                list3[2].append(bidirchip/bidirtot)
+                                list3[3].append(bidirfimochip/bidirfimo)
+                                list3[4].append(dnachipfimo/dnafimo)
+                                list3[5].append(dnachipfimobidir/dnafimobidir)
+                                
+                                list4[0].append(chipnobidir/chiptot)
+                                list4[1].append(chipnobidirfimo/chipnobidir)
+                                list4[2].append(chipnobidirdna/chipnobidir)
+                                list4[3].append(chipnobidirfimodna/chipnobidir)
+                                
+                                list5[0].append(chipnodna/chiptot)
+                                list5[1].append(chipnodnafimo/chipnodna)
+                                list5[2].append(chipnodnabidir/chipnodna)
+                                list5[3].append(chipnodnafimobidir/chipnodna)
+                                
+                                list6[0].append(chipnofimo/chiptot)
+                                list6[1].append(chipnofimobidir/chipnofimo)
+                                list6[2].append(chipnofimodna/chipnofimo)
+                                list6[3].append(chipnofimobidirdna/chipnofimo)
+                                
+                                list7[0].append(chipbidir/chiptot)
+                                list7[1].append(chipbidirfimo/chipbidir)
+                                list7[2].append(chipbidirdna/chipbidir)
+                                list7[3].append(chipbidirfimodna/chipbidir)
+                                
+                                list8[0].append(chipdna/chiptot)
+                                list8[1].append(chipdnafimo/chipdna)
+                                list8[2].append(chipdnabidir/chipdna)
+                                list8[3].append(chipdnabidirfimo/chipdna)
+                                
+                                list9[0].append(chipfimo/chiptot)
+                                list9[1].append(chipfimobidir/chipfimo)
+                                list9[2].append(chipfimodna/chipfimo)
+                                list9[3].append(chipfimobidirdna/chipfimo)
     
     
     print "Boxplot1:"
